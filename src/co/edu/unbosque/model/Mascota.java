@@ -1,0 +1,94 @@
+package co.edu.unbosque.model;
+
+public class Mascota extends Producto {
+    
+    private String tipoAnimal;
+    private String raza;
+    private String color;
+    private String formatoDeVenta;
+    
+    public Mascota() {
+        super();
+    }
+    
+    public Mascota(String nombre, String descripcion, String tipo, float precio, String marca, 
+                   String vendedor, String caracteristicas, String calificacion,
+                   String tipoAnimal, String raza, String color, String formatoDeVenta) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, calificacion);
+        this.tipoAnimal = tipoAnimal;
+        this.raza = raza;
+        this.color = color;
+        this.formatoDeVenta = formatoDeVenta;
+    }
+    
+    public Mascota(String tipoAnimal, String raza, String color, String formatoDeVenta) {
+        super();
+        this.tipoAnimal = tipoAnimal;
+        this.raza = raza;
+        this.color = color;
+        this.formatoDeVenta = formatoDeVenta;
+    }
+    
+    public Mascota(String tipoAnimal, String raza, float param1, String color, float param2,
+                   int param3, String formatoDeVenta, String param4, String param5, String param6,
+                   String param7, String param8, String param9, String param10) {
+        super();
+        this.tipoAnimal = tipoAnimal;
+        this.raza = raza;
+        this.color = color;
+        this.formatoDeVenta = formatoDeVenta;
+    }
+    
+    public Mascota(String tipoAnimal, String raza, String color, float param1, int param2,
+                   String formatoDeVenta, String param3, String param4, String param5) {
+        super();
+        this.tipoAnimal = tipoAnimal;
+        this.raza = raza;
+        this.color = color;
+        this.formatoDeVenta = formatoDeVenta;
+    }
+    
+    @Override
+    public String usarProducto(String forma) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    public String getTipoAnimal() {
+        return tipoAnimal;
+    }
+    
+    public void setTipoAnimal(String tipoAnimal) {
+        this.tipoAnimal = tipoAnimal;
+    }
+    
+    public String getRaza() {
+        return raza;
+    }
+    
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+    
+    public String getColor() {
+        return color;
+    }
+    
+    public void setColor(String color) {
+        this.color = color;
+    }
+    
+    public String getFormatoDeVenta() {
+        return formatoDeVenta;
+    }
+    
+    public void setFormatoDeVenta(String formatoDeVenta) {
+        this.formatoDeVenta = formatoDeVenta;
+    }
+    
+    @Override
+    public String toString() {
+        return "Mascota [" + super.toString() + ", tipoAnimal=" + tipoAnimal + ", raza=" + raza + 
+               ", color=" + color + ", formatoDeVenta=" + formatoDeVenta + "]";
+    }
+}
