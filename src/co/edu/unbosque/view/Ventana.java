@@ -9,6 +9,7 @@ public class Ventana extends JFrame {
 
 	private PanelSuperior panelS;
 	private PanelCrearVehiculo panelCv;
+	private PanelCrearProductoModa panelCpm;
 
 	Ventana() {
 		this.setVisible(true);
@@ -42,6 +43,13 @@ public class Ventana extends JFrame {
 	public void setPanelCv(PanelCrearVehiculo panelCv) {
 		this.panelCv = panelCv;
 	}
-	
-	
+
+	public PanelCrearProductoModa getPanelCpm() {
+		return panelCpm;
+	}
+
+	public void setPanelCpm(PanelCrearProductoModa panelCpm) {
+		this.panelCpm = panelCpm;
+	}
+
 }

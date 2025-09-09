@@ -11,17 +11,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class PanelCrearVehiculo extends JPanel {
+public class PanelCrearProductoModa extends JPanel {
 
-	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock;
+	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblColor,
+			lblTalla, lblMaterial;
 
-	private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock;
+	private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock, txtColor,
+			txtTalla, txtMaterial;
 
-	private JComboBox cmbTipo, cmbMarca, cmbAnio;
+	private JComboBox cmbTipo, cmbMarca;
 
-	private JButton btnCrearVehiculo;
+	private JButton btnCrearProductoModa;
 
-	public PanelCrearVehiculo() {
+	public PanelCrearProductoModa() {
 		this.setVisible(true);
 		this.setBackground(Color.decode("#ffe600"));
 		this.setLayout(null);
@@ -37,6 +39,9 @@ public class PanelCrearVehiculo extends JPanel {
 		lblMarca = new JLabel("Marca:");
 		lblCaracteristicas = new JLabel("Características:");
 		lblStock = new JLabel("Stock:");
+		lblColor = new JLabel("Color:");
+		lblTalla = new JLabel("Talla:");
+		lblMaterial = new JLabel("Material:");
 
 		txtNombre = new JTextArea();
 		txtDescripcion = new JTextArea();
@@ -45,45 +50,52 @@ public class PanelCrearVehiculo extends JPanel {
 		txtMarca = new JTextArea();
 		txtCaracteristicas = new JTextArea();
 		txtStock = new JTextArea();
+		txtColor = new JTextArea();
+		txtTalla = new JTextArea();
+		txtMaterial = new JTextArea();
 
 		cmbTipo = new JComboBox<>();
-		cmbTipo.addItem("Carros y camionetas");
-		cmbTipo.addItem("Motos");
-		cmbTipo.addItem("Maquinaria Pesada");
-		cmbTipo.addItem("Carros de Coleccion");
-		cmbTipo.addItem("Otros Vehiculos");
+		cmbTipo.addItem("Tenis");
+		cmbTipo.addItem("Pantalones y Jeans");
+		cmbTipo.addItem("Sacos y Buzos");
+		cmbTipo.addItem("Accesorios de Moda");
+		cmbTipo.addItem("Ropa Interior");
+		cmbTipo.addItem("Bolsos");
+		cmbTipo.addItem("Calzado");
 
 		cmbMarca = new JComboBox<>();
-		cmbMarca.addItem("Toyota");
-		cmbMarca.addItem("Chevrolet");
-		cmbMarca.addItem("Renault");
-		cmbMarca.addItem("Nissan");
-		cmbMarca.addItem("Ford");
-		cmbMarca.addItem("Hyundai");
-		cmbMarca.addItem("Kia");
-		cmbMarca.addItem("Volkswagen");
-		cmbMarca.addItem("Mazda");
-		cmbMarca.addItem("Suzuki");
-		cmbMarca.addItem("Mercedes-Benz");
-		cmbMarca.addItem("BMW");
-		cmbMarca.addItem("Audi");
-		cmbMarca.addItem("Mitsubishi");
-		cmbMarca.addItem("Subaru");
-		cmbMarca.addItem("Peugeot");
-		cmbMarca.addItem("Citroën");
-		cmbMarca.addItem("Seat");
-		cmbMarca.addItem("Volvo");
-		cmbMarca.addItem("Jeep");
-		cmbMarca.addItem("Honda");
-		cmbMarca.addItem("Otro");
+		cmbMarca.addItem("Adidas");
+		cmbMarca.addItem("Levis");
+		cmbMarca.addItem("GAP");
+		cmbMarca.addItem("Guess");
+		cmbMarca.addItem("Lacoste");
+		cmbMarca.addItem("Ray-Ban");
+		cmbMarca.addItem("Calvin Klein");
+		cmbMarca.addItem("Pandora");
+		cmbMarca.addItem("Sajú");
+		cmbMarca.addItem("Gooms");
+		cmbMarca.addItem("Mr. Boho");
+		cmbMarca.addItem("Cuarzos");
+		cmbMarca.addItem("Ángeles");
+		cmbMarca.addItem("Marini Star");
+		cmbMarca.addItem("The Five Brand");
+		cmbMarca.addItem("Lunia");
+		cmbMarca.addItem("Juliana Sánchez");
+		cmbMarca.addItem("Amai");
+		cmbMarca.addItem("Easy People");
+		cmbMarca.addItem("Dulzamara");
+		cmbMarca.addItem("Mía de Dios");
+		cmbMarca.addItem("Domenica");
+		cmbMarca.addItem("Palo Rosa");
+		cmbMarca.addItem("Monastery");
+		cmbMarca.addItem("Arturo Calle");
+		cmbMarca.addItem("Mister Jack");
+		cmbMarca.addItem("Estefanía Turbay");
+		cmbMarca.addItem("Algodón y Coco");
+		cmbMarca.addItem("Closetup");
 
-		cmbAnio = new JComboBox<>();
-		for (int i = 1980; i <= 2025; i++) {
-			cmbAnio.addItem(String.valueOf(i));
-		}
-
-		btnCrearVehiculo = new JButton("Crear Vehiculo:");
-		btnCrearVehiculo.setBounds(500, 150, 100, 30);
+		btnCrearProductoModa = new JButton("Crear Producto de Moda:");
+		btnCrearProductoModa.setBounds(500, 150, 200, 30);
 
 		lblNombre.setBounds(150, 150, 100, 30);
 		txtNombre.setBounds(300, 150, 300, 30);
@@ -106,8 +118,17 @@ public class PanelCrearVehiculo extends JPanel {
 		lblStock.setBounds(150, 560, 100, 30);
 		txtStock.setBounds(300, 560, 300, 30);
 
-		cmbTipo.setBounds(300, 560, 300, 30);
-		cmbMarca.setBounds(300, 860, 300, 30);
+		lblColor.setBounds(150, 610, 100, 30);
+		txtColor.setBounds(300, 610, 300, 30);
+
+		lblTalla.setBounds(150, 660, 100, 30);
+		txtTalla.setBounds(300, 660, 300, 30);
+
+		lblMaterial.setBounds(150, 710, 100, 30);
+		txtMaterial.setBounds(300, 710, 300, 30);
+
+		cmbTipo.setBounds(300, 760, 300, 30);
+		cmbMarca.setBounds(300, 810, 300, 30);
 
 		this.add(lblNombre);
 		this.add(txtNombre);
@@ -123,10 +144,16 @@ public class PanelCrearVehiculo extends JPanel {
 		this.add(txtCaracteristicas);
 		this.add(lblStock);
 		this.add(txtStock);
+		this.add(lblColor);
+		this.add(txtColor);
+		this.add(lblTalla);
+		this.add(txtTalla);
+		this.add(lblMaterial);
+		this.add(txtMaterial);
+
 		this.add(cmbTipo);
 		this.add(cmbMarca);
-		this.add(cmbAnio);
-		this.add(btnCrearVehiculo);
+		this.add(btnCrearProductoModa);
 	}
 
 	public JLabel getLblNombre() {
@@ -257,20 +284,60 @@ public class PanelCrearVehiculo extends JPanel {
 		this.cmbMarca = cmbMarca;
 	}
 
-	public JComboBox getCmbAnio() {
-		return cmbAnio;
+	public JLabel getLblColor() {
+		return lblColor;
 	}
 
-	public void setCmbAnio(JComboBox cmbAnio) {
-		this.cmbAnio = cmbAnio;
+	public void setLblColor(JLabel lblColor) {
+		this.lblColor = lblColor;
 	}
 
-	public JButton getBtnCrearVehiculo() {
-		return btnCrearVehiculo;
+	public JLabel getLblTalla() {
+		return lblTalla;
 	}
 
-	public void setBtnCrearVehiculo(JButton btnCrearVehiculo) {
-		this.btnCrearVehiculo = btnCrearVehiculo;
+	public void setLblTalla(JLabel lblTalla) {
+		this.lblTalla = lblTalla;
+	}
+
+	public JLabel getLblMaterial() {
+		return lblMaterial;
+	}
+
+	public void setLblMaterial(JLabel lblMaterial) {
+		this.lblMaterial = lblMaterial;
+	}
+
+	public JTextArea getTxtColor() {
+		return txtColor;
+	}
+
+	public void setTxtColor(JTextArea txtColor) {
+		this.txtColor = txtColor;
+	}
+
+	public JTextArea getTxtTalla() {
+		return txtTalla;
+	}
+
+	public void setTxtTalla(JTextArea txtTalla) {
+		this.txtTalla = txtTalla;
+	}
+
+	public JTextArea getTxtMaterial() {
+		return txtMaterial;
+	}
+
+	public void setTxtMaterial(JTextArea txtMaterial) {
+		this.txtMaterial = txtMaterial;
+	}
+
+	public JButton getBtnCrearProductoModa() {
+		return btnCrearProductoModa;
+	}
+
+	public void setBtnCrearProductoModa(JButton btnCrearProductoModa) {
+		this.btnCrearProductoModa = btnCrearProductoModa;
 	}
 
 }

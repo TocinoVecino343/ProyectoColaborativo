@@ -37,7 +37,7 @@ public class PanelSuperior extends JPanel {
 
 		txtFieldBuscador.setBounds(300, 20, 700, 40);
 		txtFieldBuscador.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		
 		this.add(btnCategoria);
 		this.add(btnVender);
 		this.add(btnCarro);

@@ -4,22 +4,25 @@ public class Vehiculo extends Producto {
 
 	private boolean esFinanciable;
 	private int kilometraje;
+	private int anio;
 
 	public Vehiculo() {
 		super();
 	}
 
-	public Vehiculo(boolean esFinanciable, int kilometraje) {
+	public Vehiculo(boolean esFinanciable, int kilometraje, int anio) {
 		super();
 		this.esFinanciable = esFinanciable;
 		this.kilometraje = kilometraje;
+		this.anio = anio;
 	}
 
 	public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, boolean esFinanciable, int kilometraje) {
+			String caracteristicas, int stock, boolean esFinanciable, int kilometraje, int anio) {
 		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
 		this.esFinanciable = esFinanciable;
 		this.kilometraje = kilometraje;
+		this.anio = anio;
 	}
 
 	public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
@@ -44,10 +47,12 @@ public class Vehiculo extends Producto {
 		this.kilometraje = kilometraje;
 	}
 
-	@Override
-	public String toString() {
-		return "Vehiculo [" + super.toString() + "esFinanciable=" + esFinanciable + ", kilometraje=" + kilometraje
-				+ "]";
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	@Override
