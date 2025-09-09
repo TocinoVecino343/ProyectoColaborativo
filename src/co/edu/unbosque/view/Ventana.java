@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 public class Ventana extends JFrame {
 
 	private PanelSuperior panelS;
+	private PanelCrearVehiculo panelCv;
 
 	Ventana() {
 		this.setVisible(true);
@@ -24,7 +25,23 @@ public class Ventana extends JFrame {
 		this.setLayout(new BorderLayout(10, 10));
 		this.getContentPane().add(panelS, BorderLayout.NORTH);
 
-
 	}
 
+	public PanelSuperior getPanelS() {
+		return panelS;
+	}
+
+	public void setPanelS(PanelSuperior panelS) {
+		this.panelS = panelS;
+	}
+
+	public PanelCrearVehiculo getPanelCv() {
+		return panelCv;
+	}
+
+	public void setPanelCv(PanelCrearVehiculo panelCv) {
+		this.panelCv = panelCv;
+	}
+	
+	
 }

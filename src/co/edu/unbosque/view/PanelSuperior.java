@@ -44,4 +44,37 @@ public class PanelSuperior extends JPanel {
 		this.add(txtFieldBuscador);
 	}
 
+	public JButton getBtnCategoria() {
+		return btnCategoria;
+	}
+
+	public void setBtnCategoria(JButton btnCategoria) {
+		this.btnCategoria = btnCategoria;
+	}
+
+	public JButton getBtnVender() {
+		return btnVender;
+	}
+
+	public void setBtnVender(JButton btnVender) {
+		this.btnVender = btnVender;
+	}
+
+	public JButton getBtnCarro() {
+		return btnCarro;
+	}
+
+	public void setBtnCarro(JButton btnCarro) {
+		this.btnCarro = btnCarro;
+	}
+
+	public JTextField getTxtFieldBuscador() {
+		return txtFieldBuscador;
+	}
+
+	public void setTxtFieldBuscador(JTextField txtFieldBuscador) {
+		this.txtFieldBuscador = txtFieldBuscador;
+	}
+	
+	
 }
