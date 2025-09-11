@@ -3,7 +3,6 @@ package co.edu.unbosque.model;
 public class Juguete extends Producto {
 
 	private String color;
-	private String talla;
 	private String material;
 	private String rangoDeEdad;
 
@@ -12,19 +11,17 @@ public class Juguete extends Producto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Juguete(String color, String talla, String material, String rangoDeEdad) {
+	public Juguete(String color, String material, String rangoDeEdad) {
 		super();
 		this.color = color;
-		this.talla = talla;
 		this.material = material;
 		this.rangoDeEdad = rangoDeEdad;
 	}
 
 	public Juguete(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String color, String talla, String material, String rangoDeEdad) {
+			String caracteristicas, int stock, String color, String material, String rangoDeEdad) {
 		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
 		this.color = color;
-		this.talla = talla;
 		this.material = material;
 		this.rangoDeEdad = rangoDeEdad;
 	}
@@ -49,14 +46,6 @@ public class Juguete extends Producto {
 		this.color = color;
 	}
 
-	public String getTalla() {
-		return talla;
-	}
-
-	public void setTalla(String talla) {
-		this.talla = talla;
-	}
-
 	public String getMaterial() {
 		return material;
 	}
@@ -75,7 +64,7 @@ public class Juguete extends Producto {
 
 	@Override
 	public String toString() {
-		return "Juguete [" + super.toString() + ", color=" + color + ", talla=" + talla + ", material=" + material
-				+ ", rangoDeEdad=" + rangoDeEdad + "]";
+		return "Juguete [" + super.toString() + ", color=" + color + ", material=" + material + ", rangoDeEdad="
+				+ rangoDeEdad + "]";
 	}
 }

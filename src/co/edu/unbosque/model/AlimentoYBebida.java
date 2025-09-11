@@ -5,28 +5,28 @@ public class AlimentoYBebida extends Producto {
 	private boolean esLiquido;
 	private int cantidadProducto;
 	private String tipoEnvase;
-	private int unidadesEnvase;
+	private int unidadEnvase;
 
 	public AlimentoYBebida() {
 		super();
 	}
 
-	public AlimentoYBebida(boolean esLiquido, int cantidadProducto, String tipoEnvase, int unidadesEnvase) {
+	public AlimentoYBebida(boolean esLiquido, int cantidadProducto, String tipoEnvase, int unidadEnvase) {
 		super();
 		this.esLiquido = esLiquido;
 		this.cantidadProducto = cantidadProducto;
 		this.tipoEnvase = tipoEnvase;
-		this.unidadesEnvase = unidadesEnvase;
+		this.unidadEnvase = unidadEnvase;
 	}
 
 	public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
 			String caracteristicas, int stock, boolean esLiquido, int cantidadProducto, String tipoEnvase,
-			int unidadesEnvase) {
+			int unidadEnvase) {
 		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
 		this.esLiquido = esLiquido;
 		this.cantidadProducto = cantidadProducto;
 		this.tipoEnvase = tipoEnvase;
-		this.unidadesEnvase = unidadesEnvase;
+		this.unidadEnvase = unidadEnvase;
 	}
 
 	public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
@@ -65,17 +65,17 @@ public class AlimentoYBebida extends Producto {
 		this.tipoEnvase = tipoEnvase;
 	}
 
-	public int getUnidadesEnvase() {
-		return unidadesEnvase;
+	public int getUnidadEnvase() {
+		return unidadEnvase;
 	}
 
-	public void setUnidadesEnvase(int unidadesEnvase) {
-		this.unidadesEnvase = unidadesEnvase;
+	public void setUnidadEnvase(int unidadesEnvase) {
+		this.unidadEnvase = unidadesEnvase;
 	}
 
 	@Override
 	public String toString() {
 		return "AlimentosYBebidas [" + super.toString() + ", esLiquido=" + esLiquido + ", cantidadProducto="
-				+ cantidadProducto + ", tipoEnvase=" + tipoEnvase + ", unidadesEnvase=" + unidadesEnvase + "]";
+				+ cantidadProducto + ", tipoEnvase=" + tipoEnvase + ", unidadesEnvase=" + unidadEnvase + "]";
 	}
 }

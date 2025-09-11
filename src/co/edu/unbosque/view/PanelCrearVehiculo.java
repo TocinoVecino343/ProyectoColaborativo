@@ -13,11 +13,12 @@ import javax.swing.JTextField;
 
 public class PanelCrearVehiculo extends JPanel {
 
-	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock;
+	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblAnio,
+			lblEsFinanciable, lblKilometraje;
 
-	private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock;
+	private JTextArea txtNombre, txtDescripcion, txtPrecio, txtCaracteristicas, txtStock, txtKilometraje;
 
-	private JComboBox cmbTipo, cmbMarca, cmbAnio;
+	private JComboBox cmbTipo, cmbMarca, cmbAnio, cmbEsFinanciable;
 
 	private JButton btnCrearVehiculo;
 
@@ -37,12 +38,12 @@ public class PanelCrearVehiculo extends JPanel {
 		lblMarca = new JLabel("Marca:");
 		lblCaracteristicas = new JLabel("Características:");
 		lblStock = new JLabel("Stock:");
+		lblAnio = new JLabel("Año");
+		lblEsFinanciable = new JLabel("Es financiable");
 
 		txtNombre = new JTextArea();
 		txtDescripcion = new JTextArea();
-		txtTipo = new JTextArea();
 		txtPrecio = new JTextArea();
-		txtMarca = new JTextArea();
 		txtCaracteristicas = new JTextArea();
 		txtStock = new JTextArea();
 
@@ -82,6 +83,10 @@ public class PanelCrearVehiculo extends JPanel {
 			cmbAnio.addItem(String.valueOf(i));
 		}
 
+		cmbEsFinanciable = new JComboBox<>();
+		cmbEsFinanciable.addItem("Si");
+		cmbEsFinanciable.addItem("No");
+
 		btnCrearVehiculo = new JButton("Crear Vehiculo:");
 		btnCrearVehiculo.setBounds(500, 150, 100, 30);
 
@@ -92,19 +97,24 @@ public class PanelCrearVehiculo extends JPanel {
 		txtDescripcion.setBounds(300, 200, 300, 60);
 
 		lblTipo.setBounds(150, 280, 100, 30);
-		txtTipo.setBounds(300, 280, 300, 30);
 
 		lblPrecio.setBounds(150, 330, 100, 30);
 		txtPrecio.setBounds(300, 330, 300, 30);
 
 		lblMarca.setBounds(150, 380, 100, 30);
-		txtMarca.setBounds(300, 380, 300, 30);
+
+		lblAnio.setBounds(150, 300, 200, 200);
+
+		lblEsFinanciable.setBounds(150, 500, 100, 30);
 
 		lblCaracteristicas.setBounds(150, 480, 120, 30);
 		txtCaracteristicas.setBounds(300, 480, 300, 60);
 
 		lblStock.setBounds(150, 560, 100, 30);
 		txtStock.setBounds(300, 560, 300, 30);
+
+		lblKilometraje.setBounds(300, 560, 300, 30);
+		txtKilometraje.setBounds(300, 560, 300, 30);
 
 		cmbTipo.setBounds(300, 560, 300, 30);
 		cmbMarca.setBounds(300, 860, 300, 30);
@@ -114,11 +124,9 @@ public class PanelCrearVehiculo extends JPanel {
 		this.add(lblDescripcion);
 		this.add(txtDescripcion);
 		this.add(lblTipo);
-		this.add(txtTipo);
 		this.add(lblPrecio);
 		this.add(txtPrecio);
 		this.add(lblMarca);
-		this.add(txtMarca);
 		this.add(lblCaracteristicas);
 		this.add(txtCaracteristicas);
 		this.add(lblStock);
@@ -127,6 +135,11 @@ public class PanelCrearVehiculo extends JPanel {
 		this.add(cmbMarca);
 		this.add(cmbAnio);
 		this.add(btnCrearVehiculo);
+		this.add(lblAnio);
+		this.add(lblEsFinanciable);
+		this.add(cmbEsFinanciable);
+		this.add(lblKilometraje);
+		this.add(txtKilometraje);
 	}
 
 	public JLabel getLblNombre() {
@@ -201,28 +214,12 @@ public class PanelCrearVehiculo extends JPanel {
 		this.txtDescripcion = txtDescripcion;
 	}
 
-	public JTextArea getTxtTipo() {
-		return txtTipo;
-	}
-
-	public void setTxtTipo(JTextArea txtTipo) {
-		this.txtTipo = txtTipo;
-	}
-
 	public JTextArea getTxtPrecio() {
 		return txtPrecio;
 	}
 
 	public void setTxtPrecio(JTextArea txtPrecio) {
 		this.txtPrecio = txtPrecio;
-	}
-
-	public JTextArea getTxtMarca() {
-		return txtMarca;
-	}
-
-	public void setTxtMarca(JTextArea txtMarca) {
-		this.txtMarca = txtMarca;
 	}
 
 	public JTextArea getTxtCaracteristicas() {
@@ -265,6 +262,14 @@ public class PanelCrearVehiculo extends JPanel {
 		this.cmbAnio = cmbAnio;
 	}
 
+	public JLabel getLblAnio() {
+		return lblAnio;
+	}
+
+	public void setLblAnio(JLabel lblAnio) {
+		this.lblAnio = lblAnio;
+	}
+
 	public JButton getBtnCrearVehiculo() {
 		return btnCrearVehiculo;
 	}
@@ -272,5 +277,39 @@ public class PanelCrearVehiculo extends JPanel {
 	public void setBtnCrearVehiculo(JButton btnCrearVehiculo) {
 		this.btnCrearVehiculo = btnCrearVehiculo;
 	}
+
+	public JLabel getLblEsFinanciable() {
+		return lblEsFinanciable;
+	}
+
+	public void setLblEsFinanciable(JLabel lblEsFinanciable) {
+		this.lblEsFinanciable = lblEsFinanciable;
+	}
+
+	public JComboBox getCmbEsFinanciable() {
+		return cmbEsFinanciable;
+	}
+
+	public void setCmbEsFinanciable(JComboBox cmbEsFinanciable) {
+		this.cmbEsFinanciable = cmbEsFinanciable;
+	}
+
+	public JLabel getLblKilometraje() {
+		return lblKilometraje;
+	}
+
+	public void setLblKilometraje(JLabel lblKilometraje) {
+		this.lblKilometraje = lblKilometraje;
+	}
+
+	public JTextArea getTxtKilometraje() {
+		return txtKilometraje;
+	}
+
+	public void setTxtKilometraje(JTextArea txtKilometraje) {
+		this.txtKilometraje = txtKilometraje;
+	}
+	
+	
 
 }
