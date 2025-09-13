@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.AlimentoYBebida;
 
-public class AlimentoYBebidaDAO extends DAO<AlimentoYBebida> {
-	
+public class AlimentoYBebidaDAO implements DAO<AlimentoYBebida> {
+
 	private ArrayList<AlimentoYBebida> listaAlimentosYBebidas;
+	private final String SERIAL_FILE_NAME = "AlimentosYBebidas.bin";
 
 	public AlimentoYBebidaDAO() {
-		super();
-		this.listaAlimentosYBebidas = listaAlimentosYBebidas;
-	}
-	
-	@Override
-	public void crear(AlimentoYBebida objeto) {
-		// TODO Auto-generated method stub
-		
+		listaAlimentosYBebidas = new ArrayList<AlimentoYBebida>();
+		cargarDesdeArchivoSerializado(SERIAL_FILE_NAME);
 	}
 
+	@Override
+	public void crear(AlimentoYBebida objeto) {
+		listaAlimentosYBebidas.add(objeto);
+		escribirArchivoSerializado();
+	}
 
 	@Override
 	public String mostrarDatos() {
@@ -28,14 +28,24 @@ public class AlimentoYBebidaDAO extends DAO<AlimentoYBebida> {
 
 	@Override
 	public boolean eliminarDato(int indice) {
-		// TODO Auto-generated method stub
-		return false;
+		if (indice < 0 || indice >= listaAlimentosYBebidas.size()) {
+			return false;
+		} else {
+			listaAlimentosYBebidas.remove(indice);
+			escribirArchivoSerializado();
+			return true;
+		}
 	}
 
 	@Override
-	public boolean actualizar(int indice, AlimentoYBebida objeto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean actualizar(int indice, AlimentoYBebida nuevoObjeto) {
+		if (indice < 0 || indice >= listaAlimentosYBebidas.size()) {
+			return false;
+		} else {
+			listaAlimentosYBebidas.set(indice, nuevoObjeto);
+			escribirArchivoSerializado();
+			return true;
+		}
 	}
 
 	@Override
@@ -58,9 +68,23 @@ public class AlimentoYBebidaDAO extends DAO<AlimentoYBebida> {
 
 	@Override
 	public int contar() {
-		// TODO Auto-generated method stub
-		return 0;
+		return listaAlimentosYBebidas.size();
 	}
 
-	
+	@Override
+	public void cargarDesdeArchivoSerializado(String url) {
+		Object contenido = FileHandler.leerDesdeArchivoSerializado(url);
+		if (contenido != null) {
+			listaAlimentosYBebidas = (ArrayList<AlimentoYBebida>) contenido;
+		} else {
+			listaAlimentosYBebidas = new ArrayList<AlimentoYBebida>();
+		}
+	}
+
+	@Override
+	public void escribirArchivoSerializado() {
+		FileHandler.escribirEnArchivoSerializado(SERIAL_FILE_NAME, listaAlimentosYBebidas);
+
+	}
+
 }

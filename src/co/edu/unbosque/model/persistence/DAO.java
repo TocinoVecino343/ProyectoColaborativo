@@ -1,21 +1,24 @@
 package co.edu.unbosque.model.persistence;
 
-import java.util.ArrayList;
+public interface DAO<E> {
 
-public abstract class DAO<T> {
-    
-    protected ArrayList<T> lista;
-    
-    public DAO() {
-        super();
-    }
-    
-    public abstract void crear(T objeto);
-    public abstract String mostrarDatos();
-    public abstract boolean eliminarDato(int indice);
-    public abstract boolean actualizar(int indice, T objeto);
-    public abstract String filtrarLetra(char letra);
-    public abstract String filtrarNombre(String nombre);
-    public abstract String filtrarMarca(String marca);
-    public abstract int contar();
+	public void crear(E objeto);
+
+	public String mostrarDatos();
+
+	public boolean eliminarDato(int indice);
+
+	public boolean actualizar(int indice, E nuevoObjeto);
+
+	public String filtrarLetra(char letra);
+
+	public String filtrarNombre(String nombre);
+
+	public String filtrarMarca(String marca);
+
+	public int contar();
+
+	public void cargarDesdeArchivoSerializado(String url);
+
+	public void escribirArchivoSerializado();
 }
