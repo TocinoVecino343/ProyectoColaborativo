@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class Mascota extends Producto {
 
+	private static final long serialVersionUID = -1339611489805860485L;
 	private String tipoAnimal;
 	private String raza;
 	private String color;
@@ -20,8 +21,9 @@ public class Mascota extends Producto {
 	}
 
 	public Mascota(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String tipoAnimal, String raza, String color, String formatoDeVenta) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, String tipoAnimal, String raza, String color,
+			String formatoDeVenta) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.tipoAnimal = tipoAnimal;
 		this.raza = raza;
 		this.color = color;
@@ -29,15 +31,9 @@ public class Mascota extends Producto {
 	}
 
 	public Mascota(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String getTipoAnimal() {

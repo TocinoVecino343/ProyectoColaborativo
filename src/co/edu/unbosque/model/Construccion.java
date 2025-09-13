@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class Construccion extends Producto {
 
+	private static final long serialVersionUID = -8242300634262318254L;
 	private String modelo;
 	private String material;
 	private String color;
@@ -24,9 +25,9 @@ public class Construccion extends Producto {
 	}
 
 	public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String modelo, String material, String color, float largo, float ancho,
-			float altura) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, String modelo, String material, String color,
+			float largo, float ancho, float altura) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.modelo = modelo;
 		this.material = material;
 		this.color = color;
@@ -36,15 +37,9 @@ public class Construccion extends Producto {
 	}
 
 	public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String getModelo() {

@@ -87,10 +87,37 @@ public class FileHandler {
 			fos.close();
 
 		} catch (IOException e) {
-			System.out.println("Error al leer el archivo serializado");
+			System.out.println("Error al escribir en el archivo serializado");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-
 	}
+
+	public static Object leerDesdeArchivoSerializado(String url) {
+
+		try {
+			archivo = new File(url);
+
+			if (!archivo.exists()) {
+				archivo.createNewFile();
+			}
+			fis = new FileInputStream(archivo);
+			ois = new ObjectInputStream(fis);
+			Object contenido = ois.readObject();
+			ois.close();
+			fis.close();
+
+			return contenido;
+		} catch (IOException e) {
+			System.out.println("Error al leer el archivo serializado");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error al deserializar los datos del archivo serializado");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 }

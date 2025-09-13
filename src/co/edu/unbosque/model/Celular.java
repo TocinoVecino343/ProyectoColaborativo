@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class Celular extends Producto {
 
+	private static final long serialVersionUID = -3634261226751531411L;
 	private String color;
 	private int memoriaInterna;
 	private int memoriaRam;
@@ -31,9 +32,10 @@ public class Celular extends Producto {
 	}
 
 	public Celular(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String color, int memoriaInterna, int memoriaRam, float largoPantalla,
-			float anchoPantalla, float altoPantalla, int camaraFrontal, int camaraTrasera, boolean poseeNfc) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, String color, int memoriaInterna, int memoriaRam,
+			float largoPantalla, float anchoPantalla, float altoPantalla, int camaraFrontal, int camaraTrasera,
+			boolean poseeNfc) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.color = color;
 		this.memoriaInterna = memoriaInterna;
 		this.memoriaRam = memoriaRam;
@@ -46,15 +48,9 @@ public class Celular extends Producto {
 	}
 
 	public Celular(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String getColor() {

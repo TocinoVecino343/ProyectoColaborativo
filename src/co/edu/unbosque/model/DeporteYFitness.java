@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class DeporteYFitness extends Producto {
 
+	private static final long serialVersionUID = -7805193237956216322L;
 	private String color;
 	private String material;
 
@@ -16,22 +17,16 @@ public class DeporteYFitness extends Producto {
 	}
 
 	public DeporteYFitness(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String color, String material) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, String color, String material) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.color = color;
 		this.material = material;
 	}
 
 	public DeporteYFitness(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String getColor() {

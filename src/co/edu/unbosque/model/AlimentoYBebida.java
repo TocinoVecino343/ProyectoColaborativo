@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class AlimentoYBebida extends Producto {
 
+	private static final long serialVersionUID = 4020600054540463285L;
 	private boolean esLiquido;
 	private int cantidadProducto;
 	private String tipoEnvase;
@@ -20,9 +21,9 @@ public class AlimentoYBebida extends Producto {
 	}
 
 	public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, boolean esLiquido, int cantidadProducto, String tipoEnvase,
-			int unidadEnvase) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, boolean esLiquido, int cantidadProducto,
+			String tipoEnvase, int unidadEnvase) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.esLiquido = esLiquido;
 		this.cantidadProducto = cantidadProducto;
 		this.tipoEnvase = tipoEnvase;
@@ -30,15 +31,9 @@ public class AlimentoYBebida extends Producto {
 	}
 
 	public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public boolean isEsLiquido() {

@@ -1,7 +1,10 @@
 package co.edu.unbosque.model;
 
-public abstract class Producto {
+import java.io.Serializable;
 
+public abstract class Producto implements Serializable {
+
+	private static final long serialVersionUID = -6261722477315313511L;
 	private String nombre;
 	private String descripcion;
 	private String tipo;
@@ -10,13 +13,14 @@ public abstract class Producto {
 	private String vendedor;
 	private String caracteristicas;
 	private int stock;
+	private int idAsociado;
 
 	public Producto() {
 		super();
 	}
 
 	public Producto(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
+			String caracteristicas, int stock, int idAsociado) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -26,9 +30,8 @@ public abstract class Producto {
 		this.vendedor = vendedor;
 		this.caracteristicas = caracteristicas;
 		this.stock = stock;
+		this.idAsociado = idAsociado;
 	}
-
-	public abstract String usarProducto(String forma);
 
 	public String getNombre() {
 		return nombre;
@@ -94,11 +97,19 @@ public abstract class Producto {
 		this.stock = stock;
 	}
 
+	public int getIdAsociado() {
+		return idAsociado;
+	}
+
+	public void setIdAsociado(int idAsociado) {
+		this.idAsociado = idAsociado;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo + ", precio=" + precio
 				+ ", marca=" + marca + ", vendedor=" + vendedor + ", caracteristicas=" + caracteristicas + ", stock="
-				+ stock + "]";
+				+ stock + ", idAsociado=" + idAsociado + "]";
 	}
 
 	public String comprar(String metodoPago) {

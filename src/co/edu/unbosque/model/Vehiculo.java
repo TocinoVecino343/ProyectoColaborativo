@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class Vehiculo extends Producto {
 
+	private static final long serialVersionUID = 7722907431546705886L;
 	private boolean esFinanciable;
 	private int kilometraje;
 	private int anio;
@@ -18,16 +19,16 @@ public class Vehiculo extends Producto {
 	}
 
 	public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, boolean esFinanciable, int kilometraje, int anio) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, boolean esFinanciable, int kilometraje, int anio) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.esFinanciable = esFinanciable;
 		this.kilometraje = kilometraje;
 		this.anio = anio;
 	}
 
 	public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -56,9 +57,9 @@ public class Vehiculo extends Producto {
 	}
 
 	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return "Vehiculo [ " + super.toString() + "esFinanciable=" + esFinanciable + ", kilometraje=" + kilometraje
+				+ ", anio=" + anio + "]";
 	}
 
 }

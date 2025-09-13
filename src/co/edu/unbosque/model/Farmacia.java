@@ -2,6 +2,7 @@ package co.edu.unbosque.model;
 
 public class Farmacia extends Producto {
 
+	private static final long serialVersionUID = -7927239735946763076L;
 	private String laboratorio;
 	private String formatoMedicamento;
 	private String formatoDeVenta;
@@ -18,23 +19,18 @@ public class Farmacia extends Producto {
 	}
 
 	public Farmacia(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, String laboratorio, String formatoMedicamento, String formatoDeVenta) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado, String laboratorio, String formatoMedicamento,
+			String formatoDeVenta) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		this.laboratorio = laboratorio;
 		this.formatoMedicamento = formatoMedicamento;
 		this.formatoDeVenta = formatoDeVenta;
 	}
 
 	public Farmacia(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock);
+			String caracteristicas, int stock, int idAsociado) {
+		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String usarProducto(String forma) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String getLaboratorio() {
