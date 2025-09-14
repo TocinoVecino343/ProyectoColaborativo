@@ -1,80 +1,41 @@
 package co.edu.unbosque.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
 
 public class PanelSuperior extends JPanel {
 
-	private JButton btnCategoria;
-	private JButton btnVender;
-	private JButton btnCarro;
+    private JButton btnCategoria;
+    private JButton btnVender;
+    private JButton btnCarro;
+    private JTextField txtFieldBuscador;
 
-	private JTextField txtFieldBuscador;
+    public PanelSuperior() {
+        setBackground(Color.decode("#ffe600"));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        setPreferredSize(new Dimension(1280, 150));
 
-	public PanelSuperior() {
-		this.setVisible(true);
-		this.setBackground(Color.decode("#ffe600"));
-		this.setLayout(null);
-		this.setBounds(0, 0, 1280, 150);
-		inicializarComponentes();
-	}
+        inicializarComponentes();
+    }
 
-	public void inicializarComponentes() {
-		btnCategoria = new JButton("Categorias");
-		btnVender = new JButton("Vender");
-		btnCarro = new JButton("Carrito 🛒");
+    public void inicializarComponentes() {
+        btnCategoria = new JButton("Categorias");
+        btnVender = new JButton("Vender");
+        btnCarro = new JButton("Carrito 🛒");
+        txtFieldBuscador = new JTextField(30);
 
-		txtFieldBuscador = new JTextField();
+        txtFieldBuscador.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		btnCategoria.setBounds(150, 90, 100, 30);
-		btnVender.setBounds(800, 90, 100, 30);
-		btnCarro.setBounds(1000, 90, 100, 30);
+        add(btnCategoria);
+        add(txtFieldBuscador);
+        add(btnVender);
+        add(btnCarro);
 
-		txtFieldBuscador.setBounds(300, 20, 700, 40);
-		txtFieldBuscador.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
-		this.add(btnCategoria);
-		this.add(btnVender);
-		this.add(btnCarro);
-		this.add(txtFieldBuscador);
-	}
+        setAlignmentY(Component.CENTER_ALIGNMENT);
+    }
 
-	public JButton getBtnCategoria() {
-		return btnCategoria;
-	}
-
-	public void setBtnCategoria(JButton btnCategoria) {
-		this.btnCategoria = btnCategoria;
-	}
-
-	public JButton getBtnVender() {
-		return btnVender;
-	}
-
-	public void setBtnVender(JButton btnVender) {
-		this.btnVender = btnVender;
-	}
-
-	public JButton getBtnCarro() {
-		return btnCarro;
-	}
-
-	public void setBtnCarro(JButton btnCarro) {
-		this.btnCarro = btnCarro;
-	}
-
-	public JTextField getTxtFieldBuscador() {
-		return txtFieldBuscador;
-	}
-
-	public void setTxtFieldBuscador(JTextField txtFieldBuscador) {
-		this.txtFieldBuscador = txtFieldBuscador;
-	}
-	
-	
+    public JButton getBtnCategoria() { return btnCategoria; }
+    public JButton getBtnVender() { return btnVender; }
+    public JButton getBtnCarro() { return btnCarro; }
+    public JTextField getTxtFieldBuscador() { return txtFieldBuscador; }
 }

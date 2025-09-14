@@ -1,55 +1,39 @@
 package co.edu.unbosque.view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class Ventana extends JFrame {
 
-	private PanelSuperior panelS;
-	private PanelCrearVehiculo panelCv;
-	private PanelCrearProductoModa panelCpm;
+    private PanelSuperior panelS;
 
-	Ventana() {
-		this.setVisible(true);
-		panelS = new PanelSuperior();
-		inicializarComponentes();
-	}
+    public Ventana() {
+        // Inicializa el panel superior
+        this.panelS = new PanelSuperior();
 
-	public void inicializarComponentes() {
-		this.setTitle("Mercado Libre");
-		this.setBounds(0, 0, 1280, 920);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Finaliza el programa completamente
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setLayout(new BorderLayout(10, 10));
-		this.getContentPane().add(panelS, BorderLayout.NORTH);
+        // Configura la ventana principal
+        setTitle("Mercado Libre");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
 
-	}
+        // Usa BorderLayout (correcto)
+        setLayout(new BorderLayout());
 
-	public PanelSuperior getPanelS() {
-		return panelS;
-	}
+        // Agrega PanelSuperior en la parte superior
+        add(panelS, BorderLayout.NORTH);
 
-	public void setPanelS(PanelSuperior panelS) {
-		this.panelS = panelS;
-	}
+        // ¡IMPORTANTE! Ajusta el tamaño automáticamente según los componentes
+        pack(); // ← Esto hace que la ventana se ajuste al contenido
 
-	public PanelCrearVehiculo getPanelCv() {
-		return panelCv;
-	}
+        // Si quieres forzar un tamaño mínimo (opcional)
+        setSize(1280, 920);
 
-	public void setPanelCv(PanelCrearVehiculo panelCv) {
-		this.panelCv = panelCv;
-	}
+        // Ocultar hasta que se inicie sesión
+        setVisible(false);
+    }
 
-	public PanelCrearProductoModa getPanelCpm() {
-		return panelCpm;
-	}
-
-	public void setPanelCpm(PanelCrearProductoModa panelCpm) {
-		this.panelCpm = panelCpm;
-	}
-
+    public PanelSuperior getPanelS() {
+        return panelS;
+    }
 }
