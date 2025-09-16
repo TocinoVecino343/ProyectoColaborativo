@@ -11,7 +11,7 @@ public class PanelCrearProductoModa extends JPanel {
     private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock,
                       txtColor;
 
-    private JComboBox cmbTipo, cmbMarca, cmbTalla, cmbMaterial;
+    private JComboBox<String> cmbTipo, cmbMarca, cmbTalla, cmbMaterial;
 
     private JButton btnCrearProductoModa;
 

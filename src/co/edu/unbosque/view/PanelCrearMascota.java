@@ -20,7 +20,7 @@ public class PanelCrearMascota extends JPanel {
 	
 	 private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock, txtRaza,txtColor;
 
-	 private JComboBox cmbTipoAnimal,cmbFormatoDeVenta;
+	 private JComboBox<String> cmbTipoAnimal,cmbFormatoDeVenta;
 	
 	  private JButton btnCrearMascota;
 	

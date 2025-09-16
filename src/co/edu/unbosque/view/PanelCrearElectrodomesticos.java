@@ -1,4 +1,4 @@
-/*package co.edu.unbosque.view;
+package co.edu.unbosque.view;
 
 import java.awt.Color;
 
@@ -14,13 +14,15 @@ public class PanelCrearElectrodomesticos extends JPanel {
 	/*private String modelo;
 	private int voltaje;
 	private String color;
-
+*/
 	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblModelo,
 	lblVoltaje, lblColor;
 	
 	 private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas,txtStock, txtModelo,txtColor;
 
-	 private JComboBox cmbVoltaje;
+	 private JComboBox<String> cmbVoltaje;
+
+
 	
 	  private JButton btnCrearElectrodomestico;
 	
@@ -327,4 +329,4 @@ public class PanelCrearElectrodomesticos extends JPanel {
 	  
 	  
 	  
-}*/
+}

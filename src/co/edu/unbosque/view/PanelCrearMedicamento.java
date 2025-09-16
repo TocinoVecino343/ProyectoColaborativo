@@ -16,7 +16,7 @@ public class PanelCrearMedicamento extends JPanel {
 	
 	 private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock;
 
-	 private JComboBox cmbFormatoMedicamento, cmbFormatoDeVenta;
+	 private JComboBox<String> cmbFormatoMedicamento, cmbFormatoDeVenta;
 	
 	  private JButton btnCrearMedicamento;
 	   

@@ -20,7 +20,7 @@ public class PanelCrearJuguete extends JPanel {
 	
 	 private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock,txtColor,txtMaterial;
 
-	 private JComboBox cmbRangoDeEdad;
+	 private JComboBox<String> cmbRangoDeEdad;
 	
 	  private JButton btnCrearJuguete;
 	   
