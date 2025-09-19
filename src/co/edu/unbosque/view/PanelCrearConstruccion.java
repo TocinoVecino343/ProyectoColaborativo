@@ -156,7 +156,7 @@ public class PanelCrearConstruccion extends JPanel {
     
     private JPanel crearPanelFormulario() {
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(null); // Layout absoluto como el original
+        formPanel.setLayout(null);
         formPanel.setBackground(COLOR_PANEL_BLANCO);
         formPanel.setPreferredSize(new Dimension(600, 1100));
         formPanel.setBorder(BorderFactory.createCompoundBorder(

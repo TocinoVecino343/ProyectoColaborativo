@@ -155,9 +155,9 @@ public class PanelCrearAlimentoYBebida extends JPanel {
     
     private JPanel crearPanelFormulario() {
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(null); // Layout absoluto como el original
+        formPanel.setLayout(null);
         formPanel.setBackground(COLOR_PANEL_BLANCO);
-        formPanel.setPreferredSize(new Dimension(600, 1200)); // Altura ajustada para todos los campos
+        formPanel.setPreferredSize(new Dimension(600, 1200));
         formPanel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
             BorderFactory.createEmptyBorder(30, 30, 30, 30)

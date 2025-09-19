@@ -14,7 +14,7 @@ public abstract class Producto implements Serializable {
     private String caracteristicas;
     private int stock;
     private int idAsociado;
-    private String fotoProducto; // Nuevo atributo
+    private String fotoProducto;
 
     public Producto() {
         super();
@@ -35,7 +35,6 @@ public abstract class Producto implements Serializable {
         this.fotoProducto = fotoProducto;
     }
 
-    // Getters y setters existentes
     public String getNombre() {
         return nombre;
     }

@@ -17,8 +17,8 @@ public class PanelSuperior extends JPanel {
     public PanelSuperior() {
         this.setVisible(true);
         this.setBackground(Color.decode("#ffe600"));
-        this.setLayout(null); // Mantengo el layout absoluto como lo tenías
-        this.setPreferredSize(new Dimension(1280, 120)); // Uso preferredSize en lugar de setBounds
+        this.setLayout(null);
+        this.setPreferredSize(new Dimension(1280, 120));
         inicializarComponentes();
     }
 

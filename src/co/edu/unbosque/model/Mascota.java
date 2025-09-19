@@ -34,8 +34,7 @@ public class Mascota extends Producto {
             String caracteristicas, int stock, int idAsociado) {
         super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
     }
-
-    // Getters y setters existentes
+    
     public String getTipoAnimal() {
         return tipoAnimal;
     }

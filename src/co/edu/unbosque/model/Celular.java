@@ -52,7 +52,6 @@ public class Celular extends Producto {
         super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
     }
 
-    // Getters y setters existentes
     public String getColor() {
         return color;
     }
