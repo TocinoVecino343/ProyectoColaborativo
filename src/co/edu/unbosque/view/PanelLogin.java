@@ -2,259 +2,227 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import co.edu.unbosque.controller.Controlador;
-import co.edu.unbosque.model.Usuario;
-import co.edu.unbosque.model.persistence.UsuarioDAO;
-import co.edu.unbosque.util.exception.EmailInvalidoException;
-import co.edu.unbosque.util.exception.EmailYaRegistradoException;
-import co.edu.unbosque.util.exception.LanzadorExcepciones;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelLogin extends JPanel {
-
-    private JTextField txtEmail, txtNombre, txtNombreUsuario, txtTelefono, txtRutaImagen;
+    private JTextField txtEmail;
     private JPasswordField txtContrasenia;
-    private JTextField txtDocumento;
-    private JButton btnIniciarSesion, btnCrearCuenta;
+    private JButton btnIniciarSesion;
+    private JButton btnCrearCuenta;
     private JComboBox<String> cmbIdioma;
-    private JFrame frame;
-    private Controlador controlador;
+    
+    // Colores estilo MercadoLibre
+    private final Color COLOR_FONDO = new Color(235, 235, 235);
+    private final Color COLOR_PANEL_BLANCO = Color.WHITE;
+    private final Color COLOR_TEXTO_PRINCIPAL = new Color(51, 51, 51);
+    private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
+    private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
+    private final Color COLOR_BOTON_PRIMARIO = new Color(52, 131, 250);
+    private final Color COLOR_BOTON_SECUNDARIO = new Color(46, 204, 113);
 
-    private String[] labelsEsp = {
-        "Nombre:", "Nombre de Usuario:", "Documento:", "Correo Electrónico:",
-        "Teléfono:", "Contraseña:", "Ruta Imagen:", "Iniciar Sesión", "Crear Cuenta"
-    };
-    private String[] labelsEng = {
-        "Name:", "Username:", "ID:", "Email:", "Phone:", "Password:", "Profile Image:", "Sign In", "Create Account"
-    };
-    private String[] labelsPor = {
-        "Nome:", "Nome de Usuário:", "ID:", "Email:", "Telefone:", "Senha:", "Imagem de Perfil:", "Entrar", "Criar Conta"
-    };
-    private String[] labelsLat = {
-        "Nomen:", "NomenUsus:", "Codex:", "Email:", "Telephonum:", "Clavis:", "ImagoProfilis:", "Inire", "Creare Contum"
-    };
-
-    private String[][] traducciones = {labelsEsp, labelsEng, labelsPor, labelsLat};
-    private int idiomaActual = 0;
-
-    public PanelLogin(JFrame frame, Controlador controlador) {
-        this.frame = frame;
-        this.controlador = controlador;
+    public PanelLogin() {
         setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
-        setPreferredSize(new Dimension(600, 700));
+        setBackground(COLOR_FONDO);
+        setPreferredSize(new Dimension(1280, 500));
+        setBorder(BorderFactory.createEmptyBorder(40, 0, 40, 0));
 
-        JLabel titulo = new JLabel("Bienvenido", SwingConstants.CENTER);
+        // Panel principal con contenedor centrado
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(COLOR_FONDO);
+        
+        // Panel contenedor centrado
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setBackground(COLOR_PANEL_BLANCO);
+        centerPanel.setPreferredSize(new Dimension(500, 350));
+        centerPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(30, 40, 30, 40)
+        ));
+        
+        // Título
+        JLabel titulo = new JLabel("Iniciar Sesión", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
-        titulo.setBorder(BorderFactory.createEmptyBorder(40, 0, 30, 0));
-        add(titulo, BorderLayout.NORTH);
+        titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
+        titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
+        centerPanel.add(titulo, BorderLayout.NORTH);
 
-        JPanel panelIdioma = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        cmbIdioma = new JComboBox<>(new String[]{"Español", "English", "Português", "Latin"});
-        cmbIdioma.setSelectedIndex(0);
-        cmbIdioma.addActionListener(e -> cambiarIdioma());
-        panelIdioma.add(cmbIdioma);
-        add(panelIdioma, BorderLayout.NORTH);
+        // Panel del formulario
+        JPanel formPanel = new JPanel(new GridLayout(2, 2, 15, 30));
+        formPanel.setBackground(COLOR_PANEL_BLANCO);
 
-        JPanel formPanel = new JPanel(new GridLayout(3, 2, 15, 10));
-        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
-        formPanel.setBackground(Color.WHITE);
-
-        formPanel.add(new JLabel(traducciones[idiomaActual][3]));
+        // Campos del formulario
+        JLabel lblEmail = new JLabel("Correo Electrónico:");
+        lblEmail.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblEmail.setForeground(COLOR_TEXTO_PRINCIPAL);
+        formPanel.add(lblEmail);
+        
         txtEmail = new JTextField();
+        txtEmail.setFont(new Font("Arial", Font.PLAIN, 14));
+        txtEmail.setBackground(COLOR_PANEL_BLANCO);
+        txtEmail.setForeground(COLOR_TEXTO_PRINCIPAL);
+        txtEmail.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        aplicarEfectoFocusTextField(txtEmail);
         formPanel.add(txtEmail);
 
-        formPanel.add(new JLabel(traducciones[idiomaActual][5]));
+        JLabel lblContrasenia = new JLabel("Contraseña:");
+        lblContrasenia.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblContrasenia.setForeground(COLOR_TEXTO_PRINCIPAL);
+        formPanel.add(lblContrasenia);
+        
         txtContrasenia = new JPasswordField();
+        txtContrasenia.setFont(new Font("Arial", Font.PLAIN, 14));
+        txtContrasenia.setBackground(COLOR_PANEL_BLANCO);
+        txtContrasenia.setForeground(COLOR_TEXTO_PRINCIPAL);
+        txtContrasenia.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        aplicarEfectoFocusTextField(txtContrasenia);
         formPanel.add(txtContrasenia);
 
-        btnIniciarSesion = new JButton(traducciones[idiomaActual][7]);
-        btnCrearCuenta = new JButton(traducciones[idiomaActual][8]);
+        centerPanel.add(formPanel, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        // Panel de botones
+        btnIniciarSesion = new JButton("Iniciar Sesión");
+        btnIniciarSesion.setFont(new Font("Arial", Font.BOLD, 14));
+        btnIniciarSesion.setBackground(COLOR_BOTON_PRIMARIO);
+        btnIniciarSesion.setForeground(Color.WHITE);
+        btnIniciarSesion.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        btnIniciarSesion.setFocusPainted(false);
+        btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        btnIniciarSesion.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnIniciarSesion.setBackground(new Color(45, 115, 220));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnIniciarSesion.setBackground(COLOR_BOTON_PRIMARIO);
+            }
+        });
+
+        btnCrearCuenta = new JButton("Crear Cuenta");
+        btnCrearCuenta.setFont(new Font("Arial", Font.BOLD, 14));
+        btnCrearCuenta.setBackground(COLOR_BOTON_SECUNDARIO);
+        btnCrearCuenta.setForeground(Color.WHITE);
+        btnCrearCuenta.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        btnCrearCuenta.setFocusPainted(false);
+        btnCrearCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        btnCrearCuenta.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                btnCrearCuenta.setBackground(new Color(38, 184, 100));
+            }
+            public void mouseExited(MouseEvent evt) {
+                btnCrearCuenta.setBackground(COLOR_BOTON_SECUNDARIO);
+            }
+        });
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        buttonPanel.setBackground(COLOR_PANEL_BLANCO);
         buttonPanel.add(btnIniciarSesion);
         buttonPanel.add(btnCrearCuenta);
 
-        add(formPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        centerPanel.add(buttonPanel, BorderLayout.SOUTH);
+        
+        // Añadir el panel centrado al mainPanel
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
-        btnIniciarSesion.addActionListener(e -> iniciarSesion());
-        btnCrearCuenta.addActionListener(e -> mostrarFormularioRegistro());
+        // Panel del idioma en la parte inferior
+        cmbIdioma = new JComboBox<>(new String[]{"Español", "English", "Português", "Latin"});
+        cmbIdioma.setFont(new Font("Arial", Font.PLAIN, 12));
+        cmbIdioma.setBackground(COLOR_PANEL_BLANCO);
+        cmbIdioma.setForeground(COLOR_TEXTO_PRINCIPAL);
+        cmbIdioma.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1));
+        aplicarEfectoFocusComboBox(cmbIdioma);
+        
+        JPanel idiomaPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        idiomaPanel.setBackground(COLOR_FONDO);
+        idiomaPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 20));
+        idiomaPanel.add(new JLabel("Idioma: "));
+        idiomaPanel.add(cmbIdioma);
+        
+        add(idiomaPanel, BorderLayout.SOUTH);
     }
-
-    private void cambiarIdioma() {
-        idiomaActual = cmbIdioma.getSelectedIndex();
-        actualizarTextos();
-    }
-
-    private void actualizarTextos() {
-        ((JLabel) ((Container) ((JPanel) getComponent(1)).getLayout()).getComponent(0)).setText(traducciones[idiomaActual][3]);
-        ((JLabel) ((Container) ((JPanel) getComponent(1)).getLayout()).getComponent(2)).setText(traducciones[idiomaActual][5]);
-        btnIniciarSesion.setText(traducciones[idiomaActual][7]);
-        btnCrearCuenta.setText(traducciones[idiomaActual][8]);
-    }
-
-    private void iniciarSesion() {
-        String email = txtEmail.getText();
-        String contrasenia = new String(txtContrasenia.getPassword());
-
-        try {
-            LanzadorExcepciones.validarEmail(email);
-
-            UsuarioDAO dao = new UsuarioDAO();
-            Usuario usuario = dao.login(email, contrasenia);
-
-            if (usuario != null) {
-                JOptionPane.showMessageDialog(this,
-                    "¡Bienvenido, " + usuario.getNombre() + "!",
-                    "Inicio de sesión exitoso",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-                frame.dispose();
-                controlador.onLoginSuccess();
-            } else {
-                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+    private void aplicarEfectoFocusTextField(JTextField textField) {
+        textField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                textField.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BOTON_PRIMARIO, 2),
+                    BorderFactory.createEmptyBorder(7, 11, 7, 11)
+                ));
             }
-
-        } catch (EmailInvalidoException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+            public void focusLost(FocusEvent evt) {
+                textField.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+                    BorderFactory.createEmptyBorder(8, 12, 8, 12)
+                ));
+            }
+        });
+    }
+    
+    private void aplicarEfectoFocusComboBox(JComboBox<String> comboBox) {
+        comboBox.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                comboBox.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BOTON_PRIMARIO, 2),
+                    BorderFactory.createEmptyBorder(7, 11, 7, 11)
+                ));
+            }
+            public void focusLost(FocusEvent evt) {
+                comboBox.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+                    BorderFactory.createEmptyBorder(8, 12, 8, 12)
+                ));
+            }
+        });
     }
 
-    private void mostrarFormularioRegistro() {
-        JDialog dialog = new JDialog(frame, "Crear Cuenta - Datos Completos", true);
-        dialog.setSize(550, 650);
-        dialog.setLocationRelativeTo(frame);
-        dialog.setLayout(new BorderLayout());
-
-        JLabel title = new JLabel("Registra tu cuenta completa", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 18));
-        title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        dialog.add(title, BorderLayout.NORTH);
-
-        JPanel form = new JPanel(new GridLayout(9, 2, 15, 10));
-        form.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
-
-        form.add(new JLabel(traducciones[idiomaActual][0] + ":"));
-        txtNombre = new JTextField();
-        form.add(txtNombre);
-
-        form.add(new JLabel(traducciones[idiomaActual][1] + ":"));
-        txtNombreUsuario = new JTextField();
-        form.add(txtNombreUsuario);
-
-        form.add(new JLabel(traducciones[idiomaActual][2] + ":"));
-        txtDocumento = new JTextField();
-        form.add(txtDocumento);
-
-        form.add(new JLabel(traducciones[idiomaActual][3] + ":"));
-        txtEmail = new JTextField();
-        form.add(txtEmail);
-
-        form.add(new JLabel(traducciones[idiomaActual][4] + ":"));
-        txtTelefono = new JTextField();
-        form.add(txtTelefono);
-
-        form.add(new JLabel(traducciones[idiomaActual][5] + ":"));
-        txtContrasenia = new JPasswordField();
-        form.add(txtContrasenia);
-
-        form.add(new JLabel(traducciones[idiomaActual][6] + " (opcional):"));
-        txtRutaImagen = new JTextField();
-        txtRutaImagen.setText("assets/foto_perfil.png");
-        form.add(txtRutaImagen);
-
-        JButton btnRegistrar = new JButton("Crear Cuenta");
-        btnRegistrar.setFont(new Font("Arial", Font.BOLD, 14));
-        btnRegistrar.setBackground(new Color(41, 128, 185));
-        btnRegistrar.setForeground(Color.WHITE);
-        btnRegistrar.setFocusPainted(false);
-        btnRegistrar.addActionListener(e -> validarYCrearUsuario(dialog));
-
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(btnRegistrar);
-
-        dialog.add(form, BorderLayout.CENTER);
-        dialog.add(buttonPanel, BorderLayout.SOUTH);
-
-        dialog.setVisible(true);
+    // Getters y setters
+    public JTextField getTxtEmail() {
+        return txtEmail;
     }
 
-    private void validarYCrearUsuario(JDialog dialog) {
-        String nombre = txtNombre.getText().trim();
-        String nombreUsuario = txtNombreUsuario.getText().trim();
-        String documentoStr = txtDocumento.getText().trim();
-        String email = txtEmail.getText().trim();
-        String telefonoStr = txtTelefono.getText().trim();
-        String contrasenia = new String(txtContrasenia.getPassword());
-        String rutaImagen = txtRutaImagen.getText().trim();
+    public void setTxtEmail(JTextField txtEmail) {
+        this.txtEmail = txtEmail;
+    }
 
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El nombre es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (nombreUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El nombre de usuario es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (documentoStr.isEmpty() || !documentoStr.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "El documento debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El correo electrónico es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (telefonoStr.isEmpty () || !telefonoStr.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "El teléfono debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (contrasenia.length() < 8) {
-            JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    public JPasswordField getTxtContrasenia() {
+        return txtContrasenia;
+    }
 
-        try {
-            LanzadorExcepciones.validarEmail(email);
-            LanzadorExcepciones.verificarEmailNoRegistrado(email);
+    public void setTxtContrasenia(JPasswordField txtContrasenia) {
+        this.txtContrasenia = txtContrasenia;
+    }
 
-            int documento = Integer.parseInt(documentoStr);
-            int telefono = Integer.parseInt(telefonoStr);
-            int id = (int) (Math.random() * (999999 - 100000 + 1)) + 100000;
+    public JButton getBtnIniciarSesion() {
+        return btnIniciarSesion;
+    }
 
-            Usuario nuevoUsuario = new Usuario(
-                nombre,
-                nombreUsuario,
-                documento,
-                email,
-                telefono,
-                contrasenia,
-                rutaImagen,
-                id
-            );
+    public void setBtnIniciarSesion(JButton btnIniciarSesion) {
+        this.btnIniciarSesion = btnIniciarSesion;
+    }
 
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.crear(nuevoUsuario);
+    public JButton getBtnCrearCuenta() {
+        return btnCrearCuenta;
+    }
 
-            JOptionPane.showMessageDialog(null,
-                "¡Cuenta creada exitosamente!\n" +
-                "ID: " + id + "\n" +
-                "Bienvenido, " + nombre + "!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    public void setBtnCrearCuenta(JButton btnCrearCuenta) {
+        this.btnCrearCuenta = btnCrearCuenta;
+    }
 
-            dialog.dispose();
-            txtEmail.setText("");
-            txtContrasenia.setText("");
+    public JComboBox<String> getCmbIdioma() {
+        return cmbIdioma;
+    }
 
-        } catch (EmailInvalidoException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        } catch (EmailYaRegistradoException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de registro", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    public void setCmbIdioma(JComboBox<String> cmbIdioma) {
+        this.cmbIdioma = cmbIdioma;
     }
 }

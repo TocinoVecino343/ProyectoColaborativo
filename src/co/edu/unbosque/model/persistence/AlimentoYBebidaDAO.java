@@ -22,8 +22,11 @@ public class AlimentoYBebidaDAO implements DAO<AlimentoYBebida> {
 
 	@Override
 	public String mostrarDatos() {
-		// TODO Auto-generated method stub
-		return null;
+		String contenido = "";
+		for (AlimentoYBebida alimentoYBebida : listaAlimentosYBebidas) {
+			contenido+= listaAlimentosYBebidas.toString() + "\n";
+		}
+		return contenido;
 	}
 
 	@Override

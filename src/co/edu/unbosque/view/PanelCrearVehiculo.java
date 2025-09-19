@@ -1,315 +1,624 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import javax.swing.Box;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PanelCrearVehiculo extends JPanel {
-
-	private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblAnio,
-			lblEsFinanciable, lblKilometraje;
-
-	private JTextArea txtNombre, txtDescripcion, txtPrecio, txtCaracteristicas, txtStock, txtKilometraje;
-
-	private JComboBox cmbTipo, cmbMarca, cmbAnio, cmbEsFinanciable;
-
-	private JButton btnCrearVehiculo;
-
-	public PanelCrearVehiculo() {
-		this.setVisible(true);
-		this.setBackground(Color.decode("#ffe600"));
-		this.setLayout(null);
-		this.setBounds(0, 0, 1280, 150);
-		inicializarComponentes();
-	}
-
-	public void inicializarComponentes() {
-		lblNombre = new JLabel("Nombre:");
-		lblDescripcion = new JLabel("Descripción:");
-		lblTipo = new JLabel("Tipo:");
-		lblPrecio = new JLabel("Precio:");
-		lblMarca = new JLabel("Marca:");
-		lblCaracteristicas = new JLabel("Características:");
-		lblStock = new JLabel("Stock:");
-		lblAnio = new JLabel("Año");
-		lblEsFinanciable = new JLabel("Es financiable");
-
-		txtNombre = new JTextArea();
-		txtDescripcion = new JTextArea();
-		txtPrecio = new JTextArea();
-		txtCaracteristicas = new JTextArea();
-		txtStock = new JTextArea();
-
-		cmbTipo = new JComboBox<>();
-		cmbTipo.addItem("Carros y camionetas");
-		cmbTipo.addItem("Motos");
-		cmbTipo.addItem("Maquinaria Pesada");
-		cmbTipo.addItem("Carros de Coleccion");
-		cmbTipo.addItem("Otros Vehiculos");
-
-		cmbMarca = new JComboBox<>();
-		cmbMarca.addItem("Toyota");
-		cmbMarca.addItem("Chevrolet");
-		cmbMarca.addItem("Renault");
-		cmbMarca.addItem("Nissan");
-		cmbMarca.addItem("Ford");
-		cmbMarca.addItem("Hyundai");
-		cmbMarca.addItem("Kia");
-		cmbMarca.addItem("Volkswagen");
-		cmbMarca.addItem("Mazda");
-		cmbMarca.addItem("Suzuki");
-		cmbMarca.addItem("Mercedes-Benz");
-		cmbMarca.addItem("BMW");
-		cmbMarca.addItem("Audi");
-		cmbMarca.addItem("Mitsubishi");
-		cmbMarca.addItem("Subaru");
-		cmbMarca.addItem("Peugeot");
-		cmbMarca.addItem("Citroën");
-		cmbMarca.addItem("Seat");
-		cmbMarca.addItem("Volvo");
-		cmbMarca.addItem("Jeep");
-		cmbMarca.addItem("Honda");
-		cmbMarca.addItem("Otro");
-
-		cmbAnio = new JComboBox<>();
-		for (int i = 1980; i <= 2025; i++) {
-			cmbAnio.addItem(String.valueOf(i));
-		}
-
-		cmbEsFinanciable = new JComboBox<>();
-		cmbEsFinanciable.addItem("Si");
-		cmbEsFinanciable.addItem("No");
-
-		btnCrearVehiculo = new JButton("Crear Vehiculo:");
-		btnCrearVehiculo.setBounds(500, 150, 100, 30);
-
-		lblNombre.setBounds(150, 150, 100, 30);
-		txtNombre.setBounds(300, 150, 300, 30);
-
-		lblDescripcion.setBounds(150, 200, 100, 30);
-		txtDescripcion.setBounds(300, 200, 300, 60);
-
-		lblTipo.setBounds(150, 280, 100, 30);
-
-		lblPrecio.setBounds(150, 330, 100, 30);
-		txtPrecio.setBounds(300, 330, 300, 30);
-
-		lblMarca.setBounds(150, 380, 100, 30);
-
-		lblAnio.setBounds(150, 300, 200, 200);
-
-		lblEsFinanciable.setBounds(150, 500, 100, 30);
-
-		lblCaracteristicas.setBounds(150, 480, 120, 30);
-		txtCaracteristicas.setBounds(300, 480, 300, 60);
-
-		lblStock.setBounds(150, 560, 100, 30);
-		txtStock.setBounds(300, 560, 300, 30);
-
-		lblKilometraje.setBounds(300, 560, 300, 30);
-		txtKilometraje.setBounds(300, 560, 300, 30);
-
-		cmbTipo.setBounds(300, 560, 300, 30);
-		cmbMarca.setBounds(300, 860, 300, 30);
-
-		this.add(lblNombre);
-		this.add(txtNombre);
-		this.add(lblDescripcion);
-		this.add(txtDescripcion);
-		this.add(lblTipo);
-		this.add(lblPrecio);
-		this.add(txtPrecio);
-		this.add(lblMarca);
-		this.add(lblCaracteristicas);
-		this.add(txtCaracteristicas);
-		this.add(lblStock);
-		this.add(txtStock);
-		this.add(cmbTipo);
-		this.add(cmbMarca);
-		this.add(cmbAnio);
-		this.add(btnCrearVehiculo);
-		this.add(lblAnio);
-		this.add(lblEsFinanciable);
-		this.add(cmbEsFinanciable);
-		this.add(lblKilometraje);
-		this.add(txtKilometraje);
-	}
-
-	public JLabel getLblNombre() {
-		return lblNombre;
-	}
-
-	public void setLblNombre(JLabel lblNombre) {
-		this.lblNombre = lblNombre;
-	}
-
-	public JLabel getLblDescripcion() {
-		return lblDescripcion;
-	}
-
-	public void setLblDescripcion(JLabel lblDescripcion) {
-		this.lblDescripcion = lblDescripcion;
-	}
-
-	public JLabel getLblTipo() {
-		return lblTipo;
-	}
-
-	public void setLblTipo(JLabel lblTipo) {
-		this.lblTipo = lblTipo;
-	}
-
-	public JLabel getLblPrecio() {
-		return lblPrecio;
-	}
-
-	public void setLblPrecio(JLabel lblPrecio) {
-		this.lblPrecio = lblPrecio;
-	}
-
-	public JLabel getLblMarca() {
-		return lblMarca;
-	}
-
-	public void setLblMarca(JLabel lblMarca) {
-		this.lblMarca = lblMarca;
-	}
-
-	public JLabel getLblCaracteristicas() {
-		return lblCaracteristicas;
-	}
-
-	public void setLblCaracteristicas(JLabel lblCaracteristicas) {
-		this.lblCaracteristicas = lblCaracteristicas;
-	}
-
-	public JLabel getLblStock() {
-		return lblStock;
-	}
-
-	public void setLblStock(JLabel lblStock) {
-		this.lblStock = lblStock;
-	}
-
-	public JTextArea getTxtNombre() {
-		return txtNombre;
-	}
-
-	public void setTxtNombre(JTextArea txtNombre) {
-		this.txtNombre = txtNombre;
-	}
-
-	public JTextArea getTxtDescripcion() {
-		return txtDescripcion;
-	}
-
-	public void setTxtDescripcion(JTextArea txtDescripcion) {
-		this.txtDescripcion = txtDescripcion;
-	}
-
-	public JTextArea getTxtPrecio() {
-		return txtPrecio;
-	}
-
-	public void setTxtPrecio(JTextArea txtPrecio) {
-		this.txtPrecio = txtPrecio;
-	}
-
-	public JTextArea getTxtCaracteristicas() {
-		return txtCaracteristicas;
-	}
-
-	public void setTxtCaracteristicas(JTextArea txtCaracteristicas) {
-		this.txtCaracteristicas = txtCaracteristicas;
-	}
-
-	public JTextArea getTxtStock() {
-		return txtStock;
-	}
-
-	public void setTxtStock(JTextArea txtStock) {
-		this.txtStock = txtStock;
-	}
-
-	public JComboBox getCmbTipo() {
-		return cmbTipo;
-	}
-
-	public void setCmbTipo(JComboBox cmbTipo) {
-		this.cmbTipo = cmbTipo;
-	}
-
-	public JComboBox getCmbMarca() {
-		return cmbMarca;
-	}
-
-	public void setCmbMarca(JComboBox cmbMarca) {
-		this.cmbMarca = cmbMarca;
-	}
-
-	public JComboBox getCmbAnio() {
-		return cmbAnio;
-	}
-
-	public void setCmbAnio(JComboBox cmbAnio) {
-		this.cmbAnio = cmbAnio;
-	}
-
-	public JLabel getLblAnio() {
-		return lblAnio;
-	}
-
-	public void setLblAnio(JLabel lblAnio) {
-		this.lblAnio = lblAnio;
-	}
-
-	public JButton getBtnCrearVehiculo() {
-		return btnCrearVehiculo;
-	}
-
-	public void setBtnCrearVehiculo(JButton btnCrearVehiculo) {
-		this.btnCrearVehiculo = btnCrearVehiculo;
-	}
-
-	public JLabel getLblEsFinanciable() {
-		return lblEsFinanciable;
-	}
-
-	public void setLblEsFinanciable(JLabel lblEsFinanciable) {
-		this.lblEsFinanciable = lblEsFinanciable;
-	}
-
-	public JComboBox getCmbEsFinanciable() {
-		return cmbEsFinanciable;
-	}
-
-	public void setCmbEsFinanciable(JComboBox cmbEsFinanciable) {
-		this.cmbEsFinanciable = cmbEsFinanciable;
-	}
-
-	public JLabel getLblKilometraje() {
-		return lblKilometraje;
-	}
-
-	public void setLblKilometraje(JLabel lblKilometraje) {
-		this.lblKilometraje = lblKilometraje;
-	}
-
-	public JTextArea getTxtKilometraje() {
-		return txtKilometraje;
-	}
-
-	public void setTxtKilometraje(JTextArea txtKilometraje) {
-		this.txtKilometraje = txtKilometraje;
-	}
-	
-	
-
+    private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblAnio,
+            lblEsFinanciable, lblKilometraje;
+    private JTextArea txtNombre, txtDescripcion, txtPrecio, txtCaracteristicas, txtStock, txtKilometraje;
+    private JComboBox<String> cmbTipo, cmbMarca, cmbAnio, cmbEsFinanciable;
+    private JButton btnCrearVehiculo, btnSeleccionarImagen;
+    private JLabel lblImagenPreview;
+    private File imagenSeleccionada;
+    
+    // Colores estilo MercadoLibre
+    private final Color COLOR_FONDO = new Color(235, 235, 235);
+    private final Color COLOR_PANEL_BLANCO = Color.WHITE;
+    private final Color COLOR_TEXTO_PRINCIPAL = new Color(51, 51, 51);
+    private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
+    private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
+    private final Color COLOR_BOTON = new Color(52, 131, 250);
+
+    public PanelCrearVehiculo() {
+        this.setVisible(true);
+        this.setBackground(COLOR_FONDO);
+        this.setLayout(new BorderLayout());
+        this.setBounds(0, 0, 1280, 800);
+        inicializarComponentes();
+    }
+
+    public void inicializarComponentes() {
+        // Panel principal con scroll
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(COLOR_FONDO);
+        
+        // Panel de contenido
+        JPanel contentPanel = new JPanel(new BorderLayout(40, 0));
+        contentPanel.setBackground(COLOR_FONDO);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        
+        // Panel izquierdo - Imagen
+        JPanel leftPanel = crearPanelImagen();
+        
+        // Panel derecho - Formulario
+        JPanel rightPanel = crearPanelFormulario();
+        
+        contentPanel.add(leftPanel, BorderLayout.WEST);
+        contentPanel.add(rightPanel, BorderLayout.CENTER);
+        
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        
+        // Crear scroll
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
+    
+    private JPanel crearPanelImagen() {
+        JPanel imagePanel = new JPanel(new BorderLayout());
+        imagePanel.setBackground(COLOR_PANEL_BLANCO);
+        imagePanel.setPreferredSize(new Dimension(500, 700));
+        imagePanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(30, 30, 30, 30)
+        ));
+        
+        // Contenedor de la imagen
+        JPanel imageContainer = new JPanel(new BorderLayout());
+        imageContainer.setBackground(new Color(248, 248, 248));
+        imageContainer.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1));
+        imageContainer.setPreferredSize(new Dimension(400, 400));
+        
+        // Label para mostrar imagen o placeholder
+        lblImagenPreview = new JLabel();
+        lblImagenPreview.setHorizontalAlignment(JLabel.CENTER);
+        lblImagenPreview.setVerticalAlignment(JLabel.CENTER);
+        lblImagenPreview.setOpaque(true);
+        lblImagenPreview.setBackground(new Color(248, 248, 248));
+        
+        // Texto placeholder
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>" +
+                                "<div style='font-size: 60px; margin-bottom: 10px;'>🚗</div>" +
+                                "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>" +
+                                "</html>");
+        
+        imageContainer.add(lblImagenPreview, BorderLayout.CENTER);
+        
+        // Botón seleccionar imagen
+        btnSeleccionarImagen = new JButton("Seleccionar imagen del vehículo");
+        btnSeleccionarImagen.setFont(new Font("Arial", Font.BOLD, 14));
+        btnSeleccionarImagen.setBackground(COLOR_PANEL_BLANCO);
+        btnSeleccionarImagen.setForeground(COLOR_BOTON);
+        btnSeleccionarImagen.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BOTON, 2),
+            BorderFactory.createEmptyBorder(12, 20, 12, 20)
+        ));
+        btnSeleccionarImagen.setFocusPainted(false);
+        btnSeleccionarImagen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        // Efecto hover del botón imagen
+        btnSeleccionarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSeleccionarImagen.setBackground(new Color(240, 247, 255));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeleccionarImagen.setBackground(COLOR_PANEL_BLANCO);
+            }
+        });
+        
+        // ActionListener para seleccionar imagen
+        btnSeleccionarImagen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccionarImagen();
+            }
+        });
+        
+        // Panel para el botón
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBackground(COLOR_PANEL_BLANCO);
+        buttonPanel.add(btnSeleccionarImagen);
+        
+        imagePanel.add(imageContainer, BorderLayout.CENTER);
+        imagePanel.add(Box.createVerticalStrut(20), BorderLayout.SOUTH);
+        imagePanel.add(buttonPanel, BorderLayout.PAGE_END);
+        
+        return imagePanel;
+    }
+    
+    private JPanel crearPanelFormulario() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null); // Layout absoluto como el original
+        formPanel.setBackground(COLOR_PANEL_BLANCO);
+        formPanel.setPreferredSize(new Dimension(600, 1200)); // Altura ajustada para todos los campos
+        formPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(30, 30, 30, 30)
+        ));
+        
+        // Inicializar componentes del formulario
+        inicializarCamposFormulario();
+        posicionarComponentesFormulario(formPanel);
+        
+        return formPanel;
+    }
+    
+    private void inicializarCamposFormulario() {
+        // Labels
+        lblNombre = crearLabel("Nombre");
+        lblDescripcion = crearLabel("Descripción"); 
+        lblTipo = crearLabel("Tipo");
+        lblPrecio = crearLabel("Precio");
+        lblMarca = crearLabel("Marca");
+        lblCaracteristicas = crearLabel("Características");
+        lblStock = crearLabel("Stock");
+        lblAnio = crearLabel("Año");
+        lblEsFinanciable = crearLabel("Es financiable");
+        lblKilometraje = crearLabel("Kilómetros");
+
+        // TextAreas
+        txtNombre = crearTextArea();
+        txtDescripcion = crearTextAreaGrande();
+        txtPrecio = crearTextArea();
+        txtCaracteristicas = crearTextAreaGrande();
+        txtStock = crearTextArea();
+        txtKilometraje = crearTextArea();
+
+        // ComboBoxes
+        cmbTipo = crearComboBox();
+        cmbTipo.addItem("Carros y camionetas");
+        cmbTipo.addItem("Motos");
+        cmbTipo.addItem("Maquinaria Pesada");
+        cmbTipo.addItem("Carros de Colección");
+        cmbTipo.addItem("Otros Vehículos");
+
+        cmbMarca = crearComboBox();
+        cmbMarca.addItem("Toyota");
+        cmbMarca.addItem("Chevrolet");
+        cmbMarca.addItem("Renault");
+        cmbMarca.addItem("Nissan");
+        cmbMarca.addItem("Ford");
+        cmbMarca.addItem("Hyundai");
+        cmbMarca.addItem("Kia");
+        cmbMarca.addItem("Volkswagen");
+        cmbMarca.addItem("Mazda");
+        cmbMarca.addItem("Suzuki");
+        cmbMarca.addItem("Mercedes-Benz");
+        cmbMarca.addItem("BMW");
+        cmbMarca.addItem("Audi");
+        cmbMarca.addItem("Mitsubishi");
+        cmbMarca.addItem("Subaru");
+        cmbMarca.addItem("Peugeot");
+        cmbMarca.addItem("Citroën");
+        cmbMarca.addItem("Seat");
+        cmbMarca.addItem("Volvo");
+        cmbMarca.addItem("Jeep");
+        cmbMarca.addItem("Honda");
+        cmbMarca.addItem("Otro");
+
+        cmbAnio = crearComboBox();
+        for (int i = 1980; i <= 2025; i++) {
+            cmbAnio.addItem(String.valueOf(i));
+        }
+
+        cmbEsFinanciable = crearComboBox();
+        cmbEsFinanciable.addItem("Si");
+        cmbEsFinanciable.addItem("No");
+
+        // Botón principal
+        btnCrearVehiculo = crearBotonPrincipal("Crear Vehículo");
+        btnCrearVehiculo.setActionCommand("Crear Vehiculo");
+    }
+    
+    private void posicionarComponentesFormulario(JPanel panel) {
+        int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
+        
+        // Título de sección
+        JLabel titulo = new JLabel("Información del vehículo");
+        titulo.setFont(new Font("Arial", Font.BOLD, 18));
+        titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
+        titulo.setBounds(x, 0, 400, 25);
+        panel.add(titulo);
+        
+        // Información básica
+        lblNombre.setBounds(x, yLabel, 200, 20);
+        txtNombre.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblDescripcion.setBounds(x, yLabel, 200, 20);
+        txtDescripcion.setBounds(x, yField, fieldWidth, 60);
+        
+        yLabel += 85; yField += 85;
+        lblTipo.setBounds(x, yLabel, 200, 20);
+        cmbTipo.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblMarca.setBounds(x, yLabel, 200, 20);
+        cmbMarca.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblAnio.setBounds(x, yLabel, 200, 20);
+        cmbAnio.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblKilometraje.setBounds(x, yLabel, 200, 20);
+        txtKilometraje.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblPrecio.setBounds(x, yLabel, 200, 20);
+        txtPrecio.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblEsFinanciable.setBounds(x, yLabel, 200, 20);
+        cmbEsFinanciable.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        yLabel += gap; yField += gap;
+        lblCaracteristicas.setBounds(x, yLabel, 200, 20);
+        txtCaracteristicas.setBounds(x, yField, fieldWidth, 60);
+        
+        yLabel += 85; yField += 85;
+        lblStock.setBounds(x, yLabel, 200, 20);
+        txtStock.setBounds(x, yField, fieldWidth, fieldHeight);
+        
+        // Botón
+        btnCrearVehiculo.setBounds((panel.getPreferredSize().width - 200) / 2, yField + 80, 200, 45);
+        
+        // Agregar todos los componentes
+        panel.add(lblNombre); panel.add(txtNombre);
+        panel.add(lblDescripcion); panel.add(txtDescripcion);
+        panel.add(lblTipo); panel.add(cmbTipo);
+        panel.add(lblMarca); panel.add(cmbMarca);
+        panel.add(lblAnio); panel.add(cmbAnio);
+        panel.add(lblKilometraje); panel.add(txtKilometraje);
+        panel.add(lblPrecio); panel.add(txtPrecio);
+        panel.add(lblEsFinanciable); panel.add(cmbEsFinanciable);
+        panel.add(lblCaracteristicas); panel.add(txtCaracteristicas);
+        panel.add(lblStock); panel.add(txtStock);
+        panel.add(btnCrearVehiculo);
+    }
+    
+    private void seleccionarImagen() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar imagen del vehículo");
+        
+        // Filtro para imágenes
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Archivos de imagen (*.jpg, *.jpeg, *.png, *.gif)", 
+            "jpg", "jpeg", "png", "gif"
+        );
+        fileChooser.setFileFilter(filter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        
+        int resultado = fileChooser.showOpenDialog(this);
+        
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            imagenSeleccionada = fileChooser.getSelectedFile();
+            
+            try {
+                // Cargar y redimensionar imagen
+                ImageIcon originalIcon = new ImageIcon(imagenSeleccionada.getAbsolutePath());
+                Image img = originalIcon.getImage();
+                Image scaledImg = img.getScaledInstance(380, 380, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImg);
+                
+                lblImagenPreview.setText("");
+                lblImagenPreview.setIcon(scaledIcon);
+                
+            } catch (Exception e) {
+                lblImagenPreview.setText("<html><div style='text-align: center; color: red;'>" +
+                                        "Error al cargar imagen</div></html>");
+            }
+        }
+    }
+    
+    // Métodos para crear componentes con estilo
+    private JLabel crearLabel(String texto) {
+        JLabel label = new JLabel(texto);
+        label.setFont(new Font("Arial", Font.PLAIN, 14));
+        label.setForeground(COLOR_TEXTO_PRINCIPAL);
+        return label;
+    }
+    
+    private JTextArea crearTextArea() {
+        JTextArea textArea = new JTextArea();
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        textArea.setBackground(COLOR_PANEL_BLANCO);
+        textArea.setForeground(COLOR_TEXTO_PRINCIPAL);
+        textArea.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        aplicarEfectoFocus(textArea);
+        return textArea;
+    }
+    
+    private JTextArea crearTextAreaGrande() {
+        JTextArea textArea = crearTextArea();
+        return textArea;
+    }
+    
+    private JComboBox<String> crearComboBox() {
+        JComboBox<String> combo = new JComboBox<>();
+        combo.setFont(new Font("Arial", Font.PLAIN, 14));
+        combo.setBackground(COLOR_PANEL_BLANCO);
+        combo.setForeground(COLOR_TEXTO_PRINCIPAL);
+        combo.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1));
+        aplicarEfectoFocusComboBox(combo);
+        return combo;
+    }
+    
+    private JButton crearBotonPrincipal(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setBackground(COLOR_BOTON);
+        boton.setForeground(Color.WHITE);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        boton.setFocusPainted(false);
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(45, 115, 220));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                boton.setBackground(COLOR_BOTON);
+            }
+        });
+        
+        return boton;
+    }
+    
+    private void aplicarEfectoFocus(JTextArea textArea) {
+        textArea.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textArea.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BOTON, 2),
+                    BorderFactory.createEmptyBorder(7, 11, 7, 11)
+                ));
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textArea.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+                    BorderFactory.createEmptyBorder(8, 12, 8, 12)
+                ));
+            }
+        });
+    }
+    
+    private void aplicarEfectoFocusComboBox(JComboBox<String> comboBox) {
+        comboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboBox.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BOTON, 2),
+                    BorderFactory.createEmptyBorder(7, 11, 7, 11)
+                ));
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboBox.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1),
+                    BorderFactory.createEmptyBorder(8, 12, 8, 12)
+                ));
+            }
+        });
+    }
+
+    // Getters y Setters
+    public JLabel getLblNombre() {
+        return lblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        this.lblNombre = lblNombre;
+    }
+
+    public JLabel getLblDescripcion() {
+        return lblDescripcion;
+    }
+
+    public void setLblDescripcion(JLabel lblDescripcion) {
+        this.lblDescripcion = lblDescripcion;
+    }
+
+    public JLabel getLblTipo() {
+        return lblTipo;
+    }
+
+    public void setLblTipo(JLabel lblTipo) {
+        this.lblTipo = lblTipo;
+    }
+
+    public JLabel getLblPrecio() {
+        return lblPrecio;
+    }
+
+    public void setLblPrecio(JLabel lblPrecio) {
+        this.lblPrecio = lblPrecio;
+    }
+
+    public JLabel getLblMarca() {
+        return lblMarca;
+    }
+
+    public void setLblMarca(JLabel lblMarca) {
+        this.lblMarca = lblMarca;
+    }
+
+    public JLabel getLblCaracteristicas() {
+        return lblCaracteristicas;
+    }
+
+    public void setLblCaracteristicas(JLabel lblCaracteristicas) {
+        this.lblCaracteristicas = lblCaracteristicas;
+    }
+
+    public JLabel getLblStock() {
+        return lblStock;
+    }
+
+    public void setLblStock(JLabel lblStock) {
+        this.lblStock = lblStock;
+    }
+
+    public JTextArea getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextArea txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
+    public JTextArea getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public void setTxtDescripcion(JTextArea txtDescripcion) {
+        this.txtDescripcion = txtDescripcion;
+    }
+
+    public JTextArea getTxtPrecio() {
+        return txtPrecio;
+    }
+
+    public void setTxtPrecio(JTextArea txtPrecio) {
+        this.txtPrecio = txtPrecio;
+    }
+
+    public JTextArea getTxtCaracteristicas() {
+        return txtCaracteristicas;
+    }
+
+    public void setTxtCaracteristicas(JTextArea txtCaracteristicas) {
+        this.txtCaracteristicas = txtCaracteristicas;
+    }
+
+    public JTextArea getTxtStock() {
+        return txtStock;
+    }
+
+    public void setTxtStock(JTextArea txtStock) {
+        this.txtStock = txtStock;
+    }
+
+    public JComboBox getCmbTipo() {
+        return cmbTipo;
+    }
+
+    public void setCmbTipo(JComboBox cmbTipo) {
+        this.cmbTipo = cmbTipo;
+    }
+
+    public JComboBox getCmbMarca() {
+        return cmbMarca;
+    }
+
+    public void setCmbMarca(JComboBox cmbMarca) {
+        this.cmbMarca = cmbMarca;
+    }
+
+    public JComboBox getCmbAnio() {
+        return cmbAnio;
+    }
+
+    public void setCmbAnio(JComboBox cmbAnio) {
+        this.cmbAnio = cmbAnio;
+    }
+
+    public JLabel getLblAnio() {
+        return lblAnio;
+    }
+
+    public void setLblAnio(JLabel lblAnio) {
+        this.lblAnio = lblAnio;
+    }
+
+    public JButton getBtnCrearVehiculo() {
+        return btnCrearVehiculo;
+    }
+
+    public void setBtnCrearVehiculo(JButton btnCrearVehiculo) {
+        this.btnCrearVehiculo = btnCrearVehiculo;
+    }
+
+    public JLabel getLblEsFinanciable() {
+        return lblEsFinanciable;
+    }
+
+    public void setLblEsFinanciable(JLabel lblEsFinanciable) {
+        this.lblEsFinanciable = lblEsFinanciable;
+    }
+
+    public JComboBox getCmbEsFinanciable() {
+        return cmbEsFinanciable;
+    }
+
+    public void setCmbEsFinanciable(JComboBox cmbEsFinanciable) {
+        this.cmbEsFinanciable = cmbEsFinanciable;
+    }
+
+    public JLabel getLblKilometraje() {
+        return lblKilometraje;
+    }
+
+    public void setLblKilometraje(JLabel lblKilometraje) {
+        this.lblKilometraje = lblKilometraje;
+    }
+
+    public JTextArea getTxtKilometraje() {
+        return txtKilometraje;
+    }
+
+    public void setTxtKilometraje(JTextArea txtKilometraje) {
+        this.txtKilometraje = txtKilometraje;
+    }
+
+    public JButton getBtnSeleccionarImagen() {
+        return btnSeleccionarImagen;
+    }
+
+    public void setBtnSeleccionarImagen(JButton btnSeleccionarImagen) {
+        this.btnSeleccionarImagen = btnSeleccionarImagen;
+    }
+
+    public JLabel getLblImagenPreview() {
+        return lblImagenPreview;
+    }
+
+    public void setLblImagenPreview(JLabel lblImagenPreview) {
+        this.lblImagenPreview = lblImagenPreview;
+    }
+
+    public File getImagenSeleccionada() {
+        return imagenSeleccionada;
+    }
+
+    public void setImagenSeleccionada(File imagenSeleccionada) {
+        this.imagenSeleccionada = imagenSeleccionada;
+    }
 }

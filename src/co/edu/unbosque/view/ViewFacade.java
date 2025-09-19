@@ -1,44 +1,178 @@
 package co.edu.unbosque.view;
 
-import javax.swing.JFrame;
-import co.edu.unbosque.controller.Controlador;
-
 public class ViewFacade {
 
-    private Ventana mainVentana;
-    private JFrame loginFrame;
-    private Controlador controlador;
+    private PanelSuperior panelSuperior;
+    private PanelLogin panelLogin;
+    private Ventana ventana;
+    private PanelCrearAlimentoYBebida panelCrearAlimentoYBebida;
+    private PanelCrearCelular panelCrearCelular;
+    private PanelCrearConstruccion panelCrearConstruccion;
+    private PanelCrearDeporteYFitness panelCDeporteYFitness;
+    private PanelCrearElectrodomesticos paneCrearElectrodomesticos;
+    private PanelCrearJuguete panelCrearJuguete;
+    private PanelCrearMascota panelCrearMascota;
+    private PanelCrearMedicamento panelCrearMedicamento;
+    private PanelCrearProductoModa panelCrearProductoModa;
+    private PanelCrearVehiculo panelCrearVehiculo;
+    private PanelSeleccionarCategoria panelSeleccionarCategoria;
 
-    public ViewFacade(Controlador controlador) {
-        this.controlador = controlador;
-        this.mainVentana = new Ventana();
-        this.mainVentana.setVisible(false);
+
+    public ViewFacade() {
+    	    panelSuperior = new PanelSuperior();
+    	    panelLogin = new PanelLogin();
+    	    ventana = new Ventana();
+    	    panelCrearAlimentoYBebida = new PanelCrearAlimentoYBebida();
+    	    panelCrearCelular = new PanelCrearCelular();
+    	    panelCrearConstruccion = new PanelCrearConstruccion();
+    	    panelCDeporteYFitness = new PanelCrearDeporteYFitness();
+    	    paneCrearElectrodomesticos = new PanelCrearElectrodomesticos();
+    	    panelCrearJuguete = new PanelCrearJuguete();
+    	    panelCrearMascota = new PanelCrearMascota();
+    	    panelCrearMedicamento = new PanelCrearMedicamento();
+    	    panelCrearProductoModa = new PanelCrearProductoModa();
+    	    panelCrearVehiculo = new PanelCrearVehiculo();
+    	    panelSeleccionarCategoria = new PanelSeleccionarCategoria();
     }
 
-    public void showLogin() {
-        if (loginFrame == null) {
-            loginFrame = new JFrame("Iniciar Sesión - Mercado Libre");
-            loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            loginFrame.setSize(600, 700);
-            loginFrame.setLocationRelativeTo(null);
-            loginFrame.setResizable(false);
 
-            PanelLogin panelLogin = new PanelLogin(loginFrame, controlador);
-            loginFrame.add(panelLogin);
-        }
-        loginFrame.setVisible(true);
-    }
+	public PanelSuperior getPanelSuperior() {
+		return panelSuperior;
+	}
 
-    public void showMain() {
-        if (mainVentana != null) {
-            mainVentana.setVisible(true);
-        }
-        if (loginFrame != null) {
-            loginFrame.dispose();
-        }
-    }
 
-    public Ventana getMainVentana() {
-        return mainVentana;
-    }
+	public void setPanelSuperior(PanelSuperior panelSuperior) {
+		this.panelSuperior = panelSuperior;
+	}
+
+
+	public PanelLogin getPanelLogin() {
+		return panelLogin;
+	}
+
+
+	public void setPanelLogin(PanelLogin panelLogin) {
+		this.panelLogin = panelLogin;
+	}
+	
+	public Ventana getVentana() {
+		return ventana;
+	}
+
+
+	public void setVentana(Ventana ventana) {
+		this.ventana = ventana;
+	}
+
+
+	public PanelCrearAlimentoYBebida getPanelCrearAlimentoYBebida() {
+		return panelCrearAlimentoYBebida;
+	}
+
+
+	public void setPanelCrearAlimentoYBebida(PanelCrearAlimentoYBebida panelCrearAlimentoYBebida) {
+		this.panelCrearAlimentoYBebida = panelCrearAlimentoYBebida;
+	}
+
+
+	public PanelCrearCelular getPanelCrearCelular() {
+		return panelCrearCelular;
+	}
+
+
+	public void setPanelCrearCelular(PanelCrearCelular panelCrearCelular) {
+		this.panelCrearCelular = panelCrearCelular;
+	}
+
+
+	public PanelCrearConstruccion getPanelCrearConstruccion() {
+		return panelCrearConstruccion;
+	}
+
+
+	public void setPanelCrearConstruccion(PanelCrearConstruccion panelCrearConstruccion) {
+		this.panelCrearConstruccion = panelCrearConstruccion;
+	}
+
+
+	public PanelCrearDeporteYFitness getPanelCDeporteYFitness() {
+		return panelCDeporteYFitness;
+	}
+
+
+	public void setPanelCDeporteYFitness(PanelCrearDeporteYFitness panelCDeporteYFitness) {
+		this.panelCDeporteYFitness = panelCDeporteYFitness;
+	}
+
+
+	public PanelCrearElectrodomesticos getPaneCrearElectrodomesticos() {
+		return paneCrearElectrodomesticos;
+	}
+
+
+	public void setPaneCrearElectrodomesticos(PanelCrearElectrodomesticos paneCrearElectrodomesticos) {
+		this.paneCrearElectrodomesticos = paneCrearElectrodomesticos;
+	}
+
+
+	public PanelCrearJuguete getPanelCrearJuguete() {
+		return panelCrearJuguete;
+	}
+
+
+	public void setPanelCrearJuguete(PanelCrearJuguete panelCrearJuguete) {
+		this.panelCrearJuguete = panelCrearJuguete;
+	}
+
+
+	public PanelCrearMascota getPanelCrearMascota() {
+		return panelCrearMascota;
+	}
+
+
+	public void setPanelCrearMascota(PanelCrearMascota panelCrearMascota) {
+		this.panelCrearMascota = panelCrearMascota;
+	}
+
+
+	public PanelCrearMedicamento getPanelCrearMedicamento() {
+		return panelCrearMedicamento;
+	}
+
+
+	public void setPanelCrearMedicamento(PanelCrearMedicamento panelCrearMedicamento) {
+		this.panelCrearMedicamento = panelCrearMedicamento;
+	}
+
+
+	public PanelCrearProductoModa getPanelCrearProductoModa() {
+		return panelCrearProductoModa;
+	}
+
+
+	public void setPanelCrearProductoModa(PanelCrearProductoModa panelCrearProductoModa) {
+		this.panelCrearProductoModa = panelCrearProductoModa;
+	}
+
+
+	public PanelCrearVehiculo getPanelCrearVehiculo() {
+		return panelCrearVehiculo;
+	}
+
+
+	public void setPanelCrearVehiculo(PanelCrearVehiculo panelCrearVehiculo) {
+		this.panelCrearVehiculo = panelCrearVehiculo;
+	}
+
+
+	public PanelSeleccionarCategoria getPanelSeleccionarCategoria() {
+		return panelSeleccionarCategoria;
+	}
+
+
+	public void setPanelSeleccionarCategoria(PanelSeleccionarCategoria panelSeleccionarCategoria) {
+		this.panelSeleccionarCategoria = panelSeleccionarCategoria;
+	}
+
+   
 }

@@ -2,97 +2,97 @@ package co.edu.unbosque.model;
 
 public class Construccion extends Producto {
 
-	private static final long serialVersionUID = -8242300634262318254L;
-	private String modelo;
-	private String material;
-	private String color;
-	private float largo;
-	private float ancho;
-	private float altura;
+    private static final long serialVersionUID = -8242300634262318254L;
+    private String modelo;
+    private String material;
+    private String color;
+    private float largo;
+    private float ancho;
+    private float altura;
 
-	public Construccion() {
-		super();
-	}
+    public Construccion() {
+        super();
+    }
 
-	public Construccion(String modelo, String material, String color, float largo, float ancho, float altura) {
-		super();
-		this.modelo = modelo;
-		this.material = material;
-		this.color = color;
-		this.largo = largo;
-		this.ancho = ancho;
-		this.altura = altura;
-	}
+    public Construccion(String modelo, String material, String color, float largo, float ancho, float altura) {
+        super();
+        this.modelo = modelo;
+        this.material = material;
+        this.color = color;
+        this.largo = largo;
+        this.ancho = ancho;
+        this.altura = altura;
+    }
 
-	public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, int idAsociado, String modelo, String material, String color,
-			float largo, float ancho, float altura) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
-		this.modelo = modelo;
-		this.material = material;
-		this.color = color;
-		this.largo = largo;
-		this.ancho = ancho;
-		this.altura = altura;
-	}
+    public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
+            String caracteristicas, int stock, int idAsociado, String modelo, String material, String color,
+            float largo, float ancho, float altura, String fotoProducto) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        this.modelo = modelo;
+        this.material = material;
+        this.color = color;
+        this.largo = largo;
+        this.ancho = ancho;
+        this.altura = altura;
+    }
 
-	public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-			String caracteristicas, int stock, int idAsociado) {
-		super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado);
-		// TODO Auto-generated constructor stub
-	}
+    public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
+            String caracteristicas, int stock, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+    }
 
-	public String getModelo() {
-		return modelo;
-	}
+    // Getters y setters existentes
+    public String getModelo() {
+        return modelo;
+    }
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
-	public String getMaterial() {
-		return material;
-	}
+    public String getMaterial() {
+        return material;
+    }
 
-	public void setMaterial(String material) {
-		this.material = material;
-	}
+    public void setMaterial(String material) {
+        this.material = material;
+    }
 
-	public String getColor() {
-		return color;
-	}
+    public String getColor() {
+        return color;
+    }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-	public float getLargo() {
-		return largo;
-	}
+    public float getLargo() {
+        return largo;
+    }
 
-	public void setLargo(float largo) {
-		this.largo = largo;
-	}
+    public void setLargo(float largo) {
+        this.largo = largo;
+    }
 
-	public float getAncho() {
-		return ancho;
-	}
+    public float getAncho() {
+        return ancho;
+    }
 
-	public void setAncho(float ancho) {
-		this.ancho = ancho;
-	}
+    public void setAncho(float ancho) {
+        this.ancho = ancho;
+    }
 
-	public float getAltura() {
-		return altura;
-	}
+    public float getAltura() {
+        return altura;
+    }
 
-	public void setAltura(float altura) {
-		this.altura = altura;
-	}
+    public void setAltura(float altura) {
+        this.altura = altura;
+    }
 
-	@Override
-	public String toString() {
-		return "Construccion [" + super.toString() + ", modelo=" + modelo + ", material=" + material + ", color="
-				+ color + ", largo=" + largo + ", ancho=" + ancho + ", altura=" + altura + "]";
-	}
+    @Override
+    public String toString() {
+        return "Construccion [" + super.toString() + ", modelo=" + modelo + ", material=" + material + ", color="
+                + color + ", largo=" + largo + ", ancho=" + ancho + ", altura=" + altura + "]";
+    }
 }
