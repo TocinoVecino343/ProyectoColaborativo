@@ -43,7 +43,6 @@ public class PanelSeleccionarCategoria extends JPanel {
         btnVehiculo = new JButton("Vehículos");
         btnVehiculo.setActionCommand("Vehículos");
 
-        // 👇 ESTILIZAMOS TODOS LOS BOTONES
         for (JButton btn : new JButton[]{btnAlimentoYBebida, btnCelular, btnConstruccion, btnDeporteYFitness,
                 btnElectrodomesticos, btnJuguete, btnMascota, btnMedicamento, btnModa, btnVehiculo}) {
             btn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -57,7 +56,6 @@ public class PanelSeleccionarCategoria extends JPanel {
             ));
         }
 
-        // 👇 AÑADIMOS LOS BOTONES AL PANEL
         add(btnAlimentoYBebida); add(btnCelular);
         add(btnConstruccion); add(btnDeporteYFitness);
         add(btnElectrodomesticos); add(btnJuguete);
