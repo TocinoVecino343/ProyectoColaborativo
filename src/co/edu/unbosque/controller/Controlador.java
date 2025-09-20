@@ -376,7 +376,7 @@ public class Controlador implements ActionListener {
 		vf.getVentana().remove(vf.getPanelCrearCelular());
 		vf.getVentana().remove(vf.getPanelCrearConstruccion());
 		vf.getVentana().remove(vf.getPanelCDeporteYFitness());
-		vf.getVentana().remove(vf.getPaneCrearElectrodomesticos());
+		vf.getVentana().remove(vf.getPanelCrearElectrodomesticos());
 		vf.getVentana().remove(vf.getPanelCrearJuguete());
 		vf.getVentana().remove(vf.getPanelCrearMascota());
 		vf.getVentana().remove(vf.getPanelCrearMedicamento());
@@ -393,13 +393,12 @@ public class Controlador implements ActionListener {
 		String vendedor = vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().getText().trim();
 		String caracteristicas = vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().getText().trim();
 		int stock = Integer.parseInt(vf.getPanelCrearAlimentoYBebida().getTxtStock().getText().trim());
-		String color = vf.getPanelCrearAlimentoYBebida().getTxtColor().getText().trim();
 		boolean esLiquido = "si"
 				.equals(vf.getPanelCrearAlimentoYBebida().getCmbEsLiquido().getSelectedItem().toString());
 		int cantidadProducto = Integer
-				.parseInt(vf.getPanelCrearAlimentoYBebida().getTxtCantidadDelProducto().getText().trim());
+				.parseInt(vf.getPanelCrearAlimentoYBebida().getTxtCantidadProducto().getText().trim());
 		String tipoEnvase = vf.getPanelCrearAlimentoYBebida().getCmbTipoEnvase().getSelectedItem().toString();
-		String unidadEnvase = vf.getPanelCrearAlimentoYBebida().getCmbUnidadEnvase().getSelectedItem().toString();
+		String unidadEnvase = vf.getPanelCrearAlimentoYBebida().getTxtUnidadEnvase().getText().trim();
 
 		AlimentoYBebida nuevoProducto = new AlimentoYBebida(nombre, descripcion, tipoEnvase, precio, marca, vendedor,
 				caracteristicas, stock, cantidadProducto);
@@ -429,7 +428,7 @@ public class Controlador implements ActionListener {
 		float altoPantalla = Float.parseFloat(vf.getPanelCrearCelular().getTxtAlturaPantalla().getText().trim());
 		int camaraFrontal = Integer.parseInt(vf.getPanelCrearCelular().getTxtCamaraFrontal().getText().trim());
 		int camaraTrasera = Integer.parseInt(vf.getPanelCrearCelular().getTxtCamaraTrasera().getText().trim());
-		boolean poseeNfc = "si".equals(vf.getPanelCrearCelular().getCmbPoseeNFT().getSelectedItem().toString());
+		boolean poseeNfc = "si".equals(vf.getPanelCrearCelular().getCmbPoseeNfc().getSelectedItem());
 
 		Celular nuevoProducto = new Celular(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock,
 				usuarioLogueado.getId(), color, memoriaInterna, memoriaRam, largoPantalla, anchoPantalla, altoPantalla,
@@ -488,17 +487,17 @@ public class Controlador implements ActionListener {
 	}
 
 	private void guardarElectrodomestico() {
-		String nombre = vf.getPaneCrearElectrodomesticos().getTxtNombre().getText().trim();
-		String descripcion = vf.getPaneCrearElectrodomesticos().getTxtDescripcion().getText().trim();
-		String tipo = vf.getPaneCrearElectrodomesticos().getTxtTipo().getText().trim();
-		float precio = Float.parseFloat(vf.getPaneCrearElectrodomesticos().getTxtPrecio().getText().trim());
-		String marca = vf.getPaneCrearElectrodomesticos().getTxtMarca().getText().trim();
-		String vendedor = vf.getPaneCrearElectrodomesticos().getTxtVendedor().getText().trim();
-		String caracteristicas = vf.getPaneCrearElectrodomesticos().getTxtCaracteristicas().getText().trim();
-		int stock = Integer.parseInt(vf.getPaneCrearElectrodomesticos().getTxtStock().getText().trim());
-		String modelo = vf.getPaneCrearElectrodomesticos().getTxtModelo().getText().trim();
-		int voltaje = Integer.parseInt(vf.getPaneCrearElectrodomesticos().getTxtVoltaje().getText().trim());
-		String color = vf.getPaneCrearElectrodomesticos().getTxtColor().getText().trim();
+		String nombre = vf.getPanelCrearElectrodomesticos().getTxtNombre().getText().trim();
+		String descripcion = vf.getPanelCrearElectrodomesticos().getTxtDescripcion().getText().trim();
+		String tipo = vf.getPanelCrearElectrodomesticos().getTxtTipo().getText().trim();
+		float precio = Float.parseFloat(vf.getPanelCrearElectrodomesticos().getTxtPrecio().getText().trim());
+		String marca = vf.getPanelCrearElectrodomesticos().getTxtMarca().getText().trim();
+		String vendedor = vf.getPanelCrearElectrodomesticos().getTxtVendedor().getText().trim();
+		String caracteristicas = vf.getPanelCrearElectrodomesticos().getTxtCaracteristicas().getText().trim();
+		int stock = Integer.parseInt(vf.getPanelCrearElectrodomesticos().getTxtStock().getText().trim());
+		String modelo = vf.getPanelCrearElectrodomesticos().getTxtModelo().getText().trim();
+		int voltaje = Integer.parseInt(vf.getPanelCrearElectrodomesticos().getTxtVoltaje().getText().trim());
+		String color = vf.getPanelCrearElectrodomesticos().getTxtColor().getText().trim();
 
 		Electrodomestico nuevoProducto = new Electrodomestico(nombre, descripcion, tipo, precio, marca, vendedor,
 				caracteristicas, stock, usuarioLogueado.getId(), modelo, voltaje, color);
@@ -632,11 +631,9 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearAlimentoYBebida().getTxtStock().setText();
 		vf.getPanelCrearAlimentoYBebida().getCmbEsLiquido().getSelectedItem(String.valueOf());
 		vf.getPanelCrearAlimentoYBebida().getTxtCantidadProducto().setText();
-		vf.getPanelCrearAlimentoYBebida().getTxtTipoEnvase().setText();
+		vf.getPanelCrearAlimentoYBebida().getCmbTipoEnvase().setSelectedItem();
 		vf.getPanelCrearAlimentoYBebida().getTxtUnidadEnvase().setText();
 
-		guardarAlimentoYBebida();
-		limpiarPanelAlimentoYBebida();
 	}
 
 	public void mostrarPanelActualizarCelular() {
@@ -659,8 +656,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearCelular().getTxtCamaraTrasera().setText();
 		vf.getPanelCrearCelular().getCmbPoseeNfc().setSelectedItem(String.valueOf());
 
-		guardarCelular();
-		limpiarPanelCelular();
 	}
 
 	public void mostrarPanelActualizarConstruccion() {
@@ -680,8 +675,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearConstruccion().getTxtAncho().setText();
 		vf.getPanelCrearConstruccion().getTxtAltura().setText();
 
-		guardarConstruccion();
-		limpiarPanelConstruccion();
 	}
 
 	public void mostrarPanelActualizarDeporteYFitness() {
@@ -697,8 +690,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCDeporteYFitness().getTxtColor().setText();
 		vf.getPanelCDeporteYFitness().getTxtMaterial().setText();
 
-		guardarDeporteYFitness();
-		limpiarPanelDeporteYFitness();
 	}
 
 	public void mostrarPanelActualizarElectrodomestico() {
@@ -714,8 +705,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearElectrodomesticos().getTxtVoltaje().setText();
 		vf.getPanelCrearElectrodomesticos().getTxtColor().setText();
 
-		guardarElectrodomestico();
-		limpiarPanelElectrodomestico();
 	}
 
 	public void mostrarPanelActualizarMedicamento() {
@@ -731,8 +720,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearMedicamento().getCmbFormatoMedicamento().setSelectedItem();
 		vf.getPanelCrearMedicamento().getCmbFormatoDeVenta().setSelectedItem();
 
-		guardarMedicamento();
-		limpiarPanelMedicamento();
 	}
 
 	public void mostrarPanelActualizarJuguete() {
@@ -748,8 +735,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearJuguete().getTxtMaterial().setText();
 		vf.getPanelCrearJuguete().getTxtRangoDeEdad().setText();
 
-		guardarJuguete();
-		limpiarPanelJuguete();
 	}
 
 	public void mostrarPanelActualizarMascota() {
@@ -762,8 +747,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().setText();
 		vf.getPanelCrearAlimentoYBebida().getTxtStock().setText();
 
-		guardarMascota();
-		limpiarPanelMascota();
 	}
 
 	public void mostrarPanelActualizarModa() {
@@ -776,8 +759,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().setText();
 		vf.getPanelCrearAlimentoYBebida().getTxtStock().setText();
 
-		guardarModa();
-		limpiarPanelModa();
 	}
 
 	public void mostrarPanelActualizarVehiculo() {
@@ -790,8 +771,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().setText();
 		vf.getPanelCrearAlimentoYBebida().getTxtStock().setText();
 
-		guardarVehiculo();
-		limpiarPanelVehiculo();
 	}
 
 	private void limpiarPanelAlimentoYBebida() {
@@ -826,7 +805,7 @@ public class Controlador implements ActionListener {
 		p.getTxtAlturaPantalla().setValue(0);
 		p.getTxtCamaraFrontal().setValue(0);
 		p.getTxtCamaraTrasera().setValue(0);
-		p.getCmbPoseeNFT().setSelectedIndex(0);
+		p.getCmbPoseeNfc().setSelectedIndex(0);
 	}
 
 	private void limpiarPanelConstruccion() {
@@ -860,7 +839,7 @@ public class Controlador implements ActionListener {
 	}
 
 	private void limpiarPanelElectrodomestico() {
-		var p = vf.getPaneCrearElectrodomesticos();
+		var p = vf.getPanelCrearElectrodomesticos();
 		p.getTxtNombre().setText("");
 		p.getTxtDescripcion().setText("");
 		p.getTxtTipo().setText("");
@@ -953,141 +932,309 @@ public class Controlador implements ActionListener {
 		String comando = e.getActionCommand();
 
 		switch (comando) {
-		case "Iniciar Sesión":
+		case "Iniciar Sesión": {
 			iniciarSesion();
 			break;
+		}
 
-		case "Crear Cuenta":
+		case "Crear Cuenta": {
 			mostrarFormularioRegistro();
 			break;
+		}
 
-		case "Categorías":
+		case "Categorías": {
 			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad de categorías en desarrollo", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			break;
+		}
 
-		case "Vender":
+		case "Vender": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelSeleccionarCategoria(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Carrito 🛒":
+		case "Carrito 🛒": {
 			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad del carrito en desarrollo", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			break;
+		}
 
-		case "Alimentos y Bebidas":
+		case "Alimentos y Bebidas": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearAlimentoYBebida(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			System.out.println(mf.getAlimentoYBebidaDAO().mostrarDatos());
 			break;
+		}
 
-		case "Celulares":
+		case "Celulares": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearCelular(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Construcción":
+		case "Construcción": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearConstruccion(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Deporte y Fitness":
+		case "Deporte y Fitness": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCDeporteYFitness(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Electrodomésticos":
+		case "Electrodomésticos": {
 			ocultarTodosLosPaneles();
-			vf.getVentana().add(vf.getPaneCrearElectrodomesticos(), BorderLayout.CENTER);
+			vf.getVentana().add(vf.getPanelCrearElectrodomesticos(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Juguetes":
+		case "Juguetes": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearJuguete(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Mascotas":
+		case "Mascotas": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearMascota(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Medicamentos":
+		case "Medicamentos": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearMedicamento(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Moda":
+		case "Moda": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearProductoModa(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Vehículos":
+		case "Vehículos": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearVehiculo(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
 			vf.getVentana().repaint();
 			break;
+		}
 
-		case "Crear AlimentoYBebida":
+		case "Crear AlimentoYBebida": {
 			guardarAlimentoYBebida();
 			break;
+		}
 
-		case "Crear Celular":
+		case "Crear Celular": {
 			guardarCelular();
 			break;
+		}
 
-		case "Crear Construccion":
+		case "Crear Construccion": {
 			guardarConstruccion();
 			break;
+		}
 
-		case "Crear DeporteYFitness":
+		case "Crear DeporteYFitness": {
 			guardarDeporteYFitness();
 			break;
+		}
 
-		case "Crear Electrodomestico":
+		case "Crear Electrodomestico": {
 			guardarElectrodomestico();
 			break;
+		}
 
-		case "Crear Juguete":
+		case "Crear Juguete": {
 			guardarJuguete();
 			break;
+		}
 
-		case "Crear Mascota":
+		case "Crear Mascota": {
 			guardarMascota();
 			break;
+		}
 
-		case "Crear Medicamento":
+		case "Crear Medicamento": {
 			guardarMedicamento();
 			break;
+		}
 
-		case "Crear Moda":
+		case "Crear Moda": {
 			guardarModa();
 			break;
+		}
 
-		case "Crear Vehiculo":
+		case "Crear Vehiculo": {
 			guardarVehiculo();
 			break;
+		}
+
+		// Paneles para Actualizar
+		case "Panel Actualizar Alimentos y Bebidas": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearAlimentoYBebida(), BorderLayout.CENTER);
+			mostrarPanelActualizarAlimentoYBebida();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			System.out.println(mf.getAlimentoYBebidaDAO().mostrarDatos());
+			break;
+		}
+
+		case "Panel Actualizar Celulares": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearCelular(), BorderLayout.CENTER);
+			mostrarPanelActualizarCelular();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Construcción": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearConstruccion(), BorderLayout.CENTER);
+			mostrarPanelActualizarConstruccion();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Deporte y Fitness": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCDeporteYFitness(), BorderLayout.CENTER);
+			mostrarPanelActualizarDeporteYFitness();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Electrodomésticos": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearElectrodomesticos(), BorderLayout.CENTER);
+			mostrarPanelActualizarElectrodomestico();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Juguetes": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearJuguete(), BorderLayout.CENTER);
+			mostrarPanelActualizarJuguete();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Mascotas": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearMascota(), BorderLayout.CENTER);
+			mostrarPanelActualizarMascota();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Medicamentos": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearMedicamento(), BorderLayout.CENTER);
+			mostrarPanelActualizarMedicamento();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Moda": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearProductoModa(), BorderLayout.CENTER);
+			mostrarPanelActualizarModa();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Actualizar Vehículos": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelCrearVehiculo(), BorderLayout.CENTER);
+			mostrarPanelActualizarVehiculo();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		// Guardar los Productos Actualizados
+		case "AlimentoYBebida": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Celular": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Construccion": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar DeporteYFitness": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Electrodomestica": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Juguete": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Mascota": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Medicamento": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar ProductoModa": {
+			guardarAlimentoYBebida();
+			break;
+		}
+
+		case "Actualizar Vehiculo": {
+			guardarAlimentoYBebida();
+			break;
+		}
 
 		default:
 			System.out.println("Acción no reconocida: " + comando);
@@ -1105,7 +1252,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearCelular().getBtnCrearCelular().addActionListener(this);
 		vf.getPanelCrearConstruccion().getBtnCrearConstruccion().addActionListener(this);
 		vf.getPanelCDeporteYFitness().getBtnCrearDeporteYFitness().addActionListener(this);
-		vf.getPaneCrearElectrodomesticos().getBtnCrearElectrodomestico().addActionListener(this);
+		vf.getPanelCrearElectrodomesticos().getBtnCrearElectrodomestico().addActionListener(this);
 		vf.getPanelCrearJuguete().getBtnCrearJuguete().addActionListener(this);
 		vf.getPanelCrearMascota().getBtnCrearMascota().addActionListener(this);
 		vf.getPanelCrearMedicamento().getBtnCrearFarmacia().addActionListener(this);
