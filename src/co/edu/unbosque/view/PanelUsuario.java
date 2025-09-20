@@ -6,14 +6,14 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class PanelUsuario extends JPanel {
 
 	private JLabel lblTitulo, lblNombre, lblNombre2, lblEmail, lblEmail2, lblImagen, lblNombreUsuario, lblDocumento,
 			lblTelefono, lblContrasenia;
 
-	private JTextArea txtNombre, txtEmail, txtNombreUsuario, txtDocumento, txtTelefono, txtContrasenia;
+	private JTextField txtNombre, txtEmail, txtNombreUsuario, txtDocumento, txtTelefono, txtContrasenia;
 
 	private JButton btnActualizarUsuario, btnEliminarUsuario, btnSeleccionarImagen;
 
@@ -27,7 +27,7 @@ public class PanelUsuario extends JPanel {
 	public PanelUsuario() {
 		this.setVisible(true);
 		this.setBackground(COLOR_FONDO);
-		this.setLayout(new BorderLayout());
+		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 800);
 		inicializarComponentes();
 	}
@@ -45,32 +45,32 @@ public class PanelUsuario extends JPanel {
 
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(POSICION_LBL, 320, ANCHO_LBL, ALTURA_LBL);
-		txtNombre = new JTextArea();
+		txtNombre = new JTextField();
 		txtNombre.setBounds(POSICION_TXT, 320, ANCHO_TXT, ALTURA_LBL);
 
 		lblEmail = new JLabel("Email");
 		lblEmail.setBounds(POSICION_LBL, 380, ANCHO_LBL, ALTURA_LBL);
-		txtEmail = new JTextArea();
+		txtEmail = new JTextField();
 		txtEmail.setBounds(POSICION_TXT, 380, ANCHO_TXT, ALTURA_LBL);
 
 		lblNombreUsuario = new JLabel("Nombre de usuario");
 		lblNombreUsuario.setBounds(POSICION_LBL, 440, ANCHO_LBL, ALTURA_LBL);
-		txtNombreUsuario = new JTextArea();
+		txtNombreUsuario = new JTextField();
 		txtNombreUsuario.setBounds(POSICION_TXT, 440, ANCHO_TXT, ALTURA_LBL);
 
 		lblDocumento = new JLabel("Documento");
 		lblDocumento.setBounds(POSICION_LBL, 500, ANCHO_LBL, ALTURA_LBL);
-		txtDocumento = new JTextArea();
+		txtDocumento = new JTextField();
 		txtDocumento.setBounds(POSICION_TXT, 500, ANCHO_TXT, ALTURA_LBL);
 
 		lblTelefono = new JLabel("Número de telefono");
 		lblTelefono.setBounds(POSICION_LBL, 560, ANCHO_LBL, ALTURA_LBL);
-		txtTelefono = new JTextArea();
+		txtTelefono = new JTextField();
 		txtTelefono.setBounds(POSICION_TXT, 560, ANCHO_TXT, ALTURA_LBL);
 
 		lblContrasenia = new JLabel("Contraseña");
 		lblContrasenia.setBounds(POSICION_LBL, 620, ANCHO_LBL, ALTURA_LBL);
-		txtContrasenia = new JTextArea();
+		txtContrasenia = new JTextField();
 		txtContrasenia.setBounds(POSICION_TXT, 620, ANCHO_TXT, ALTURA_LBL);
 
 		btnActualizarUsuario = new JButton("Actualizar datos");
@@ -181,51 +181,51 @@ public class PanelUsuario extends JPanel {
 		this.lblContrasenia = lblContrasenia;
 	}
 
-	public JTextArea getTxtNombre() {
+	public JTextField getTxtNombre() {
 		return txtNombre;
 	}
 
-	public void setTxtNombre(JTextArea txtNombre) {
+	public void setTxtNombre(JTextField txtNombre) {
 		this.txtNombre = txtNombre;
 	}
 
-	public JTextArea getTxtEmail() {
+	public JTextField getTxtEmail() {
 		return txtEmail;
 	}
 
-	public void setTxtEmail(JTextArea txtEmail) {
+	public void setTxtEmail(JTextField txtEmail) {
 		this.txtEmail = txtEmail;
 	}
 
-	public JTextArea getTxtNombreUsuario() {
+	public JTextField getTxtNombreUsuario() {
 		return txtNombreUsuario;
 	}
 
-	public void setTxtNombreUsuario(JTextArea txtNombreUsuario) {
+	public void setTxtNombreUsuario(JTextField txtNombreUsuario) {
 		this.txtNombreUsuario = txtNombreUsuario;
 	}
 
-	public JTextArea getTxtDocumento() {
+	public JTextField getTxtDocumento() {
 		return txtDocumento;
 	}
 
-	public void setTxtDocumento(JTextArea txtDocumento) {
+	public void setTxtDocumento(JTextField txtDocumento) {
 		this.txtDocumento = txtDocumento;
 	}
 
-	public JTextArea getTxtTelefono() {
+	public JTextField getTxtTelefono() {
 		return txtTelefono;
 	}
 
-	public void setTxtTelefono(JTextArea txtTelefono) {
+	public void setTxtTelefono(JTextField txtTelefono) {
 		this.txtTelefono = txtTelefono;
 	}
 
-	public JTextArea getTxtContrasenia() {
+	public JTextField getTxtContrasenia() {
 		return txtContrasenia;
 	}
 
-	public void setTxtContrasenia(JTextArea txtContrasenia) {
+	public void setTxtContrasenia(JTextField txtContrasenia) {
 		this.txtContrasenia = txtContrasenia;
 	}
 
