@@ -45,4 +45,45 @@ public class PanelPerfil extends JPanel {
 		this.add(btnUsuario);
 		this.add(btnMetodoDePago);
 	}
+
+	public JLabel getLblImagenPerfil() {
+		return lblImagenPerfil;
+	}
+
+	public void setLblImagenPerfil(JLabel lblImagenPerfil) {
+		this.lblImagenPerfil = lblImagenPerfil;
+	}
+
+	public JLabel getLblNombre() {
+		return lblNombre;
+	}
+
+	public void setLblNombre(JLabel lblNombre) {
+		this.lblNombre = lblNombre;
+	}
+
+	public JLabel getLblEmail() {
+		return lblEmail;
+	}
+
+	public void setLblEmail(JLabel lblEmail) {
+		this.lblEmail = lblEmail;
+	}
+
+	public JButton getBtnUsuario() {
+		return btnUsuario;
+	}
+
+	public void setBtnUsuario(JButton btnUsuario) {
+		this.btnUsuario = btnUsuario;
+	}
+
+	public JButton getBtnMetodoDePago() {
+		return btnMetodoDePago;
+	}
+
+	public void setBtnMetodoDePago(JButton btnMetodoDePago) {
+		this.btnMetodoDePago = btnMetodoDePago;
+	}
+	
 }

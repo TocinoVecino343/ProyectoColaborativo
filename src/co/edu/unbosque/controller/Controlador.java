@@ -382,6 +382,9 @@ public class Controlador implements ActionListener {
 		vf.getVentana().remove(vf.getPanelCrearMedicamento());
 		vf.getVentana().remove(vf.getPanelCrearProductoModa());
 		vf.getVentana().remove(vf.getPanelCrearVehiculo());
+		vf.getVentana().remove(vf.getPanelUsuario());
+		vf.getVentana().remove(vf.getPanelPerfil());
+		vf.getVentana().remove(vf.getPanelMetodoDePago());
 	}
 
 	private void guardarAlimentoYBebida() {
@@ -773,6 +776,29 @@ public class Controlador implements ActionListener {
 
 	}
 
+	public void mostrarPanelPerfil() {
+		vf.getPanelPerfil().getLblImagenPerfil().setText(usuarioLogueado.getRutaImagenDePerfil());
+		vf.getPanelPerfil().getLblNombre().setText(usuarioLogueado.getNombre());
+		vf.getPanelPerfil().getLblEmail().setText(usuarioLogueado.getEmail());
+	}
+
+	public void mostrarPanelUsuario() {
+		vf.getPanelUsuario().getTxtNombre().setText(usuarioLogueado.getNombre());
+		vf.getPanelUsuario().getTxtNombreUsuario().setText(usuarioLogueado.getNombreDeUsuario());
+		vf.getPanelUsuario().getTxtEmail().setText(usuarioLogueado.getEmail());
+		vf.getPanelUsuario().getTxtDocumento().setText(String.valueOf(usuarioLogueado.getDocumentoDeIdentidad()));
+		vf.getPanelUsuario().getTxtTelefono().setText(String.valueOf(usuarioLogueado.getTelefono()));
+		vf.getPanelUsuario().getTxtContrasenia().setText(usuarioLogueado.getContrasenia());
+	}
+
+	public void mostrarPanelMetodoDePago() {
+
+		vf.getPanelMetodoDePago().getLblTitular().setText();
+		vf.getPanelMetodoDePago().getLblNumeroTarjeta().setText();
+		vf.getPanelMetodoDePago().getLblFechaVencimiento();
+		vf.getPanelMetodoDePago().getLblPinSeguridad();
+	}
+
 	private void limpiarPanelAlimentoYBebida() {
 		var p = vf.getPanelCrearAlimentoYBebida();
 		p.getTxtNombre().setText("");
@@ -932,7 +958,7 @@ public class Controlador implements ActionListener {
 		String comando = e.getActionCommand();
 
 		switch (comando) {
-		case "Iniciar Sesión": {
+		case "Iniciar Sesion": {
 			iniciarSesion();
 			break;
 		}
@@ -942,7 +968,7 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Categorías": {
+		case "Categorias": {
 			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad de categorías en desarrollo", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			break;
@@ -956,7 +982,7 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Carrito 🛒": {
+		case "Carrito": {
 			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad del carrito en desarrollo", "Información",
 					JOptionPane.INFORMATION_MESSAGE);
 			break;
@@ -979,7 +1005,7 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Construcción": {
+		case "Construccion": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearConstruccion(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
@@ -995,7 +1021,7 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Electrodomésticos": {
+		case "Electrodomesticos": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearElectrodomesticos(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
@@ -1035,7 +1061,7 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Vehículos": {
+		case "Vehiculos": {
 			ocultarTodosLosPaneles();
 			vf.getVentana().add(vf.getPanelCrearVehiculo(), BorderLayout.CENTER);
 			vf.getVentana().revalidate();
@@ -1185,8 +1211,36 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
+		// Paneles datos cuenta
+		case "Panel Perfil": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelPerfil(), BorderLayout.CENTER);
+			mostrarPanelPerfil();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel Usuario": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelPerfil(), BorderLayout.CENTER);
+			mostrarPanelUsuario();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
+		case "Panel MetodoDePago": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelMetodoDePago(), BorderLayout.CENTER);
+			mostrarPanelMetodoDePago();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
 		// Guardar los Productos Actualizados
-		case "AlimentoYBebida": {
+		case "Actualizar AlimentoYBebida": {
 			guardarAlimentoYBebida();
 			break;
 		}
@@ -1243,21 +1297,43 @@ public class Controlador implements ActionListener {
 	}
 
 	public void inicializaraActionListener() {
+		// Panel Superior
 		vf.getPanelLogin().getBtnIniciarSesion().addActionListener(this);
+		vf.getPanelLogin().getBtnIniciarSesion().setActionCommand("Iniciar Sesion");
 		vf.getPanelLogin().getBtnCrearCuenta().addActionListener(this);
+		vf.getPanelLogin().getBtnCrearCuenta().setActionCommand("Crear Cuenta");
 		vf.getPanelSuperior().getBtnCategoria().addActionListener(this);
+		vf.getPanelSuperior().getBtnCategoria().setActionCommand("Categorias");
 		vf.getPanelSuperior().getBtnVender().addActionListener(this);
+		vf.getPanelSuperior().getBtnVender().setActionCommand("Vender");
 		vf.getPanelSuperior().getBtnCarro().addActionListener(this);
+		vf.getPanelSuperior().getBtnCarro().setActionCommand("Carrito");
+		vf.getPanelSuperior().getBtnPerfil().addActionListener(this);
+		vf.getPanelSuperior().getBtnPerfil().setActionCommand("Panel Perfil");
+
+		// Crear Objetos
 		vf.getPanelCrearAlimentoYBebida().getBtnCrearAlimentoYBebida().addActionListener(this);
+		vf.getPanelCrearAlimentoYBebida().getBtnCrearAlimentoYBebida().setActionCommand("Crear AlimentoYBebida");
 		vf.getPanelCrearCelular().getBtnCrearCelular().addActionListener(this);
+		vf.getPanelCrearCelular().getBtnCrearCelular().setActionCommand("Crear Celular");
 		vf.getPanelCrearConstruccion().getBtnCrearConstruccion().addActionListener(this);
+		vf.getPanelCrearConstruccion().getBtnCrearConstruccion().setActionCommand("Crear Construccion");
 		vf.getPanelCDeporteYFitness().getBtnCrearDeporteYFitness().addActionListener(this);
+		vf.getPanelCDeporteYFitness().getBtnCrearDeporteYFitness().setActionCommand("Crear DeporteYFitness");
 		vf.getPanelCrearElectrodomesticos().getBtnCrearElectrodomestico().addActionListener(this);
+		vf.getPanelCrearElectrodomesticos().getBtnCrearElectrodomestico().setActionCommand("Crear Electrodomestico");
 		vf.getPanelCrearJuguete().getBtnCrearJuguete().addActionListener(this);
+		vf.getPanelCrearJuguete().getBtnCrearJuguete().setActionCommand("Crear Juguete");
 		vf.getPanelCrearMascota().getBtnCrearMascota().addActionListener(this);
+		vf.getPanelCrearMascota().getBtnCrearMascota().setActionCommand("Crear Mascota");
 		vf.getPanelCrearMedicamento().getBtnCrearFarmacia().addActionListener(this);
+		vf.getPanelCrearMedicamento().getBtnCrearFarmacia().setActionCommand("Crear Medicamento");
 		vf.getPanelCrearProductoModa().getBtnCrearProductoModa().addActionListener(this);
+		vf.getPanelCrearProductoModa().getBtnCrearProductoModa().setActionCommand("Crear Moda");
 		vf.getPanelCrearVehiculo().getBtnCrearVehiculo().addActionListener(this);
+		vf.getPanelCrearVehiculo().getBtnCrearVehiculo().setActionCommand("Crear vehiculo");
+
+		// Seleccionar Categorias
 		vf.getPanelSeleccionarCategoria().getBtnAlimentoYBebida().addActionListener(this);
 		vf.getPanelSeleccionarCategoria().getBtnCelular().addActionListener(this);
 		vf.getPanelSeleccionarCategoria().getBtnConstruccion().addActionListener(this);
@@ -1268,8 +1344,17 @@ public class Controlador implements ActionListener {
 		vf.getPanelSeleccionarCategoria().getBtnMedicamento().addActionListener(this);
 		vf.getPanelSeleccionarCategoria().getBtnModa().addActionListener(this);
 		vf.getPanelSeleccionarCategoria().getBtnVehiculo().addActionListener(this);
+
+		// Datos Cuenta
+		vf.getPanelPerfil().getBtnUsuario().addActionListener(this);
+		vf.getPanelPerfil().getBtnUsuario().setActionCommand("Panel Usuario");
+		vf.getPanelPerfil().getBtnUsuario().addActionListener(this);
+		vf.getPanelPerfil().getBtnUsuario().setActionCommand("Panel MetodoDePago");
+
+		// Oculta los botones para el login
 		vf.getPanelSuperior().getBtnCategoria().setVisible(false);
 		vf.getPanelSuperior().getBtnVender().setVisible(false);
 		vf.getPanelSuperior().getBtnCarro().setVisible(false);
+		vf.getPanelSuperior().getBtnPerfil().setVisible(false);
 	}
 }

@@ -16,6 +16,9 @@ public class ViewFacade {
 	private PanelCrearProductoModa panelCrearProductoModa;
 	private PanelCrearVehiculo panelCrearVehiculo;
 	private PanelSeleccionarCategoria panelSeleccionarCategoria;
+	private PanelPerfil panelPerfil;
+	private PanelUsuario panelUsuario;
+	private PanelMetodoDePago panelMetodoDePago;
 
 	public ViewFacade() {
 		panelSuperior = new PanelSuperior();
@@ -32,6 +35,9 @@ public class ViewFacade {
 		panelCrearProductoModa = new PanelCrearProductoModa();
 		panelCrearVehiculo = new PanelCrearVehiculo();
 		panelSeleccionarCategoria = new PanelSeleccionarCategoria();
+		panelPerfil = new PanelPerfil();
+		panelUsuario = new PanelUsuario();
+		panelMetodoDePago = new PanelMetodoDePago();
 	}
 
 	public PanelSuperior getPanelSuperior() {
@@ -144,6 +150,30 @@ public class ViewFacade {
 
 	public void setPanelSeleccionarCategoria(PanelSeleccionarCategoria panelSeleccionarCategoria) {
 		this.panelSeleccionarCategoria = panelSeleccionarCategoria;
+	}
+
+	public PanelPerfil getPanelPerfil() {
+		return panelPerfil;
+	}
+
+	public void setPanelPerfil(PanelPerfil panelPerfil) {
+		this.panelPerfil = panelPerfil;
+	}
+
+	public PanelUsuario getPanelUsuario() {
+		return panelUsuario;
+	}
+
+	public void setPanelUsuario(PanelUsuario panelUsuario) {
+		this.panelUsuario = panelUsuario;
+	}
+
+	public PanelMetodoDePago getPanelMetodoDePago() {
+		return panelMetodoDePago;
+	}
+
+	public void setPanelMetodoDePago(PanelMetodoDePago panelMetodoDePago) {
+		this.panelMetodoDePago = panelMetodoDePago;
 	}
 
 }

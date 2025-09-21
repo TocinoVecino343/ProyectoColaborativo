@@ -92,4 +92,126 @@ public class PanelMetodoDePago extends JPanel {
 		this.add(lblFrenteTarjeta);
 		this.add(lblPosteriorTarjeta);
 	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblTitular() {
+		return lblTitular;
+	}
+
+	public void setLblTitular(JLabel lblTitular) {
+		this.lblTitular = lblTitular;
+	}
+
+	public JLabel getLblNumeroTarjeta() {
+		return lblNumeroTarjeta;
+	}
+
+	public void setLblNumeroTarjeta(JLabel lblNumeroTarjeta) {
+		this.lblNumeroTarjeta = lblNumeroTarjeta;
+	}
+
+	public JLabel getLblFechaVencimiento() {
+		return lblFechaVencimiento;
+	}
+
+	public void setLblFechaVencimiento(JLabel lblFechaVencimiento) {
+		this.lblFechaVencimiento = lblFechaVencimiento;
+	}
+
+	public JLabel getLblPinSeguridad() {
+		return lblPinSeguridad;
+	}
+
+	public void setLblPinSeguridad(JLabel lblPinSeguridad) {
+		this.lblPinSeguridad = lblPinSeguridad;
+	}
+
+	public JLabel getLblFrenteTarjeta() {
+		return lblFrenteTarjeta;
+	}
+
+	public void setLblFrenteTarjeta(JLabel lblFrenteTarjeta) {
+		this.lblFrenteTarjeta = lblFrenteTarjeta;
+	}
+
+	public JLabel getLblPosteriorTarjeta() {
+		return lblPosteriorTarjeta;
+	}
+
+	public void setLblPosteriorTarjeta(JLabel lblPosteriorTarjeta) {
+		this.lblPosteriorTarjeta = lblPosteriorTarjeta;
+	}
+
+	public JTextField getTxtTitular() {
+		return txtTitular;
+	}
+
+	public void setTxtTitular(JTextField txtTitular) {
+		this.txtTitular = txtTitular;
+	}
+
+	public JTextField getTxtNumeroTarjeta() {
+		return txtNumeroTarjeta;
+	}
+
+	public void setTxtNumeroTarjeta(JTextField txtNumeroTarjeta) {
+		this.txtNumeroTarjeta = txtNumeroTarjeta;
+	}
+
+	public JTextField getTxtFechaVencimiento() {
+		return txtFechaVencimiento;
+	}
+
+	public void setTxtFechaVencimiento(JTextField txtFechaVencimiento) {
+		this.txtFechaVencimiento = txtFechaVencimiento;
+	}
+
+	public JPasswordField getTxtPinSeguridad() {
+		return txtPinSeguridad;
+	}
+
+	public void setTxtPinSeguridad(JPasswordField txtPinSeguridad) {
+		this.txtPinSeguridad = txtPinSeguridad;
+	}
+
+	public JButton getBtnActualizar() {
+		return btnActualizar;
+	}
+
+	public void setBtnActualizar(JButton btnActualizar) {
+		this.btnActualizar = btnActualizar;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
+
+	public void setBtnEliminar(JButton btnEliminar) {
+		this.btnEliminar = btnEliminar;
+	}
+
+	public ImageIcon getFrenteTarjeta() {
+		return frenteTarjeta;
+	}
+
+	public void setFrenteTarjeta(ImageIcon frenteTarjeta) {
+		this.frenteTarjeta = frenteTarjeta;
+	}
+
+	public ImageIcon getPosteriorTarjeta() {
+		return posteriorTarjeta;
+	}
+
+	public void setPosteriorTarjeta(ImageIcon posteriorTarjeta) {
+		this.posteriorTarjeta = posteriorTarjeta;
+	}
+	
+	
 }
