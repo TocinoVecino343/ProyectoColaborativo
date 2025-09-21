@@ -71,6 +71,14 @@ public class UsuarioDAO {
             listaUsuarios = new ArrayList<>();
         }
     }
+    public int buscarIndicePorId(int id) {
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            if (listaUsuarios.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public void escribirArchivoSerializado() {
         FileHandler.escribirEnArchivoSerializado(SERIAL_FILE_NAME, listaUsuarios);

@@ -1,6 +1,7 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.unbosque.model.MetodoDePago;
 
@@ -27,13 +28,6 @@ public class MetodoDePagoDAO {
 		return true;
 	}
 
-	public boolean eliminar(int indice) {
-		if (indice < 0 || indice >= listaMetodosDePago.size())
-			return false;
-		listaMetodosDePago.remove(indice);
-		escribirArchivoSerializado();
-		return true;
-	}
 
 	public void cargarDesdeArchivoSerializado(String url) {
 		Object contenido = FileHandler.leerDesdeArchivoSerializado(url);
@@ -55,6 +49,31 @@ public class MetodoDePagoDAO {
 	public void setListaMetodosDePago(ArrayList<MetodoDePago> listaMetodosDePago) {
 		this.listaMetodosDePago = listaMetodosDePago;
 	}
-	
-	
+
+	public List<MetodoDePago> obtenerTodos() {
+	    return listaMetodosDePago;
+	}
+
+	public int buscarIndicePorAtributos(String titular, double numeroTarjetaOriginal, String fechaVencimiento, int pinSeguridad, int idAsociado) {
+	    for (int i = 0; i < listaMetodosDePago.size(); i++) {
+	        MetodoDePago metodo = listaMetodosDePago.get(i);
+	        if (metodo.getTitular().equals(titular) && 
+	            metodo.getNumeroTarjeta() == numeroTarjetaOriginal && 
+	            metodo.getFechaVencimiento().equals(fechaVencimiento) && 
+	            metodo.getPinDeSeguridad() == pinSeguridad && 
+	            metodo.getIdAsociado() == idAsociado) {
+	            return i;
+	        }
+	    }
+	    return -1; 
+	}
+
+	public boolean eliminar(int indice) {
+	    if (indice >= 0 && indice < listaMetodosDePago.size()) {
+	        listaMetodosDePago.remove(indice);
+	        escribirArchivoSerializado();
+	        return true;
+	    }
+	    return false;
+	}
 }

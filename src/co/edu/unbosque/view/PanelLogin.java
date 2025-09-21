@@ -12,7 +12,7 @@ public class PanelLogin extends JPanel {
     private JPasswordField txtContrasenia;
     private JButton btnIniciarSesion;
     private JButton btnCrearCuenta;
-    private JComboBox<String> cmbIdioma;
+
     
     // Colores estilo MercadoLibre
     private final Color COLOR_FONDO = new Color(235, 235, 235);
@@ -24,6 +24,10 @@ public class PanelLogin extends JPanel {
     private final Color COLOR_BOTON_SECUNDARIO = new Color(46, 204, 113);
 
     public PanelLogin() {
+        initComponents();
+    }
+    
+    private void initComponents() {
         setLayout(new BorderLayout());
         setBackground(COLOR_FONDO);
         setPreferredSize(new Dimension(1280, 500));
@@ -133,23 +137,8 @@ public class PanelLogin extends JPanel {
         // Añadir el panel centrado al mainPanel
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         add(mainPanel, BorderLayout.CENTER);
-
-        // Panel del idioma en la parte inferior
-        cmbIdioma = new JComboBox<>(new String[]{"Español", "English", "Português", "Latin"});
-        cmbIdioma.setFont(new Font("Arial", Font.PLAIN, 12));
-        cmbIdioma.setBackground(COLOR_PANEL_BLANCO);
-        cmbIdioma.setForeground(COLOR_TEXTO_PRINCIPAL);
-        cmbIdioma.setBorder(BorderFactory.createLineBorder(COLOR_BORDE_CAMPO, 1));
-        aplicarEfectoFocusComboBox(cmbIdioma);
-        
-        JPanel idiomaPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        idiomaPanel.setBackground(COLOR_FONDO);
-        idiomaPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 20));
-        idiomaPanel.add(new JLabel("Idioma: "));
-        idiomaPanel.add(cmbIdioma);
-        
-        add(idiomaPanel, BorderLayout.SOUTH);
     }
+     
     
     private void aplicarEfectoFocusTextField(JTextField textField) {
         textField.addFocusListener(new FocusAdapter() {
@@ -190,39 +179,21 @@ public class PanelLogin extends JPanel {
         return txtEmail;
     }
 
-    public void setTxtEmail(JTextField txtEmail) {
-        this.txtEmail = txtEmail;
-    }
-
     public JPasswordField getTxtContrasenia() {
         return txtContrasenia;
-    }
-
-    public void setTxtContrasenia(JPasswordField txtContrasenia) {
-        this.txtContrasenia = txtContrasenia;
     }
 
     public JButton getBtnIniciarSesion() {
         return btnIniciarSesion;
     }
 
-    public void setBtnIniciarSesion(JButton btnIniciarSesion) {
-        this.btnIniciarSesion = btnIniciarSesion;
-    }
-
     public JButton getBtnCrearCuenta() {
         return btnCrearCuenta;
     }
-
-    public void setBtnCrearCuenta(JButton btnCrearCuenta) {
-        this.btnCrearCuenta = btnCrearCuenta;
-    }
-
-    public JComboBox<String> getCmbIdioma() {
-        return cmbIdioma;
-    }
-
-    public void setCmbIdioma(JComboBox<String> cmbIdioma) {
-        this.cmbIdioma = cmbIdioma;
+    
+    // Método para limpiar el formulario
+    public void limpiarFormulario() {
+        txtEmail.setText("");
+        txtContrasenia.setText("");
     }
 }

@@ -8,6 +8,7 @@ import co.edu.unbosque.model.persistence.ElectrodomesticoDAO;
 import co.edu.unbosque.model.persistence.FarmaciaDAO;
 import co.edu.unbosque.model.persistence.JugueteDAO;
 import co.edu.unbosque.model.persistence.MascotaDAO;
+import co.edu.unbosque.model.persistence.MetodoDePagoDAO;
 import co.edu.unbosque.model.persistence.ModaDAO;
 import co.edu.unbosque.model.persistence.UsuarioDAO;
 import co.edu.unbosque.model.persistence.VehiculoDAO;
@@ -24,6 +25,7 @@ public class ModelFacade {
 	private MascotaDAO mascotaDAO;
 	private ModaDAO modaDAO;
 	private VehiculoDAO vehiculoDAO; 
+	private MetodoDePagoDAO metodoDePagoDAO;
 	
 	private UsuarioDAO usuarioDAO;
 	
@@ -39,6 +41,7 @@ public class ModelFacade {
 	    modaDAO = new ModaDAO();
 	    vehiculoDAO = new VehiculoDAO();
 	    usuarioDAO = new UsuarioDAO();
+	    metodoDePagoDAO = new MetodoDePagoDAO();
 	}
 
 	public AlimentoYBebidaDAO getAlimentoYBebidaDAO() {
@@ -128,6 +131,15 @@ public class ModelFacade {
 	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
 	}
+
+	public MetodoDePagoDAO getMetodoDePagoDAO() {
+		return metodoDePagoDAO;
+	}
+
+	public void setMetodoDePagoDAO(MetodoDePagoDAO metodoDePagoDAO) {
+		this.metodoDePagoDAO = metodoDePagoDAO;
+	}
+
 	
 	
 }

@@ -4,12 +4,9 @@ import java.io.Serializable;
 
 public class MetodoDePago implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1194621474458762572L;
 	private String titular;
-	private int numeroTarjeta;
+	private long numeroTarjeta;
 	private String fechaVencimiento;
 	private int pinDeSeguridad;
 	private int idAsociado;
@@ -17,7 +14,7 @@ public class MetodoDePago implements Serializable {
 	public MetodoDePago() {
 	}
 
-	public MetodoDePago(String titular, int numeroTarjeta, String fechaVencimiento, int pinDeSeguridad,
+	public MetodoDePago(String titular, long numeroTarjeta, String fechaVencimiento, int pinDeSeguridad,
 			int idAsociado) {
 		super();
 		this.titular = titular;
@@ -35,11 +32,11 @@ public class MetodoDePago implements Serializable {
 		this.titular = titular;
 	}
 
-	public int getNumeroTarjeta() {
+	public long getNumeroTarjeta() {
 		return numeroTarjeta;
 	}
 
-	public void setNumeroTarjeta(int numeroTarjeta) {
+	public void setNumeroTarjeta(long numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 

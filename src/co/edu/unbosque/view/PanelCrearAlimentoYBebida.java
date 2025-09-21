@@ -445,6 +445,30 @@ public class PanelCrearAlimentoYBebida extends JPanel {
             }
         });
     }
+    
+    public void limpiarFormulario() {
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        txtTipo.setText("");
+        txtPrecio.setText("");
+        txtMarca.setText("");
+        txtVendedor.setText("");
+        txtCaracteristicas.setText("");
+        txtStock.setText("");
+        txtUnidadEnvase.setText("");
+        
+        cmbEsLiquido.setSelectedIndex(0);
+        cmbTipoEnvase.setSelectedIndex(0);
+        
+        txtCantidadProducto.setValue(null);
+        
+        imagenSeleccionada = null;
+        lblImagenPreview.setIcon(null);
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>" +
+                                "<div style='font-size: 60px; margin-bottom: 10px;'>🍔</div>" +
+                                "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>" +
+                                "</html>");
+    }
 
     // Getters y Setters
     public JLabel getLblNombre() {
