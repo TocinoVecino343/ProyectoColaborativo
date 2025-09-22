@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.AlimentoYBebida;
 import co.edu.unbosque.model.DeporteYFitness;
 
 public class DeporteYFitnessDAO implements DAO<DeporteYFitness> {
@@ -22,8 +23,12 @@ public class DeporteYFitnessDAO implements DAO<DeporteYFitness> {
 
 	@Override
 	public String mostrarDatos() {
-		// TODO Auto-generated method stub
-		return null;
+		String contenido = "";
+		for (DeporteYFitness deporteYFitness : listaDeportesYFitness) {
+			
+			contenido+= listaDeportesYFitness.toString() + "\n";
+		}
+		return contenido;
 	}
 
 	@Override
