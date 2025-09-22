@@ -46,7 +46,6 @@ public class Controlador implements ActionListener {
 	}
 
 	public void runGui() {
-		System.out.println(mf.getDeporteYFitnessDAO().mostrarDatos());
 		inicializarActionListener();
 		vf.getVentana().add(vf.getPanelSuperior(), BorderLayout.NORTH);
 		vf.getVentana().add(vf.getPanelLogin(), BorderLayout.CENTER);

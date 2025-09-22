@@ -107,7 +107,7 @@ public class PanelCrearCelular extends JPanel {
 		// Texto placeholder
 		lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
 				+ "<div style='font-size: 60px; margin-bottom: 10px;'>📱</div>"
-				+ "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>" + "</html>");
+				+ "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO SELECCIONADA</div>" + "</html>");
 
 		imageContainer.add(lblImagenPreview, BorderLayout.CENTER);
 
