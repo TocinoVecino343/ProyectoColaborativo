@@ -88,4 +88,12 @@ public class ConstruccionDAO implements DAO<Construccion> {
 
 	}
 
+	public ArrayList<Construccion> getListaConstruccion() {
+		return listaConstruccion;
+	}
+
+	public void setListaConstruccion(ArrayList<Construccion> listaConstruccion) {
+		this.listaConstruccion = listaConstruccion;
+	}
+
 }

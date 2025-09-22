@@ -88,4 +88,12 @@ public class FarmaciaDAO implements DAO<Farmacia> {
 
 	}
 
+	public ArrayList<Farmacia> getListaFarmacia() {
+		return listaFarmacia;
+	}
+
+	public void setListaFarmacia(ArrayList<Farmacia> listaFarmacia) {
+		this.listaFarmacia = listaFarmacia;
+	}
+
 }

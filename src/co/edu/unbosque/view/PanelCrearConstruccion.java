@@ -451,6 +451,28 @@ public class PanelCrearConstruccion extends JPanel {
             }
         });
     }
+    public void limpiarFormulario() {
+        getTxtNombre().setText("");
+        getTxtDescripcion().setText("");
+        getTxtTipo().setText("");
+        getTxtPrecio().setText("");
+        getTxtMarca().setText("");
+        getTxtCaracteristicas().setText("");
+        getTxtStock().setText("");
+        getTxtModelo().setText("");
+        getCmbMaterial().setSelectedIndex(0);
+        getTxtColor().setText("");
+        getTxtLargo().setText("");
+        getTxtAncho().setText("");
+        getTxtAltura().setText("");
+        
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
+                + "<div style='font-size: 60px; margin-bottom: 10px;'>🏗</div>"
+                + "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>"
+                + "</html>");
+        lblImagenPreview.setIcon(null);
+        imagenSeleccionada = null;
+    }
 
 	public JLabel getLblNombre() {
 		return lblNombre;
@@ -675,5 +697,14 @@ public class PanelCrearConstruccion extends JPanel {
 	public void setBtnCrearConstruccion(JButton btnCrearConstruccion) {
 		this.btnCrearConstruccion = btnCrearConstruccion;
 	}
+
+	public File getImagenSeleccionada() {
+		return imagenSeleccionada;
+	}
+
+	public void setImagenSeleccionada(File imagenSeleccionada) {
+		this.imagenSeleccionada = imagenSeleccionada;
+	}
+	
 
 }

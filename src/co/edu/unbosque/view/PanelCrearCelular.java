@@ -498,6 +498,31 @@ public class PanelCrearCelular extends JPanel {
 			}
 		});
 	}
+	public void limpiarFormulario() {
+	    getTxtNombre().setText("");
+	    getTxtDescripcion().setText("");
+	    getTxtTipo().setText("");
+	    getTxtPrecio().setText("");
+	    getTxtMarca().setText("");
+	    getTxtCaracteristicas().setText("");
+	    getTxtStock().setText("");
+	    getTxtColor().setText("");
+	    getCmbMemoriaInterna().setSelectedIndex(0);
+	    getCmbMemoriaRam().setSelectedIndex(0);
+	    getTxtLargoPantalla().setText("");
+	    getTxtAnchoPantalla().setText("");
+	    getTxtAlturaPantalla().setText("");
+	    getTxtCamaraFrontal().setText("");
+	    getTxtCamaraTrasera().setText("");
+	    getCmbPoseeNfc().setSelectedIndex(0);
+	    
+	    lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
+	            + "<div style='font-size: 60px; margin-bottom: 10px;'>📱</div>"
+	            + "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>"
+	            + "</html>");
+	    lblImagenPreview.setIcon(null);
+	    imagenSeleccionada = null;
+	}
 
 	public JLabel getLblNombre() {
 		return lblNombre;
@@ -762,4 +787,13 @@ public class PanelCrearCelular extends JPanel {
 	public void setBtnCrearCelular(JButton btnCrearCelular) {
 		this.btnCrearCelular = btnCrearCelular;
 	}
+
+	public File getImagenSeleccionada() {
+		return imagenSeleccionada;
+	}
+
+	public void setImagenSeleccionada(File imagenSeleccionada) {
+		this.imagenSeleccionada = imagenSeleccionada;
+	}
+	
 }

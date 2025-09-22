@@ -89,4 +89,12 @@ public class JugueteDAO implements DAO<Juguete> {
 
 	}
 
+	public ArrayList<Juguete> getListaJuguetes() {
+		return listaJuguetes;
+	}
+
+	public void setListaJuguetes(ArrayList<Juguete> listaJuguetes) {
+		this.listaJuguetes = listaJuguetes;
+	}
+
 }

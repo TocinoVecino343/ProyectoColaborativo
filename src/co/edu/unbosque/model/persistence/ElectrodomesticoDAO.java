@@ -89,4 +89,12 @@ public class ElectrodomesticoDAO implements DAO<Electrodomestico> {
 
 	}
 
+	public ArrayList<Electrodomestico> getListaElectrodomesticos() {
+		return listaElectrodomesticos;
+	}
+
+	public void setListaElectrodomesticos(ArrayList<Electrodomestico> listaElectrodomesticos) {
+		this.listaElectrodomesticos = listaElectrodomesticos;
+	}
+
 }

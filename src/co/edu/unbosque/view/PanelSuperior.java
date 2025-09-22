@@ -12,8 +12,8 @@ public class PanelSuperior extends JPanel {
 	private JButton btnVender;
 	private JButton btnCarro;
 	private JButton btnPerfil;
+	private JButton btnMercadoLibre;
 	private JTextField txtFieldBuscador;
-	private JLabel lblLogo;
 
 	public PanelSuperior() {
 		this.setVisible(true);
@@ -24,13 +24,31 @@ public class PanelSuperior extends JPanel {
 	}
 
 	public void inicializarComponentes() {
-		// Logo/Título
-		lblLogo = new JLabel("MercadoLibre");
-		lblLogo.setFont(new Font("Arial", Font.BOLD, 24));
-		lblLogo.setForeground(Color.BLACK);
-		lblLogo.setBounds(20, 45, 200, 30);
 
-		// Buscador
+		btnMercadoLibre = new JButton("MercadoLibre");
+		btnMercadoLibre.setFont(new Font("Arial", Font.BOLD, 24));
+		btnMercadoLibre.setForeground(Color.BLACK);
+		btnMercadoLibre.setBackground(Color.decode("#ffe600")); 
+		btnMercadoLibre.setBounds(20, 45, 200, 30);
+		btnMercadoLibre.setBorder(BorderFactory.createEmptyBorder()); 
+		btnMercadoLibre.setFocusPainted(false);
+		btnMercadoLibre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		btnMercadoLibre.setActionCommand("Principal");
+		
+
+		btnMercadoLibre.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				btnMercadoLibre.setBackground(Color.decode("#fff176")); 
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				btnMercadoLibre.setBackground(Color.decode("#ffe600")); 
+			}
+		});
+
+		// Buscador - SIN CAMBIOS
 		txtFieldBuscador = new JTextField("Buscar productos, marcas y más...");
 		txtFieldBuscador.setBounds(250, 25, 600, 40);
 		txtFieldBuscador.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK, 1),
@@ -38,14 +56,14 @@ public class PanelSuperior extends JPanel {
 		txtFieldBuscador.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtFieldBuscador.setForeground(Color.GRAY);
 
-		// Botón de búsqueda
+		// Botón de búsqueda - SIN CAMBIOS
 		JButton btnBuscar = new JButton("🔍");
 		btnBuscar.setBounds(850, 25, 50, 40);
 		btnBuscar.setBackground(Color.WHITE);
 		btnBuscar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		btnBuscar.setFocusPainted(false);
 
-		// Botones de navegación
+		// Botones de navegación - SIN CAMBIOS (exactamente como los tenías)
 		btnCategoria = new JButton("Categorías");
 		btnCategoria.setBounds(200, 80, 120, 35);
 		estilizarBoton(btnCategoria);
@@ -62,8 +80,8 @@ public class PanelSuperior extends JPanel {
 		btnPerfil.setBounds(1050, 80, 100, 35);
 		estilizarBoton(btnPerfil);
 
-		// Agregar componentesFS
-		this.add(lblLogo);
+		// Agregar componentes - ÚNICO CAMBIO: btnMercadoLibre en lugar de lblLogo
+		this.add(btnMercadoLibre);
 		this.add(txtFieldBuscador);
 		this.add(btnBuscar);
 		this.add(btnCategoria);
@@ -71,7 +89,7 @@ public class PanelSuperior extends JPanel {
 		this.add(btnCarro);
 		this.add(btnPerfil);
 
-		// Agregar funcionalidad al campo de búsqueda
+		// Agregar funcionalidad al campo de búsqueda - SIN CAMBIOS
 		txtFieldBuscador.addFocusListener(new java.awt.event.FocusListener() {
 			@Override
 			public void focusGained(java.awt.event.FocusEvent e) {
@@ -91,6 +109,7 @@ public class PanelSuperior extends JPanel {
 		});
 	}
 
+	// Método estilizarBoton - SIN CAMBIOS
 	private void estilizarBoton(JButton boton) {
 		boton.setFont(new Font("Arial", Font.BOLD, 12));
 		boton.setBackground(Color.WHITE);
@@ -114,7 +133,7 @@ public class PanelSuperior extends JPanel {
 		});
 	}
 
-	// Getters y setters
+	// Getters y setters - CAMBIO: getter para btnMercadoLibre
 	public JButton getBtnCategoria() {
 		return btnCategoria;
 	}
@@ -147,12 +166,13 @@ public class PanelSuperior extends JPanel {
 		this.txtFieldBuscador = txtFieldBuscador;
 	}
 
-	public JLabel getLblLogo() {
-		return lblLogo;
+	// CAMBIO: getter para btnMercadoLibre en lugar de lblLogo
+	public JButton getBtnMercadoLibre() {
+		return btnMercadoLibre;
 	}
 
-	public void setLblLogo(JLabel lblLogo) {
-		this.lblLogo = lblLogo;
+	public void setBtnMercadoLibre(JButton btnMercadoLibre) {
+		this.btnMercadoLibre = btnMercadoLibre;
 	}
 
 	public JButton getBtnPerfil() {
@@ -162,5 +182,4 @@ public class PanelSuperior extends JPanel {
 	public void setBtnPerfil(JButton btnPerfil) {
 		this.btnPerfil = btnPerfil;
 	}
-	
 }

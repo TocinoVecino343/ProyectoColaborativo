@@ -89,4 +89,13 @@ public class MascotaDAO implements DAO<Mascota> {
 
 	}
 
+	public ArrayList<Mascota> getListaMascotas() {
+		return listaMascotas;
+	}
+
+	public void setListaMascotas(ArrayList<Mascota> listaMascotas) {
+		this.listaMascotas = listaMascotas;
+	}
+	
+
 }

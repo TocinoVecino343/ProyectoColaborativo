@@ -87,4 +87,13 @@ public class CelularDAO implements DAO<Celular> {
 
 	}
 
+	public ArrayList<Celular> getListaCelulares() {
+		return listaCelulares;
+	}
+
+	public void setListaCelulares(ArrayList<Celular> listaCelulares) {
+		this.listaCelulares = listaCelulares;
+	}
+	
+
 }

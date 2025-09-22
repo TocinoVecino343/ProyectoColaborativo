@@ -94,4 +94,5 @@ public class Construccion extends Producto {
         return "Construccion [" + super.toString() + ", modelo=" + modelo + ", material=" + material + ", color="
                 + color + ", largo=" + largo + ", ancho=" + ancho + ", altura=" + altura + "]";
     }
+    
 }

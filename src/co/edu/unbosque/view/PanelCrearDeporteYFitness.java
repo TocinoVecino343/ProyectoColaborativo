@@ -357,6 +357,26 @@ public class PanelCrearDeporteYFitness extends JPanel {
             }
         });
     }
+    
+    public void limpiarFormulario() {
+        getTxtNombre().setText("");
+        getTxtDescripcion().setText("");
+        getTxtTipo().setText("");
+        getTxtPrecio().setText("");
+        getTxtMarca().setText("");
+        getTxtCaracteristicas().setText("");
+        getTxtStock().setText("");
+        getTxtColor().setText("");
+        getTxtMaterial().setText("");
+        
+        // Reiniciar la imagen
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
+                + "<div style='font-size: 60px; margin-bottom: 10px;'>🏋</div>"
+                + "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>"
+                + "</html>");
+        lblImagenPreview.setIcon(null);
+        imagenSeleccionada = null;
+    }
 
     // Getters y Setters
     public JLabel getLblNombre() {

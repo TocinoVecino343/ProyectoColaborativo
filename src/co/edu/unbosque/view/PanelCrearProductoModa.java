@@ -458,6 +458,26 @@ public class PanelCrearProductoModa extends JPanel {
             }
         });
     }
+    public void limpiarFormulario() {
+        getTxtNombre().setText("");
+        getTxtDescripcion().setText("");
+        getCmbTipo().setSelectedIndex(0);
+        getTxtPrecio().setText("");
+        getCmbMarca().setSelectedIndex(0);
+        getTxtCaracteristicas().setText("");
+        getTxtStock().setText("");
+        getTxtColor().setText("");
+        getCmbTalla().setSelectedIndex(0);
+        getCmbMaterial().setSelectedIndex(0);
+        
+        // Reiniciar la imagen
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
+                + "<div style='font-size: 60px; margin-bottom: 10px;'>👕</div>"
+                + "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>"
+                + "</html>");
+        lblImagenPreview.setIcon(null);
+        imagenSeleccionada = null;
+    }
 
     // Getters y Setters
     public JLabel getLblNombre() {

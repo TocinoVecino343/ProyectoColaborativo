@@ -18,6 +18,10 @@ public class AlimentoYBebidaDAO implements DAO<AlimentoYBebida> {
 	public void crear(AlimentoYBebida objeto) {
 		listaAlimentosYBebidas.add(objeto);
 		escribirArchivoSerializado();
+	}	
+
+	public ArrayList<AlimentoYBebida> getListaAlimentosYBebidas() {
+	    return listaAlimentosYBebidas;
 	}
 
 	@Override

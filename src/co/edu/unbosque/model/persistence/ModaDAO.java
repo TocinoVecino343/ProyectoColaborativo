@@ -89,4 +89,12 @@ public class ModaDAO implements DAO<Moda> {
 
 	}
 
+	public ArrayList<Moda> getListaModa() {
+		return listaModa;
+	}
+
+	public void setListaModa(ArrayList<Moda> listaModa) {
+		this.listaModa = listaModa;
+	}
+
 }

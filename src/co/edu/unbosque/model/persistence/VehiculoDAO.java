@@ -89,4 +89,13 @@ public class VehiculoDAO implements DAO<Vehiculo> {
 
 	}
 
+	public ArrayList<Vehiculo> getListaVehiculos() {
+		return listaVehiculos;
+	}
+
+	public void setListaVehiculos(ArrayList<Vehiculo> listaVehiculos) {
+		this.listaVehiculos = listaVehiculos;
+	}
+	
+
 }

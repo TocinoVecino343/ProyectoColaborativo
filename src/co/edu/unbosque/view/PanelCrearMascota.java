@@ -419,6 +419,26 @@ public class PanelCrearMascota extends JPanel {
             }
         });
     }
+    public void limpiarFormulario() {
+        getTxtNombre().setText("");
+        getTxtDescripcion().setText("");
+        getTxtTipo().setText("");
+        getTxtPrecio().setText("");
+        getTxtMarca().setText("");
+        getTxtCaracteristicas().setText("");
+        getTxtStock().setText("");
+        getCmbTipoAnimal().setSelectedIndex(0);
+        getTxtRaza().setText("");
+        getTxtColor().setText("");
+        getCmbFormatoDeVenta().setSelectedIndex(0);
+        
+        lblImagenPreview.setText("<html><div style='text-align: center; color: #999; font-family: Arial;'>"
+                + "<div style='font-size: 60px; margin-bottom: 10px;'>🐾</div>"
+                + "<div style='font-size: 16px; font-weight: bold;'>IMAGEN NO DISPONIBLE</div>"
+                + "</html>");
+        lblImagenPreview.setIcon(null);
+        imagenSeleccionada = null;
+    }
 
     // Getters y Setters
     public JLabel getLblNombre() {

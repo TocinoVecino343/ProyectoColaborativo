@@ -87,4 +87,13 @@ public class DeporteYFitnessDAO implements DAO<DeporteYFitness> {
 
 	}
 
+	public ArrayList<DeporteYFitness> getListaDeportesYFitness() {
+		return listaDeportesYFitness;
+	}
+
+	public void setListaDeportesYFitness(ArrayList<DeporteYFitness> listaDeportesYFitness) {
+		this.listaDeportesYFitness = listaDeportesYFitness;
+	}
+	
+
 }
