@@ -1,7 +1,7 @@
-package co.edu.unbosque.view;
-import javax.swing.*;
+package co.edu.unbosque.view;import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+
 import co.edu.unbosque.model.*;
 
 public class PanelPrincipal extends JPanel {

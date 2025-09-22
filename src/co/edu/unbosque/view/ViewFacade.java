@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import co.edu.unbosque.view.PanelMostrarProducto;
+
 public class ViewFacade {
 
 	private PanelSuperior panelSuperior;
@@ -21,6 +23,7 @@ public class ViewFacade {
 	private PanelMetodoDePago panelMetodoDePago;
 	private PanelPrincipal panelPrincipal;
 	private PanelMostrarProducto panelMostrarProducto;
+	private PanelProductoCreado panelProductoCreado;
 
 	public ViewFacade() {
 		panelSuperior = new PanelSuperior();
@@ -42,6 +45,7 @@ public class ViewFacade {
 		panelMetodoDePago = new PanelMetodoDePago();
 		panelPrincipal = new PanelPrincipal(this);
 		panelMostrarProducto = new PanelMostrarProducto();
+		panelProductoCreado = new PanelProductoCreado();
 	}
 
 	public PanelSuperior getPanelSuperior() {
@@ -194,6 +198,14 @@ public class ViewFacade {
 
 	public void setPanelMostrarProducto(PanelMostrarProducto panelMostrarProducto) {
 		this.panelMostrarProducto = panelMostrarProducto;
+	}
+
+	public PanelProductoCreado getPanelProductoCreado() {
+		return panelProductoCreado;
+	}
+
+	public void setPanelProductoCreado(PanelProductoCreado panelProductoCreado) {
+		this.panelProductoCreado = panelProductoCreado;
 	}
 	
 
