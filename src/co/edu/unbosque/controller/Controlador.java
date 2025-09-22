@@ -56,44 +56,43 @@ public class Controlador implements ActionListener {
 	}
 
 	private void iniciarSesion() {
-	    String email = vf.getPanelLogin().getTxtEmail().getText().trim();
-	    String contrasenia = new String(vf.getPanelLogin().getTxtContrasenia().getPassword());
+		String email = vf.getPanelLogin().getTxtEmail().getText().trim();
+		String contrasenia = new String(vf.getPanelLogin().getTxtContrasenia().getPassword());
 
-	    try {
-	        LanzadorExcepciones.validarEmail(email);
-	        Usuario usuario = mf.getUsuarioDAO().login(email, contrasenia);
+		try {
+			LanzadorExcepciones.validarEmail(email);
+			Usuario usuario = mf.getUsuarioDAO().login(email, contrasenia);
 
-	        if (usuario != null) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "¡Bienvenido, " +
-	                    usuario.getNombre() + "!",
-	                    "Inicio de sesión exitoso", JOptionPane.INFORMATION_MESSAGE);
+			if (usuario != null) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "¡Bienvenido, " + usuario.getNombre() + "!",
+						"Inicio de sesión exitoso", JOptionPane.INFORMATION_MESSAGE);
 
-	            vf.getVentana().remove(vf.getPanelLogin());
-	            vf.getVentana().revalidate();
-	            vf.getVentana().repaint();
+				vf.getVentana().remove(vf.getPanelLogin());
+				vf.getVentana().revalidate();
+				vf.getVentana().repaint();
 
-	            vf.getPanelSuperior().getBtnCategoria().setVisible(true);
-	            vf.getPanelSuperior().getBtnVender().setVisible(true);
-	            vf.getPanelSuperior().getBtnCarro().setVisible(true);
-	            vf.getPanelSuperior().getBtnPerfil().setVisible(true);
+				vf.getPanelSuperior().getBtnCategoria().setVisible(true);
+				vf.getPanelSuperior().getBtnVender().setVisible(true);
+				vf.getPanelSuperior().getBtnCarro().setVisible(true);
+				vf.getPanelSuperior().getBtnPerfil().setVisible(true);
 
-	            usuarioLogueado = usuario;
+				usuarioLogueado = usuario;
 
-	            vf.getPanelLogin().limpiarFormulario();
+				vf.getPanelLogin().limpiarFormulario();
 
-	            mostrarPanelPrincipal();
+				mostrarPanelPrincipal();
 
-	        } else {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Correo o contraseña incorrectos.",
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	        }
-	    } catch (EmailInvalidoException ex) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), ex.getMessage(), "Error de validación",
-	                JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception ex) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error inesperado: " +
-	                ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+			} else {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Correo o contraseña incorrectos.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (EmailInvalidoException ex) {
+			JOptionPane.showMessageDialog(vf.getVentana(), ex.getMessage(), "Error de validación",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error inesperado: " + ex.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void mostrarFormularioRegistro() {
@@ -398,795 +397,795 @@ public class Controlador implements ActionListener {
 			vf.getVentana().repaint();
 		}
 	}
-	
+
 	// Métodos para agregar a tu clase Controlador
 
 	private void mostrarPanelPrincipal() {
-	    ocultarTodosLosPaneles();
+		ocultarTodosLosPaneles();
 
-	    // Obtener productos de todas las categorías
-	    ArrayList<AlimentoYBebida> productosAlimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
-	    ArrayList<Celular> productosCelulares = mf.getCelularDAO().getListaCelulares();
-	    ArrayList<Construccion> productosConstruccion = mf.getConstruccionDAO().getListaConstruccion();
-	    ArrayList<DeporteYFitness> productosDeporteYFitness = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
-	    ArrayList<Electrodomestico> productosElectrodomesticos = mf.getElectrodomesticoDAO().getListaElectrodomesticos();
-	    ArrayList<Juguete> productosJuguetes = mf.getJugueteDAO().getListaJuguetes();
-	    ArrayList<Mascota> productosMascotas = mf.getMascotaDAO().getListaMascotas();
-	    ArrayList<Farmacia> productosFarmacia = mf.getFarmaciaDAO().getListaFarmacia();
-	    ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
-	    ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
+		// Obtener productos de todas las categorías
+		ArrayList<AlimentoYBebida> productosAlimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
+		ArrayList<Celular> productosCelulares = mf.getCelularDAO().getListaCelulares();
+		ArrayList<Construccion> productosConstruccion = mf.getConstruccionDAO().getListaConstruccion();
+		ArrayList<DeporteYFitness> productosDeporteYFitness = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
+		ArrayList<Electrodomestico> productosElectrodomesticos = mf.getElectrodomesticoDAO()
+				.getListaElectrodomesticos();
+		ArrayList<Juguete> productosJuguetes = mf.getJugueteDAO().getListaJuguetes();
+		ArrayList<Mascota> productosMascotas = mf.getMascotaDAO().getListaMascotas();
+		ArrayList<Farmacia> productosFarmacia = mf.getFarmaciaDAO().getListaFarmacia();
+		ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
+		ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
 
-	    // Mostrar todos los productos en el panel principal
-	    vf.getPanelPrincipal().mostrarTodosLosProductos(
-	        productosAlimentos,
-	        productosCelulares,
-	        productosConstruccion,
-	        productosDeporteYFitness,
-	        productosElectrodomesticos,
-	        productosJuguetes,
-	        productosMascotas,
-	        productosFarmacia,
-	        productosModa,
-	        productosVehiculos
-	    );
+		// Mostrar todos los productos en el panel principal
+		vf.getPanelPrincipal().mostrarTodosLosProductos(productosAlimentos, productosCelulares, productosConstruccion,
+				productosDeporteYFitness, productosElectrodomesticos, productosJuguetes, productosMascotas,
+				productosFarmacia, productosModa, productosVehiculos);
 
-	    vf.getVentana().add(vf.getPanelPrincipal(), BorderLayout.CENTER);
-	    vf.getVentana().revalidate();
-	    vf.getVentana().repaint();
+		vf.getVentana().add(vf.getPanelPrincipal(), BorderLayout.CENTER);
+		vf.getVentana().revalidate();
+		vf.getVentana().repaint();
 	}
 
 	public void actualizarPanelPrincipal() {
-	    boolean panelPrincipalVisible = false;
-	    Component[] components = vf.getVentana().getContentPane().getComponents();
-	    for (Component comp : components) {
-	        if (comp == vf.getPanelPrincipal()) {
-	            panelPrincipalVisible = true;
-	            break;
-	        }
-	    }
+		boolean panelPrincipalVisible = false;
+		Component[] components = vf.getVentana().getContentPane().getComponents();
+		for (Component comp : components) {
+			if (comp == vf.getPanelPrincipal()) {
+				panelPrincipalVisible = true;
+				break;
+			}
+		}
 
-	    if (panelPrincipalVisible) {
-	        // Obtener productos de todas las categorías
-	        ArrayList<AlimentoYBebida> productosAlimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
-	        ArrayList<Celular> productosCelulares = mf.getCelularDAO().getListaCelulares();
-	        ArrayList<Construccion> productosConstruccion = mf.getConstruccionDAO().getListaConstruccion();
-	        ArrayList<DeporteYFitness> productosDeporteYFitness = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
-	        ArrayList<Electrodomestico> productosElectrodomesticos = mf.getElectrodomesticoDAO().getListaElectrodomesticos();
-	        ArrayList<Juguete> productosJuguetes = mf.getJugueteDAO().getListaJuguetes();
-	        ArrayList<Mascota> productosMascotas = mf.getMascotaDAO().getListaMascotas();
-	        ArrayList<Farmacia> productosFarmacia = mf.getFarmaciaDAO().getListaFarmacia();
-	        ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
-	        ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
+		if (panelPrincipalVisible) {
+			// Obtener productos de todas las categorías
+			ArrayList<AlimentoYBebida> productosAlimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
+			ArrayList<Celular> productosCelulares = mf.getCelularDAO().getListaCelulares();
+			ArrayList<Construccion> productosConstruccion = mf.getConstruccionDAO().getListaConstruccion();
+			ArrayList<DeporteYFitness> productosDeporteYFitness = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
+			ArrayList<Electrodomestico> productosElectrodomesticos = mf.getElectrodomesticoDAO()
+					.getListaElectrodomesticos();
+			ArrayList<Juguete> productosJuguetes = mf.getJugueteDAO().getListaJuguetes();
+			ArrayList<Mascota> productosMascotas = mf.getMascotaDAO().getListaMascotas();
+			ArrayList<Farmacia> productosFarmacia = mf.getFarmaciaDAO().getListaFarmacia();
+			ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
+			ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
 
-	        // Mostrar todos los productos en el panel principal
-	        vf.getPanelPrincipal().mostrarTodosLosProductos(
-	            productosAlimentos,
-	            productosCelulares,
-	            productosConstruccion,
-	            productosDeporteYFitness,
-	            productosElectrodomesticos,
-	            productosJuguetes,
-	            productosMascotas,
-	            productosFarmacia,
-	            productosModa,
-	            productosVehiculos
-	        );
-	    }
+			// Mostrar todos los productos en el panel principal
+			vf.getPanelPrincipal().mostrarTodosLosProductos(productosAlimentos, productosCelulares,
+					productosConstruccion, productosDeporteYFitness, productosElectrodomesticos, productosJuguetes,
+					productosMascotas, productosFarmacia, productosModa, productosVehiculos);
+		}
 	}
-	
+
+	public void actualizarPanelProductoCreado() {
+		ArrayList<AlimentoYBebida> productosAlimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
+		ArrayList<Celular> productosCelulares = mf.getCelularDAO().getListaCelulares();
+		ArrayList<Construccion> productosConstruccion = mf.getConstruccionDAO().getListaConstruccion();
+		ArrayList<DeporteYFitness> productosDeporteYFitness = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
+		ArrayList<Electrodomestico> productosElectrodomesticos = mf.getElectrodomesticoDAO()
+				.getListaElectrodomesticos();
+		ArrayList<Juguete> productosJuguetes = mf.getJugueteDAO().getListaJuguetes();
+		ArrayList<Mascota> productosMascotas = mf.getMascotaDAO().getListaMascotas();
+		ArrayList<Farmacia> productosFarmacia = mf.getFarmaciaDAO().getListaFarmacia();
+		ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
+		ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
+		int idUsuario = usuarioLogueado.getId();
+
+		vf.getPanelProductoCreado().mostrarTodosLosProductos(productosAlimentos, productosCelulares,
+				productosConstruccion, productosDeporteYFitness, productosElectrodomesticos, productosJuguetes,
+				productosMascotas, productosFarmacia, productosModa, productosVehiculos, idUsuario);
+
+	}
 
 	private void ocultarTodosLosPaneles() {
-	    vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
-	    vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
-	    vf.getVentana().remove(vf.getPanelCrearCelular());
-	    vf.getVentana().remove(vf.getPanelCrearConstruccion());
-	    vf.getVentana().remove(vf.getPanelCDeporteYFitness());
-	    vf.getVentana().remove(vf.getPanelCrearElectrodomesticos());
-	    vf.getVentana().remove(vf.getPanelCrearJuguete());
-	    vf.getVentana().remove(vf.getPanelCrearMascota());
-	    vf.getVentana().remove(vf.getPanelCrearMedicamento());
-	    vf.getVentana().remove(vf.getPanelCrearProductoModa());
-	    vf.getVentana().remove(vf.getPanelCrearVehiculo());
-	    vf.getVentana().remove(vf.getPanelUsuario());
-	    vf.getVentana().remove(vf.getPanelPerfil());
-	    vf.getVentana().remove(vf.getPanelMetodoDePago());
-
-	    vf.getVentana().remove(vf.getPanelPrincipal());
+		vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
+		vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
+		vf.getVentana().remove(vf.getPanelCrearCelular());
+		vf.getVentana().remove(vf.getPanelCrearConstruccion());
+		vf.getVentana().remove(vf.getPanelCDeporteYFitness());
+		vf.getVentana().remove(vf.getPanelCrearElectrodomesticos());
+		vf.getVentana().remove(vf.getPanelCrearJuguete());
+		vf.getVentana().remove(vf.getPanelCrearMascota());
+		vf.getVentana().remove(vf.getPanelCrearMedicamento());
+		vf.getVentana().remove(vf.getPanelCrearProductoModa());
+		vf.getVentana().remove(vf.getPanelCrearVehiculo());
+		vf.getVentana().remove(vf.getPanelUsuario());
+		vf.getVentana().remove(vf.getPanelPerfil());
+		vf.getVentana().remove(vf.getPanelMetodoDePago());
+		vf.getVentana().remove(vf.getPanelProductoCreado());
+		vf.getVentana().remove(vf.getPanelPrincipal());
 	}
+
 	private void guardarAlimentoYBebida() {
-	    try {
-	        String nombre = vf.getPanelCrearAlimentoYBebida().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearAlimentoYBebida().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearAlimentoYBebida().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearAlimentoYBebida().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearAlimentoYBebida().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearAlimentoYBebida().getTxtVendedor().getText().trim();
-	        String caracteristicas = vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearAlimentoYBebida().getTxtStock().getText().trim();
-	        String unidadEnvaseStr = vf.getPanelCrearAlimentoYBebida().getTxtUnidadEnvase().getText().trim();
+		try {
+			String nombre = vf.getPanelCrearAlimentoYBebida().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearAlimentoYBebida().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearAlimentoYBebida().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearAlimentoYBebida().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearAlimentoYBebida().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearAlimentoYBebida().getTxtVendedor().getText().trim();
+			String caracteristicas = vf.getPanelCrearAlimentoYBebida().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearAlimentoYBebida().getTxtStock().getText().trim();
+			String unidadEnvaseStr = vf.getPanelCrearAlimentoYBebida().getTxtUnidadEnvase().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || unidadEnvaseStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty()
+					|| unidadEnvaseStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
-	        int unidadEnvase = Integer.parseInt(unidadEnvaseStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
+			int unidadEnvase = Integer.parseInt(unidadEnvaseStr);
 
-	        boolean esLiquido = "Sí".equals(vf.getPanelCrearAlimentoYBebida().getCmbEsLiquido().getSelectedItem().toString());
-	        String tipoEnvase = vf.getPanelCrearAlimentoYBebida().getCmbTipoEnvase().getSelectedItem().toString();
+			boolean esLiquido = "Sí"
+					.equals(vf.getPanelCrearAlimentoYBebida().getCmbEsLiquido().getSelectedItem().toString());
+			String tipoEnvase = vf.getPanelCrearAlimentoYBebida().getCmbTipoEnvase().getSelectedItem().toString();
 
-	        Object cantidadObj = vf.getPanelCrearAlimentoYBebida().getTxtCantidadProducto().getValue();
-	        int cantidadProducto = (cantidadObj != null) ? Integer.parseInt(cantidadObj.toString()) : 0;
+			Object cantidadObj = vf.getPanelCrearAlimentoYBebida().getTxtCantidadProducto().getValue();
+			int cantidadProducto = (cantidadObj != null) ? Integer.parseInt(cantidadObj.toString()) : 0;
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearAlimentoYBebida().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearAlimentoYBebida().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        AlimentoYBebida nuevoProducto = new AlimentoYBebida(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            esLiquido,       // esLiquido
-	            cantidadProducto, // cantidadProducto
-	            tipoEnvase,      // tipoEnvase
-	            unidadEnvase,    // unidadEnvase
-	            rutaImagen       // fotoProducto
-	        );
+			AlimentoYBebida nuevoProducto = new AlimentoYBebida(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					esLiquido, // esLiquido
+					cantidadProducto, // cantidadProducto
+					tipoEnvase, // tipoEnvase
+					unidadEnvase, // unidadEnvase
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getAlimentoYBebidaDAO().crear(nuevoProducto);
+			mf.getAlimentoYBebidaDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Alimento y bebida guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Alimento y bebida guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearAlimentoYBebida().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearAlimentoYBebida().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarCelular() {
-	    try {
-	        String nombre = vf.getPanelCrearCelular().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearCelular().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearCelular().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearCelular().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearCelular().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearCelular().getTxtCaracteristicas().getText().trim();
-	        String caracteristicas = vf.getPanelCrearCelular().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearCelular().getTxtStock().getText().trim();
-	        String color = vf.getPanelCrearCelular().getTxtColor().getText().trim();
-	        String memoriaInternaStr = (String) vf.getPanelCrearCelular().getCmbMemoriaInterna().getSelectedItem();
-	        String memoriaRamStr = (String) vf.getPanelCrearCelular().getCmbMemoriaRam().getSelectedItem();
-	        String largoPantallaStr = vf.getPanelCrearCelular().getTxtLargoPantalla().getText().trim();
-	        String anchoPantallaStr = vf.getPanelCrearCelular().getTxtAnchoPantalla().getText().trim();
-	        String altoPantallaStr = vf.getPanelCrearCelular().getTxtAlturaPantalla().getText().trim();
-	        String camaraFrontalStr = vf.getPanelCrearCelular().getTxtCamaraFrontal().getText().trim();
-	        String camaraTraseraStr = vf.getPanelCrearCelular().getTxtCamaraTrasera().getText().trim();
+		try {
+			String nombre = vf.getPanelCrearCelular().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearCelular().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearCelular().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearCelular().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearCelular().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearCelular().getTxtCaracteristicas().getText().trim();
+			String caracteristicas = vf.getPanelCrearCelular().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearCelular().getTxtStock().getText().trim();
+			String color = vf.getPanelCrearCelular().getTxtColor().getText().trim();
+			String memoriaInternaStr = (String) vf.getPanelCrearCelular().getCmbMemoriaInterna().getSelectedItem();
+			String memoriaRamStr = (String) vf.getPanelCrearCelular().getCmbMemoriaRam().getSelectedItem();
+			String largoPantallaStr = vf.getPanelCrearCelular().getTxtLargoPantalla().getText().trim();
+			String anchoPantallaStr = vf.getPanelCrearCelular().getTxtAnchoPantalla().getText().trim();
+			String altoPantallaStr = vf.getPanelCrearCelular().getTxtAlturaPantalla().getText().trim();
+			String camaraFrontalStr = vf.getPanelCrearCelular().getTxtCamaraFrontal().getText().trim();
+			String camaraTraseraStr = vf.getPanelCrearCelular().getTxtCamaraTrasera().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
-	            || memoriaInternaStr.isEmpty() || memoriaRamStr.isEmpty() || largoPantallaStr.isEmpty()
-	            || anchoPantallaStr.isEmpty() || altoPantallaStr.isEmpty() || camaraFrontalStr.isEmpty()
-	            || camaraTraseraStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
+					|| memoriaInternaStr.isEmpty() || memoriaRamStr.isEmpty() || largoPantallaStr.isEmpty()
+					|| anchoPantallaStr.isEmpty() || altoPantallaStr.isEmpty() || camaraFrontalStr.isEmpty()
+					|| camaraTraseraStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
-	        int memoriaInterna = Integer.parseInt(memoriaInternaStr.replace("GB", ""));
-	        int memoriaRam = Integer.parseInt(memoriaRamStr.replace("GB", ""));
-	        float largoPantalla = Float.parseFloat(largoPantallaStr);
-	        float anchoPantalla = Float.parseFloat(anchoPantallaStr);
-	        float altoPantalla = Float.parseFloat(altoPantallaStr);
-	        int camaraFrontal = Integer.parseInt(camaraFrontalStr);
-	        int camaraTrasera = Integer.parseInt(camaraTraseraStr);
-	        boolean poseeNfc = "Sí".equals(vf.getPanelCrearCelular().getCmbPoseeNfc().getSelectedItem().toString());
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
+			int memoriaInterna = Integer.parseInt(memoriaInternaStr.replace("GB", ""));
+			int memoriaRam = Integer.parseInt(memoriaRamStr.replace("GB", ""));
+			float largoPantalla = Float.parseFloat(largoPantallaStr);
+			float anchoPantalla = Float.parseFloat(anchoPantallaStr);
+			float altoPantalla = Float.parseFloat(altoPantallaStr);
+			int camaraFrontal = Integer.parseInt(camaraFrontalStr);
+			int camaraTrasera = Integer.parseInt(camaraTraseraStr);
+			boolean poseeNfc = "Sí".equals(vf.getPanelCrearCelular().getCmbPoseeNfc().getSelectedItem().toString());
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearCelular().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearCelular().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Celular nuevoProducto = new Celular(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            color,           // color
-	            memoriaInterna,  // memoriaInterna
-	            memoriaRam,      // memoriaRam
-	            largoPantalla,   // largoPantalla
-	            anchoPantalla,   // anchoPantalla
-	            altoPantalla,    // altoPantalla
-	            camaraFrontal,   // camaraFrontal
-	            camaraTrasera,   // camaraTrasera
-	            poseeNfc,        // poseeNfc
-	            rutaImagen       // fotoProducto
-	        );
+			Celular nuevoProducto = new Celular(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					color, // color
+					memoriaInterna, // memoriaInterna
+					memoriaRam, // memoriaRam
+					largoPantalla, // largoPantalla
+					anchoPantalla, // anchoPantalla
+					altoPantalla, // altoPantalla
+					camaraFrontal, // camaraFrontal
+					camaraTrasera, // camaraTrasera
+					poseeNfc, // poseeNfc
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getCelularDAO().crear(nuevoProducto);
+			mf.getCelularDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Celular guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Celular guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearCelular().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearCelular().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarConstruccion() {
-	    try {
-	        String nombre = vf.getPanelCrearConstruccion().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearConstruccion().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearConstruccion().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearConstruccion().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearConstruccion().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearConstruccion().getTxtCaracteristicas().getText().trim();
-	        String caracteristicas = vf.getPanelCrearConstruccion().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearConstruccion().getTxtStock().getText().trim();
-	        String modelo = vf.getPanelCrearConstruccion().getTxtModelo().getText().trim();
-	        String material = vf.getPanelCrearConstruccion().getCmbMaterial().getSelectedItem().toString();
-	        String color = vf.getPanelCrearConstruccion().getTxtColor().getText().trim();
-	        String largoStr = vf.getPanelCrearConstruccion().getTxtLargo().getText().trim();
-	        String anchoStr = vf.getPanelCrearConstruccion().getTxtAncho().getText().trim();
-	        String alturaStr = vf.getPanelCrearConstruccion().getTxtAltura().getText().trim();
+		try {
+			String nombre = vf.getPanelCrearConstruccion().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearConstruccion().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearConstruccion().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearConstruccion().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearConstruccion().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearConstruccion().getTxtCaracteristicas().getText().trim();
+			String caracteristicas = vf.getPanelCrearConstruccion().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearConstruccion().getTxtStock().getText().trim();
+			String modelo = vf.getPanelCrearConstruccion().getTxtModelo().getText().trim();
+			String material = vf.getPanelCrearConstruccion().getCmbMaterial().getSelectedItem().toString();
+			String color = vf.getPanelCrearConstruccion().getTxtColor().getText().trim();
+			String largoStr = vf.getPanelCrearConstruccion().getTxtLargo().getText().trim();
+			String anchoStr = vf.getPanelCrearConstruccion().getTxtAncho().getText().trim();
+			String alturaStr = vf.getPanelCrearConstruccion().getTxtAltura().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || modelo.isEmpty()
-	            || material.isEmpty() || color.isEmpty() || largoStr.isEmpty() || anchoStr.isEmpty() || alturaStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || modelo.isEmpty()
+					|| material.isEmpty() || color.isEmpty() || largoStr.isEmpty() || anchoStr.isEmpty()
+					|| alturaStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
-	        float largo = Float.parseFloat(largoStr);
-	        float ancho = Float.parseFloat(anchoStr);
-	        float altura = Float.parseFloat(alturaStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
+			float largo = Float.parseFloat(largoStr);
+			float ancho = Float.parseFloat(anchoStr);
+			float altura = Float.parseFloat(alturaStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearConstruccion().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearConstruccion().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Construccion nuevoProducto = new Construccion(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            modelo,          // modelo
-	            material,        // material
-	            color,           // color
-	            largo,           // largo
-	            ancho,           // ancho
-	            altura,          // altura
-	            rutaImagen       // fotoProducto
-	        );
+			Construccion nuevoProducto = new Construccion(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					modelo, // modelo
+					material, // material
+					color, // color
+					largo, // largo
+					ancho, // ancho
+					altura, // altura
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getConstruccionDAO().crear(nuevoProducto);
+			mf.getConstruccionDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de construcción guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de construcción guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearConstruccion().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearConstruccion().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarDeporteYFitness() {
-	    try {
-	        String nombre = vf.getPanelCDeporteYFitness().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCDeporteYFitness().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCDeporteYFitness().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCDeporteYFitness().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCDeporteYFitness().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCDeporteYFitness().getTxtCaracteristicas().getText().trim();
-	        String caracteristicas = vf.getPanelCDeporteYFitness().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCDeporteYFitness().getTxtStock().getText().trim();
-	        String color = vf.getPanelCDeporteYFitness().getTxtColor().getText().trim();
-	        String material = vf.getPanelCDeporteYFitness().getTxtMaterial().getText().trim();
+		try {
+			String nombre = vf.getPanelCDeporteYFitness().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCDeporteYFitness().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCDeporteYFitness().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCDeporteYFitness().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCDeporteYFitness().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCDeporteYFitness().getTxtCaracteristicas().getText().trim();
+			String caracteristicas = vf.getPanelCDeporteYFitness().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCDeporteYFitness().getTxtStock().getText().trim();
+			String color = vf.getPanelCDeporteYFitness().getTxtColor().getText().trim();
+			String material = vf.getPanelCDeporteYFitness().getTxtMaterial().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
-	            || material.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
+					|| material.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCDeporteYFitness().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCDeporteYFitness().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        DeporteYFitness nuevoProducto = new DeporteYFitness(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            color,           // color
-	            material,        // material
-	            rutaImagen       // fotoProducto
-	        );
+			DeporteYFitness nuevoProducto = new DeporteYFitness(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					color, // color
+					material, // material
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getDeporteYFitnessDAO().crear(nuevoProducto);
+			mf.getDeporteYFitnessDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de deporte y fitness guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de deporte y fitness guardado exitosamente!",
+					"Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCDeporteYFitness().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCDeporteYFitness().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarElectrodomestico() {
-	    try {
-	        String nombre = vf.getPanelCrearElectrodomesticos().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearElectrodomesticos().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearElectrodomesticos().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearElectrodomesticos().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearElectrodomesticos().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearElectrodomesticos().getTxtVendedor().getText().trim();
-	        String caracteristicas = vf.getPanelCrearElectrodomesticos().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearElectrodomesticos().getTxtStock().getText().trim();
-	        String modelo = vf.getPanelCrearElectrodomesticos().getTxtModelo().getText().trim();
-	        String voltajeStr = vf.getPanelCrearElectrodomesticos().getTxtVoltaje().getText().trim();
-	        String color = vf.getPanelCrearElectrodomesticos().getTxtColor().getText().trim();
+		try {
+			String nombre = vf.getPanelCrearElectrodomesticos().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearElectrodomesticos().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearElectrodomesticos().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearElectrodomesticos().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearElectrodomesticos().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearElectrodomesticos().getTxtVendedor().getText().trim();
+			String caracteristicas = vf.getPanelCrearElectrodomesticos().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearElectrodomesticos().getTxtStock().getText().trim();
+			String modelo = vf.getPanelCrearElectrodomesticos().getTxtModelo().getText().trim();
+			String voltajeStr = vf.getPanelCrearElectrodomesticos().getTxtVoltaje().getText().trim();
+			String color = vf.getPanelCrearElectrodomesticos().getTxtColor().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || modelo.isEmpty()
-	            || voltajeStr.isEmpty() || color.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || modelo.isEmpty()
+					|| voltajeStr.isEmpty() || color.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
-	        int voltaje = Integer.parseInt(voltajeStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
+			int voltaje = Integer.parseInt(voltajeStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearElectrodomesticos().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearElectrodomesticos().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Electrodomestico nuevoProducto = new Electrodomestico(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            modelo,          // modelo
-	            voltaje,         // voltaje
-	            color,           // color
-	            rutaImagen       // fotoProducto
-	        );
+			Electrodomestico nuevoProducto = new Electrodomestico(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					modelo, // modelo
+					voltaje, // voltaje
+					color, // color
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getElectrodomesticoDAO().crear(nuevoProducto);
+			mf.getElectrodomesticoDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Electrodoméstico guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Electrodoméstico guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearElectrodomesticos().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearElectrodomesticos().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarJuguete() {
-	    try {
-	        String nombre = vf.getPanelCrearJuguete().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearJuguete().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearJuguete().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearJuguete().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearJuguete().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearJuguete().getTxtVendedor().getText().trim();
-	        String caracteristicas = vf.getPanelCrearJuguete().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearJuguete().getTxtStock().getText().trim();
-	        String color = vf.getPanelCrearJuguete().getTxtColor().getText().trim();
-	        String material = vf.getPanelCrearJuguete().getTxtMaterial().getText().trim();
-	        String rangoEdad = vf.getPanelCrearJuguete().getTxtRangoDeEdad().getText().trim();
+		try {
+			String nombre = vf.getPanelCrearJuguete().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearJuguete().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearJuguete().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearJuguete().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearJuguete().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearJuguete().getTxtVendedor().getText().trim();
+			String caracteristicas = vf.getPanelCrearJuguete().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearJuguete().getTxtStock().getText().trim();
+			String color = vf.getPanelCrearJuguete().getTxtColor().getText().trim();
+			String material = vf.getPanelCrearJuguete().getTxtMaterial().getText().trim();
+			String rangoEdad = vf.getPanelCrearJuguete().getTxtRangoDeEdad().getText().trim();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
-	            || material.isEmpty() || rangoEdad.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
+					|| material.isEmpty() || rangoEdad.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearJuguete().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearJuguete().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Juguete nuevoProducto = new Juguete(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            color,           // color
-	            material,        // material
-	            rangoEdad,       // rangoEdad
-	            rutaImagen       // fotoProducto
-	        );
+			Juguete nuevoProducto = new Juguete(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					color, // color
+					material, // material
+					rangoEdad, // rangoEdad
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getJugueteDAO().crear(nuevoProducto);
+			mf.getJugueteDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Juguete guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Juguete guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearJuguete().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearJuguete().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarMascota() {
-	    try {
-	        String nombre = vf.getPanelCrearMascota().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearMascota().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearMascota().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearMascota().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearMascota().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearMascota().getTxtCaracteristicas().getText().trim();
-	        String caracteristicas = vf.getPanelCrearMascota().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearMascota().getTxtStock().getText().trim();
-	        String tipoAnimal = vf.getPanelCrearMascota().getCmbTipoAnimal().getSelectedItem().toString();
-	        String raza = vf.getPanelCrearMascota().getTxtRaza().getText().trim();
-	        String color = vf.getPanelCrearMascota().getTxtColor().getText().trim();
-	        String formatoVenta = vf.getPanelCrearMascota().getCmbFormatoDeVenta().getSelectedItem().toString();
+		try {
+			String nombre = vf.getPanelCrearMascota().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearMascota().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearMascota().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearMascota().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearMascota().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearMascota().getTxtCaracteristicas().getText().trim();
+			String caracteristicas = vf.getPanelCrearMascota().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearMascota().getTxtStock().getText().trim();
+			String tipoAnimal = vf.getPanelCrearMascota().getCmbTipoAnimal().getSelectedItem().toString();
+			String raza = vf.getPanelCrearMascota().getTxtRaza().getText().trim();
+			String color = vf.getPanelCrearMascota().getTxtColor().getText().trim();
+			String formatoVenta = vf.getPanelCrearMascota().getCmbFormatoDeVenta().getSelectedItem().toString();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || tipoAnimal.isEmpty()
-	            || raza.isEmpty() || color.isEmpty() || formatoVenta.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || tipoAnimal.isEmpty()
+					|| raza.isEmpty() || color.isEmpty() || formatoVenta.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearMascota().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearMascota().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Mascota nuevoProducto = new Mascota(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            tipoAnimal,      // tipoAnimal
-	            raza,            // raza
-	            color,           // color
-	            formatoVenta,    // formatoVenta
-	            rutaImagen       // fotoProducto
-	        );
+			Mascota nuevoProducto = new Mascota(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					tipoAnimal, // tipoAnimal
+					raza, // raza
+					color, // color
+					formatoVenta, // formatoVenta
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getMascotaDAO().crear(nuevoProducto);
+			mf.getMascotaDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto para mascota guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto para mascota guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearMascota().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearMascota().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarMedicamento() {
-	    try {
-	        String nombre = vf.getPanelCrearMedicamento().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearMedicamento().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearMedicamento().getTxtTipo().getText().trim();
-	        String precioStr = vf.getPanelCrearMedicamento().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearMedicamento().getTxtMarca().getText().trim();
-	        String vendedor = vf.getPanelCrearMedicamento().getTxtVendedor().getText().trim();
-	        String caracteristicas = vf.getPanelCrearMedicamento().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearMedicamento().getTxtStock().getText().trim();
-	        String laboratorio = vf.getPanelCrearMedicamento().getTxtLaboratorio().getText().trim();
-	        String formatoMedicamento = vf.getPanelCrearMedicamento().getCmbFormatoMedicamento().getSelectedItem().toString();
-	        String formatoVenta = vf.getPanelCrearMedicamento().getCmbFormatoDeVenta().getSelectedItem().toString();
+		try {
+			String nombre = vf.getPanelCrearMedicamento().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearMedicamento().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearMedicamento().getTxtTipo().getText().trim();
+			String precioStr = vf.getPanelCrearMedicamento().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearMedicamento().getTxtMarca().getText().trim();
+			String vendedor = vf.getPanelCrearMedicamento().getTxtVendedor().getText().trim();
+			String caracteristicas = vf.getPanelCrearMedicamento().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearMedicamento().getTxtStock().getText().trim();
+			String laboratorio = vf.getPanelCrearMedicamento().getTxtLaboratorio().getText().trim();
+			String formatoMedicamento = vf.getPanelCrearMedicamento().getCmbFormatoMedicamento().getSelectedItem()
+					.toString();
+			String formatoVenta = vf.getPanelCrearMedicamento().getCmbFormatoDeVenta().getSelectedItem().toString();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || laboratorio.isEmpty()
-	            || formatoMedicamento.isEmpty() || formatoVenta.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || laboratorio.isEmpty()
+					|| formatoMedicamento.isEmpty() || formatoVenta.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearMedicamento().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearMedicamento().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Farmacia nuevoProducto = new Farmacia(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            laboratorio,     // laboratorio
-	            formatoMedicamento, // formatoMedicamento
-	            formatoVenta,    // formatoVenta
-	            rutaImagen       // fotoProducto
-	        );
+			Farmacia nuevoProducto = new Farmacia(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					laboratorio, // laboratorio
+					formatoMedicamento, // formatoMedicamento
+					formatoVenta, // formatoVenta
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getFarmaciaDAO().crear(nuevoProducto);
+			mf.getFarmaciaDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Medicamento guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Medicamento guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearMedicamento().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearMedicamento().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarModa() {
-	    try {
-	        String nombre = vf.getPanelCrearProductoModa().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearProductoModa().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearProductoModa().getCmbTipo().getSelectedItem().toString();
-	        String precioStr = vf.getPanelCrearProductoModa().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearProductoModa().getCmbMarca().getSelectedItem().toString();
-	        String vendedor = vf.getPanelCrearProductoModa().getTxtCaracteristicas().getText().trim();
-	        String caracteristicas = vf.getPanelCrearProductoModa().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearProductoModa().getTxtStock().getText().trim();
-	        String color = vf.getPanelCrearProductoModa().getTxtColor().getText().trim();
-	        String talla = vf.getPanelCrearProductoModa().getCmbTalla().getSelectedItem().toString();
-	        String material = vf.getPanelCrearProductoModa().getCmbMaterial().getSelectedItem().toString();
+		try {
+			String nombre = vf.getPanelCrearProductoModa().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearProductoModa().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearProductoModa().getCmbTipo().getSelectedItem().toString();
+			String precioStr = vf.getPanelCrearProductoModa().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearProductoModa().getCmbMarca().getSelectedItem().toString();
+			String vendedor = vf.getPanelCrearProductoModa().getTxtCaracteristicas().getText().trim();
+			String caracteristicas = vf.getPanelCrearProductoModa().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearProductoModa().getTxtStock().getText().trim();
+			String color = vf.getPanelCrearProductoModa().getTxtColor().getText().trim();
+			String talla = vf.getPanelCrearProductoModa().getCmbTalla().getSelectedItem().toString();
+			String material = vf.getPanelCrearProductoModa().getCmbMaterial().getSelectedItem().toString();
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
-	            || talla.isEmpty() || material.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| vendedor.isEmpty() || caracteristicas.isEmpty() || stockStr.isEmpty() || color.isEmpty()
+					|| talla.isEmpty() || material.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearProductoModa().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearProductoModa().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Moda nuevoProducto = new Moda(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            vendedor,        // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            color,           // color
-	            talla,           // talla
-	            material,        // material
-	            rutaImagen       // fotoProducto
-	        );
+			Moda nuevoProducto = new Moda(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					vendedor, // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					color, // color
+					talla, // talla
+					material, // material
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getModaDAO().crear(nuevoProducto);
+			mf.getModaDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de moda guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Producto de moda guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearProductoModa().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearProductoModa().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void guardarVehiculo() {
-	    try {
-	        String nombre = vf.getPanelCrearVehiculo().getTxtNombre().getText().trim();
-	        String descripcion = vf.getPanelCrearVehiculo().getTxtDescripcion().getText().trim();
-	        String tipo = vf.getPanelCrearVehiculo().getCmbTipo().getSelectedItem().toString();
-	        String precioStr = vf.getPanelCrearVehiculo().getTxtPrecio().getText().trim();
-	        String marca = vf.getPanelCrearVehiculo().getCmbMarca().getSelectedItem().toString();
-	        String caracteristicas = vf.getPanelCrearVehiculo().getTxtCaracteristicas().getText().trim();
-	        String stockStr = vf.getPanelCrearVehiculo().getTxtStock().getText().trim();
-	        String anioStr = vf.getPanelCrearVehiculo().getCmbAnio().getSelectedItem().toString();
-	        String kilometrajeStr = vf.getPanelCrearVehiculo().getTxtKilometraje().getText().trim();
-	        boolean esFinanciable = "Sí".equals(vf.getPanelCrearVehiculo().getCmbEsFinanciable().getSelectedItem().toString());
+		try {
+			String nombre = vf.getPanelCrearVehiculo().getTxtNombre().getText().trim();
+			String descripcion = vf.getPanelCrearVehiculo().getTxtDescripcion().getText().trim();
+			String tipo = vf.getPanelCrearVehiculo().getCmbTipo().getSelectedItem().toString();
+			String precioStr = vf.getPanelCrearVehiculo().getTxtPrecio().getText().trim();
+			String marca = vf.getPanelCrearVehiculo().getCmbMarca().getSelectedItem().toString();
+			String caracteristicas = vf.getPanelCrearVehiculo().getTxtCaracteristicas().getText().trim();
+			String stockStr = vf.getPanelCrearVehiculo().getTxtStock().getText().trim();
+			String anioStr = vf.getPanelCrearVehiculo().getCmbAnio().getSelectedItem().toString();
+			String kilometrajeStr = vf.getPanelCrearVehiculo().getTxtKilometraje().getText().trim();
+			boolean esFinanciable = "Sí"
+					.equals(vf.getPanelCrearVehiculo().getCmbEsFinanciable().getSelectedItem().toString());
 
-	        if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
-	            || caracteristicas.isEmpty() || stockStr.isEmpty() || anioStr.isEmpty() || kilometrajeStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (nombre.isEmpty() || descripcion.isEmpty() || tipo.isEmpty() || precioStr.isEmpty() || marca.isEmpty()
+					|| caracteristicas.isEmpty() || stockStr.isEmpty() || anioStr.isEmpty()
+					|| kilometrajeStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        float precio = Float.parseFloat(precioStr);
-	        int stock = Integer.parseInt(stockStr);
-	        int anio = Integer.parseInt(anioStr);
-	        int kilometraje = Integer.parseInt(kilometrajeStr);
+			float precio = Float.parseFloat(precioStr);
+			int stock = Integer.parseInt(stockStr);
+			int anio = Integer.parseInt(anioStr);
+			int kilometraje = Integer.parseInt(kilometrajeStr);
 
-	        String rutaImagen = null;
-	        File imagen = vf.getPanelCrearVehiculo().getImagenSeleccionada();
-	        if (imagen != null) {
-	            rutaImagen = imagen.getAbsolutePath();
-	        }
+			String rutaImagen = null;
+			File imagen = vf.getPanelCrearVehiculo().getImagenSeleccionada();
+			if (imagen != null) {
+				rutaImagen = imagen.getAbsolutePath();
+			}
 
-	        Vehiculo nuevoProducto = new Vehiculo(
-	            nombre,           // nombre
-	            descripcion,      // descripcion  
-	            tipo,            // tipo
-	            precio,          // precio
-	            marca,           // marca
-	            "Vendedor",      // vendedor
-	            caracteristicas, // caracteristicas
-	            stock,           // stock
-	            usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
-	            esFinanciable,   // esFinanciable
-	            kilometraje,     // kilometraje
-	            anio,            // anio
-	            rutaImagen       // fotoProducto
-	        );
+			Vehiculo nuevoProducto = new Vehiculo(nombre, // nombre
+					descripcion, // descripcion
+					tipo, // tipo
+					precio, // precio
+					marca, // marca
+					"Vendedor", // vendedor
+					caracteristicas, // caracteristicas
+					stock, // stock
+					usuarioLogueado.getId(), // idAsociado (ID del usuario logueado)
+					esFinanciable, // esFinanciable
+					kilometraje, // kilometraje
+					anio, // anio
+					rutaImagen // fotoProducto
+			);
 
-	        mf.getVehiculoDAO().crear(nuevoProducto);
+			mf.getVehiculoDAO().crear(nuevoProducto);
 
-	        JOptionPane.showMessageDialog(vf.getVentana(), "¡Vehículo guardado exitosamente!", "Éxito",
-	            JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(vf.getVentana(), "¡Vehículo guardado exitosamente!", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
 
-	        vf.getPanelCrearVehiculo().limpiarFormulario();
-	        
-	        actualizarPanelPrincipal();
+			vf.getPanelCrearVehiculo().limpiarFormulario();
 
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
-	            "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+			actualizarPanelPrincipal();
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al guardar el producto: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	public void mostrarPanelActualizarAlimentoYBebida() {
@@ -1401,278 +1400,255 @@ public class Controlador implements ActionListener {
 	}
 
 	private List<MetodoDePago> obtenerMetodosDePagoPorUsuario(int idUsuario) {
-	    List<MetodoDePago> metodosDePagoUsuario = new ArrayList<>();
+		List<MetodoDePago> metodosDePagoUsuario = new ArrayList<>();
 
-	    List<MetodoDePago> todosLosMetodos = mf.getMetodoDePagoDAO().getListaMetodosDePago();
-	    
-	    for (MetodoDePago metodo : todosLosMetodos) {
-	        if (metodo.getIdAsociado() == idUsuario) {
-	            metodosDePagoUsuario.add(metodo);
-	        }
-	    }
-	    
-	    return metodosDePagoUsuario;
+		List<MetodoDePago> todosLosMetodos = mf.getMetodoDePagoDAO().getListaMetodosDePago();
+
+		for (MetodoDePago metodo : todosLosMetodos) {
+			if (metodo.getIdAsociado() == idUsuario) {
+				metodosDePagoUsuario.add(metodo);
+			}
+		}
+
+		return metodosDePagoUsuario;
 	}
 
 	private void mostrarPanelMetodoDePago() {
-	    ocultarTodosLosPaneles();
-	   
-	    List<MetodoDePago> metodosDePago = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
-	    
-	    vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosDePago);
-	    
-	    vf.getVentana().add(vf.getPanelMetodoDePago(), BorderLayout.CENTER);
-	    vf.getVentana().revalidate();
-	    vf.getVentana().repaint();
+		ocultarTodosLosPaneles();
+
+		List<MetodoDePago> metodosDePago = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
+
+		vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosDePago);
+
+		vf.getVentana().add(vf.getPanelMetodoDePago(), BorderLayout.CENTER);
+		vf.getVentana().revalidate();
+		vf.getVentana().repaint();
 	}
 
-
 	private void agregarMetodoDePago() {
-	    try {
-	        String titular = vf.getPanelMetodoDePago().getTxtTitular().getText().trim();
-	        String numeroTarjetaStr = vf.getPanelMetodoDePago().getTxtNumeroTarjeta().getText().trim();
-	        String fechaVencimiento = vf.getPanelMetodoDePago().getTxtFechaVencimiento().getText().trim();
-	        String pinSeguridadStr = vf.getPanelMetodoDePago().getTxtPinSeguridad().getText().trim();
-	        
-	        
-	        if (titular.isEmpty() || numeroTarjetaStr.isEmpty() || fechaVencimiento.isEmpty() || pinSeguridadStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+		try {
+			String titular = vf.getPanelMetodoDePago().getTxtTitular().getText().trim();
+			String numeroTarjetaStr = vf.getPanelMetodoDePago().getTxtNumeroTarjeta().getText().trim();
+			String fechaVencimiento = vf.getPanelMetodoDePago().getTxtFechaVencimiento().getText().trim();
+			String pinSeguridadStr = vf.getPanelMetodoDePago().getTxtPinSeguridad().getText().trim();
 
-	        if (!fechaVencimiento.matches("\\d{2}/\\d{2}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "La fecha de vencimiento debe tener formato MM/AA", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (titular.isEmpty() || numeroTarjetaStr.isEmpty() || fechaVencimiento.isEmpty()
+					|| pinSeguridadStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        if (!numeroTarjetaStr.matches("\\d{16}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "El número de tarjeta debe contener 16 dígitos", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
+			if (!fechaVencimiento.matches("\\d{2}/\\d{2}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "La fecha de vencimiento debe tener formato MM/AA",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        if (!pinSeguridadStr.matches("\\d{3}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "El PIN debe contener 3 dígitos", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        long numeroTarjeta = Long.parseLong(numeroTarjetaStr);
-	        int pinSeguridad = Integer.parseInt(pinSeguridadStr);
-	        
-	       
+			if (!numeroTarjetaStr.matches("\\d{16}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "El número de tarjeta debe contener 16 dígitos",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        MetodoDePago nuevoMetodo = new MetodoDePago(
-	            titular, 
-	            numeroTarjeta, 
-	            fechaVencimiento, 
-	            pinSeguridad, 
-	            usuarioLogueado.getId()
-	        );
-	        mf.getMetodoDePagoDAO().crear(nuevoMetodo);
+			if (!pinSeguridadStr.matches("\\d{3}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "El PIN debe contener 3 dígitos", "Error de validación",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			long numeroTarjeta = Long.parseLong(numeroTarjetaStr);
+			int pinSeguridad = Integer.parseInt(pinSeguridadStr);
 
-	        List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
-	        
-	        boolean agregado = false;
-	        
-	        for (MetodoDePago metodo : metodosActualizados) {
-	            if (metodo.getTitular().equals(titular) && 
-	                metodo.getNumeroTarjeta() == numeroTarjeta && 
-	                metodo.getFechaVencimiento().equals(fechaVencimiento) && 
-	                metodo.getPinDeSeguridad() == pinSeguridad) {
-	                agregado = true;
-	                break;
-	            }
-	        }
-	        
-	        if (agregado) {
+			MetodoDePago nuevoMetodo = new MetodoDePago(titular, numeroTarjeta, fechaVencimiento, pinSeguridad,
+					usuarioLogueado.getId());
+			mf.getMetodoDePagoDAO().crear(nuevoMetodo);
 
-	            JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago agregado exitosamente!", 
-	                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
-	            
-	            vf.getPanelMetodoDePago().limpiarFormulario();
-	            
-	            vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
-	        } else {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Error al agregar el método de pago", 
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	        }
-	        
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos", 
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al agregar el método de pago: " + e.getMessage(), 
-	                "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+			List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
+
+			boolean agregado = false;
+
+			for (MetodoDePago metodo : metodosActualizados) {
+				if (metodo.getTitular().equals(titular) && metodo.getNumeroTarjeta() == numeroTarjeta
+						&& metodo.getFechaVencimiento().equals(fechaVencimiento)
+						&& metodo.getPinDeSeguridad() == pinSeguridad) {
+					agregado = true;
+					break;
+				}
+			}
+
+			if (agregado) {
+
+				JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago agregado exitosamente!", "Éxito",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				vf.getPanelMetodoDePago().limpiarFormulario();
+
+				vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
+			} else {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Error al agregar el método de pago", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al agregar el método de pago: " + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void actualizarMetodoDePago() {
-	    try {
-	        MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
-	        if (metodoSeleccionado == null) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Debes seleccionar un método de pago para actualizar", 
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        String titular = vf.getPanelMetodoDePago().getTxtTitular().getText().trim();
-	        String numeroTarjetaStr = vf.getPanelMetodoDePago().getTxtNumeroTarjeta().getText().trim();
-	        String fechaVencimiento = vf.getPanelMetodoDePago().getTxtFechaVencimiento().getText().trim();
-	        String pinSeguridadStr = vf.getPanelMetodoDePago().getTxtPinSeguridad().getText().trim();
-	        
+		try {
+			MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
+			if (metodoSeleccionado == null) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Debes seleccionar un método de pago para actualizar",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	        if (titular.isEmpty() || numeroTarjetaStr.isEmpty() || fechaVencimiento.isEmpty() || pinSeguridadStr.isEmpty()) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        if (!fechaVencimiento.matches("\\d{2}/\\d{2}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "La fecha de vencimiento debe tener formato MM/AA", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        if (!numeroTarjetaStr.matches("\\d{16}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "El número de tarjeta debe contener 16 dígitos", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
+			String titular = vf.getPanelMetodoDePago().getTxtTitular().getText().trim();
+			String numeroTarjetaStr = vf.getPanelMetodoDePago().getTxtNumeroTarjeta().getText().trim();
+			String fechaVencimiento = vf.getPanelMetodoDePago().getTxtFechaVencimiento().getText().trim();
+			String pinSeguridadStr = vf.getPanelMetodoDePago().getTxtPinSeguridad().getText().trim();
 
-	        if (!pinSeguridadStr.matches("\\d{3}")) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "El PIN debe contener 3 dígitos", 
-	                    "Error de validación", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        int numeroTarjeta = Integer.parseInt(numeroTarjetaStr);
-	        int pinSeguridad = Integer.parseInt(pinSeguridadStr);
-	        
-	        String titularOriginal = metodoSeleccionado.getTitular();
-	        double numeroTarjetaOriginal = metodoSeleccionado.getNumeroTarjeta();
-	        String fechaVencimientoOriginal = metodoSeleccionado.getFechaVencimiento();
-	        int pinSeguridadOriginal = metodoSeleccionado.getPinDeSeguridad();
-	        
-	        metodoSeleccionado.setTitular(titular);
-	        metodoSeleccionado.setNumeroTarjeta(numeroTarjeta);
-	        metodoSeleccionado.setFechaVencimiento(fechaVencimiento);
-	        metodoSeleccionado.setPinDeSeguridad(pinSeguridad);
-	        
-	        int indice = mf.getMetodoDePagoDAO().buscarIndicePorAtributos(
-	            titularOriginal, 
-	            numeroTarjetaOriginal, 
-	            fechaVencimientoOriginal, 
-	            pinSeguridadOriginal, 
-	            metodoSeleccionado.getIdAsociado()
-	        );
-	        
-	        if (indice == -1) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "No se encontró el método de pago en la base de datos", 
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        mf.getMetodoDePagoDAO().actualizar(indice, metodoSeleccionado);
-	        
-	        List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
-	        boolean actualizado = false;
-	        
-	        for (MetodoDePago metodo : metodosActualizados) {
-	            if (metodo.getTitular().equals(titular) && 
-	                metodo.getNumeroTarjeta() == numeroTarjeta && 
-	                metodo.getFechaVencimiento().equals(fechaVencimiento) && 
-	                metodo.getPinDeSeguridad() == pinSeguridad) {
-	                actualizado = true;
-	                break;
-	            }
-	        }
-	        
-	        if (actualizado) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago actualizado exitosamente!", 
-	                    "Éxito", JOptionPane.INFORMATION_MESSAGE);  
-	            vf.getPanelMetodoDePago().limpiarFormulario();
-	            vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
-	        } else {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Error al actualizar el método de pago", 
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	        }
-	        
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos", 
-	                "Error de validación", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al actualizar el método de pago: " + e.getMessage(), 
-	                "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+			if (titular.isEmpty() || numeroTarjetaStr.isEmpty() || fechaVencimiento.isEmpty()
+					|| pinSeguridadStr.isEmpty()) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Todos los campos son obligatorios",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			if (!fechaVencimiento.matches("\\d{2}/\\d{2}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "La fecha de vencimiento debe tener formato MM/AA",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			if (!numeroTarjetaStr.matches("\\d{16}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "El número de tarjeta debe contener 16 dígitos",
+						"Error de validación", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			if (!pinSeguridadStr.matches("\\d{3}")) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "El PIN debe contener 3 dígitos", "Error de validación",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			int numeroTarjeta = Integer.parseInt(numeroTarjetaStr);
+			int pinSeguridad = Integer.parseInt(pinSeguridadStr);
+
+			String titularOriginal = metodoSeleccionado.getTitular();
+			double numeroTarjetaOriginal = metodoSeleccionado.getNumeroTarjeta();
+			String fechaVencimientoOriginal = metodoSeleccionado.getFechaVencimiento();
+			int pinSeguridadOriginal = metodoSeleccionado.getPinDeSeguridad();
+
+			metodoSeleccionado.setTitular(titular);
+			metodoSeleccionado.setNumeroTarjeta(numeroTarjeta);
+			metodoSeleccionado.setFechaVencimiento(fechaVencimiento);
+			metodoSeleccionado.setPinDeSeguridad(pinSeguridad);
+
+			int indice = mf.getMetodoDePagoDAO().buscarIndicePorAtributos(titularOriginal, numeroTarjetaOriginal,
+					fechaVencimientoOriginal, pinSeguridadOriginal, metodoSeleccionado.getIdAsociado());
+
+			if (indice == -1) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "No se encontró el método de pago en la base de datos",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			mf.getMetodoDePagoDAO().actualizar(indice, metodoSeleccionado);
+
+			List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
+			boolean actualizado = false;
+
+			for (MetodoDePago metodo : metodosActualizados) {
+				if (metodo.getTitular().equals(titular) && metodo.getNumeroTarjeta() == numeroTarjeta
+						&& metodo.getFechaVencimiento().equals(fechaVencimiento)
+						&& metodo.getPinDeSeguridad() == pinSeguridad) {
+					actualizado = true;
+					break;
+				}
+			}
+
+			if (actualizado) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago actualizado exitosamente!", "Éxito",
+						JOptionPane.INFORMATION_MESSAGE);
+				vf.getPanelMetodoDePago().limpiarFormulario();
+				vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
+			} else {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Error al actualizar el método de pago", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error en el formato de los campos numéricos",
+					"Error de validación", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al actualizar el método de pago: " + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void eliminarMetodoDePago() {
-	    try {
-	        MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
-	        if (metodoSeleccionado == null) {
-	            JOptionPane.showMessageDialog(vf.getVentana(), "Debes seleccionar un método de pago para eliminar", 
-	                    "Error", JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        int opcion = JOptionPane.showConfirmDialog(vf.getVentana(), 
-	                "¿Estás seguro de que quieres eliminar este método de pago?", 
-	                "Eliminar Método de Pago", 
-	                JOptionPane.YES_NO_OPTION, 
-	                JOptionPane.WARNING_MESSAGE);
-	        
-	        if (opcion == JOptionPane.YES_OPTION) {
+		try {
+			MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
+			if (metodoSeleccionado == null) {
+				JOptionPane.showMessageDialog(vf.getVentana(), "Debes seleccionar un método de pago para eliminar",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-	            int indice = mf.getMetodoDePagoDAO().buscarIndicePorAtributos(
-	                metodoSeleccionado.getTitular(), 
-	                metodoSeleccionado.getNumeroTarjeta(), 
-	                metodoSeleccionado.getFechaVencimiento(), 
-	                metodoSeleccionado.getPinDeSeguridad(), 
-	                metodoSeleccionado.getIdAsociado()
-	            );
-	            
-	            if (indice == -1) {
-	                JOptionPane.showMessageDialog(vf.getVentana(), "No se encontró el método de pago en la base de datos", 
-	                        "Error", JOptionPane.ERROR_MESSAGE);
-	                return;
-	            }
+			int opcion = JOptionPane.showConfirmDialog(vf.getVentana(),
+					"¿Estás seguro de que quieres eliminar este método de pago?", "Eliminar Método de Pago",
+					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-	            String titular = metodoSeleccionado.getTitular();
-	            double numeroTarjeta = metodoSeleccionado.getNumeroTarjeta();
-	            String fechaVencimiento = metodoSeleccionado.getFechaVencimiento();
-	            int pinSeguridad = metodoSeleccionado.getPinDeSeguridad();
-	            mf.getMetodoDePagoDAO().eliminar(indice);
-	            
-	            List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
-	            boolean eliminado = true;
-	            
-	            for (MetodoDePago metodo : metodosActualizados) {
-	                if (metodo.getTitular().equals(titular) && 
-	                    metodo.getNumeroTarjeta() == numeroTarjeta && 
-	                    metodo.getFechaVencimiento().equals(fechaVencimiento) && 
-	                    metodo.getPinDeSeguridad() == pinSeguridad) {
-	                    eliminado = false;
-	                    break;
-	                }
-	            }
-	            
-	            if (eliminado) {
-	                JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago eliminado exitosamente!", 
-	                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
-	                vf.getPanelMetodoDePago().limpiarFormulario();
-	                vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
-	            } else {
-	                JOptionPane.showMessageDialog(vf.getVentana(), "Error al eliminar el método de pago", 
-	                        "Error", JOptionPane.ERROR_MESSAGE);
-	            }
-	        }
-	        
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(vf.getVentana(), "Error al eliminar el método de pago: " + e.getMessage(), 
-	                "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+			if (opcion == JOptionPane.YES_OPTION) {
+
+				int indice = mf.getMetodoDePagoDAO().buscarIndicePorAtributos(metodoSeleccionado.getTitular(),
+						metodoSeleccionado.getNumeroTarjeta(), metodoSeleccionado.getFechaVencimiento(),
+						metodoSeleccionado.getPinDeSeguridad(), metodoSeleccionado.getIdAsociado());
+
+				if (indice == -1) {
+					JOptionPane.showMessageDialog(vf.getVentana(),
+							"No se encontró el método de pago en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				String titular = metodoSeleccionado.getTitular();
+				double numeroTarjeta = metodoSeleccionado.getNumeroTarjeta();
+				String fechaVencimiento = metodoSeleccionado.getFechaVencimiento();
+				int pinSeguridad = metodoSeleccionado.getPinDeSeguridad();
+				mf.getMetodoDePagoDAO().eliminar(indice);
+
+				List<MetodoDePago> metodosActualizados = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
+				boolean eliminado = true;
+
+				for (MetodoDePago metodo : metodosActualizados) {
+					if (metodo.getTitular().equals(titular) && metodo.getNumeroTarjeta() == numeroTarjeta
+							&& metodo.getFechaVencimiento().equals(fechaVencimiento)
+							&& metodo.getPinDeSeguridad() == pinSeguridad) {
+						eliminado = false;
+						break;
+					}
+				}
+
+				if (eliminado) {
+					JOptionPane.showMessageDialog(vf.getVentana(), "¡Método de pago eliminado exitosamente!", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+					vf.getPanelMetodoDePago().limpiarFormulario();
+					vf.getPanelMetodoDePago().mostrarMetodosDePago(metodosActualizados);
+				} else {
+					JOptionPane.showMessageDialog(vf.getVentana(), "Error al eliminar el método de pago", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(vf.getVentana(), "Error al eliminar el método de pago: " + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	@Override
@@ -1689,13 +1665,12 @@ public class Controlador implements ActionListener {
 			mostrarFormularioRegistro();
 			break;
 		}
-		
-		case "Principal":  // NUEVO CASO para el botón MercadoLibre
-            if (usuarioLogueado != null) {  // Solo si hay usuario logueado
-            mostrarPanelPrincipal();
-            }
-            break;
 
+		case "Principal": // NUEVO CASO para el botón MercadoLibre
+			if (usuarioLogueado != null) { // Solo si hay usuario logueado
+				mostrarPanelPrincipal();
+			}
+			break;
 
 		case "Categorias": {
 			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad de categorías en desarrollo", "Información",
@@ -1962,6 +1937,15 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
+		case "Panel Productos Creados": {
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(vf.getPanelProductoCreado(), BorderLayout.CENTER);
+			actualizarPanelProductoCreado();
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+			break;
+		}
+
 		// Guardar los Productos Actualizados
 		case "Actualizar AlimentoYBebida": {
 			guardarAlimentoYBebida();
@@ -2022,8 +2006,8 @@ public class Controlador implements ActionListener {
 		}
 
 		case "Panel MetodoDePago": {
-		    mostrarPanelMetodoDePago();
-		    break;
+			mostrarPanelMetodoDePago();
+			break;
 		}
 
 		case "Agregar MetodoPago": {
@@ -2050,7 +2034,6 @@ public class Controlador implements ActionListener {
 		}
 		}
 	}
-
 
 	private void inicializarActionListener() {
 		vf.getPanelLogin().getBtnIniciarSesion().addActionListener(this);
@@ -2123,10 +2106,12 @@ public class Controlador implements ActionListener {
 		vf.getPanelMetodoDePago().getBtnVolver().setActionCommand("Volver MetodoPago");
 		vf.getPanelPerfil().getBtnMetodoDePago().addActionListener(this);
 		vf.getPanelPerfil().getBtnMetodoDePago().setActionCommand("Panel MetodoDePago");
+		vf.getPanelPerfil().getBtnProducto().addActionListener(this);
+		vf.getPanelPerfil().getBtnProducto().setActionCommand("Panel Productos Creados");
 		vf.getPanelSuperior().getBtnCategoria().setVisible(false);
 		vf.getPanelSuperior().getBtnVender().setVisible(false);
 		vf.getPanelSuperior().getBtnCarro().setVisible(false);
 		vf.getPanelSuperior().getBtnPerfil().setVisible(false);
 		vf.getPanelSuperior().getBtnMercadoLibre().addActionListener(this);
- }
+	}
 }

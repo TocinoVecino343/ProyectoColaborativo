@@ -20,6 +20,7 @@ public class ViewFacade {
 	private PanelUsuario panelUsuario;
 	private PanelMetodoDePago panelMetodoDePago;
 	private PanelPrincipal panelPrincipal;
+	private PanelProductoCreado panelProductoCreado;
 
 	public ViewFacade() {
 		panelSuperior = new PanelSuperior();
@@ -40,6 +41,7 @@ public class ViewFacade {
 		panelUsuario = new PanelUsuario();
 		panelMetodoDePago = new PanelMetodoDePago();
 		panelPrincipal = new PanelPrincipal();
+		panelProductoCreado = new PanelProductoCreado();
 	}
 
 	public PanelSuperior getPanelSuperior() {
@@ -185,6 +187,16 @@ public class ViewFacade {
 	public void setPanelPrincipal(PanelPrincipal panelPrincipal) {
 		this.panelPrincipal = panelPrincipal;
 	}
+
+	public PanelProductoCreado getPanelProductoCreado() {
+		return panelProductoCreado;
+	}
+
+	public void setPanelProductoCreado(PanelProductoCreado panelProductoCreado) {
+		this.panelProductoCreado = panelProductoCreado;
+	}
+	
+	
 	
 
 }
