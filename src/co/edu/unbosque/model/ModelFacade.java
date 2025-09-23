@@ -24,24 +24,24 @@ public class ModelFacade {
 	private JugueteDAO jugueteDAO;
 	private MascotaDAO mascotaDAO;
 	private ModaDAO modaDAO;
-	private VehiculoDAO vehiculoDAO; 
+	private VehiculoDAO vehiculoDAO;
 	private MetodoDePagoDAO metodoDePagoDAO;
-	
+
 	private UsuarioDAO usuarioDAO;
-	
+
 	public ModelFacade() {
-	    alimentoYBebidaDAO = new AlimentoYBebidaDAO();
-	    celularDAO = new CelularDAO();
-	    construccionDAO = new ConstruccionDAO();
-	    deporteYFitnessDAO = new DeporteYFitnessDAO();
-	    electrodomesticoDAO = new ElectrodomesticoDAO();
-	    farmaciaDAO = new FarmaciaDAO();
-	    jugueteDAO = new JugueteDAO();
-	    mascotaDAO = new MascotaDAO();
-	    modaDAO = new ModaDAO();
-	    vehiculoDAO = new VehiculoDAO();
-	    usuarioDAO = new UsuarioDAO();
-	    metodoDePagoDAO = new MetodoDePagoDAO();
+		alimentoYBebidaDAO = new AlimentoYBebidaDAO();
+		celularDAO = new CelularDAO();
+		construccionDAO = new ConstruccionDAO();
+		deporteYFitnessDAO = new DeporteYFitnessDAO();
+		electrodomesticoDAO = new ElectrodomesticoDAO();
+		farmaciaDAO = new FarmaciaDAO();
+		jugueteDAO = new JugueteDAO();
+		mascotaDAO = new MascotaDAO();
+		modaDAO = new ModaDAO();
+		vehiculoDAO = new VehiculoDAO();
+		usuarioDAO = new UsuarioDAO();
+		metodoDePagoDAO = new MetodoDePagoDAO();
 	}
 
 	public AlimentoYBebidaDAO getAlimentoYBebidaDAO() {
@@ -140,6 +140,4 @@ public class ModelFacade {
 		this.metodoDePagoDAO = metodoDePagoDAO;
 	}
 
-	
-	
 }

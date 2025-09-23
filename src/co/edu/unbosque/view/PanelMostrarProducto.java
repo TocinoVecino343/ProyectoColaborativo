@@ -4,6 +4,29 @@ import java.awt.*;
 
 public class PanelMostrarProducto extends JPanel {
     
+	// Variables privadas globales para componentes Swing
+    private JPanel panelContenido;
+    private JPanel panelSuperior;
+    private JPanel panelImagen;
+    private JLabel lblImagen;
+    private JPanel panelInfoBasica;
+    private JLabel lblTiendaOficial;
+    private JLabel lblNombre;
+    private JLabel lblPrecio;
+    private JLabel lblStock;
+    private JLabel lblCantidad;
+    private JPanel panelBotones;
+    private JButton btnComprar;
+    private JButton btnCarrito;
+    private JPanel panelCaracteristicas;
+    private JLabel lblTituloCaracteristicas;
+    private JPanel panelListaCaracteristicas;
+    private JPanel panelDescripcion;
+    private JLabel lblTituloDescripcion;
+    private JTextArea txtDescripcion;
+    private JPanel panelInferior;
+    private JScrollPane scrollPane;
+    
     public PanelMostrarProducto() {
         initComponents();
     }
@@ -31,19 +54,19 @@ public class PanelMostrarProducto extends JPanel {
         setBackground(new Color(249, 249, 249)); // Fondo gris claro como en la imagen
         
         // Panel principal con scroll
-        JPanel panelContenido = new JPanel();
+        panelContenido = new JPanel();
         panelContenido.setLayout(new BoxLayout(panelContenido, BoxLayout.Y_AXIS));
         panelContenido.setBackground(new Color(249, 249, 249));
         panelContenido.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
         
         // Panel superior con layout horizontal mejorado
-        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.setBackground(new Color(249, 249, 249));
         panelSuperior.setMaximumSize(new Dimension(Integer.MAX_VALUE, 600));
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
         
         // Panel para la imagen (izquierda) - más pequeña y con bordes redondeados simulados
-        JPanel panelImagen = new JPanel(new BorderLayout());
+        panelImagen = new JPanel(new BorderLayout());
         panelImagen.setBackground(Color.WHITE);
         panelImagen.setPreferredSize(new Dimension(350, 350));
         panelImagen.setBorder(BorderFactory.createCompoundBorder(
@@ -56,11 +79,11 @@ public class PanelMostrarProducto extends JPanel {
             try {
                 ImageIcon icon = new ImageIcon(fotoPath);
                 Image img = icon.getImage().getScaledInstance(320, 320, Image.SCALE_SMOOTH);
-                JLabel lblImagen = new JLabel(new ImageIcon(img));
+                lblImagen = new JLabel(new ImageIcon(img));
                 lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
                 panelImagen.add(lblImagen, BorderLayout.CENTER);
             } catch (Exception ex) {
-                JLabel lblImagen = new JLabel("Imagen no disponible");
+                lblImagen = new JLabel("Imagen no disponible");
                 lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
                 lblImagen.setVerticalAlignment(SwingConstants.CENTER);
                 lblImagen.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -68,7 +91,7 @@ public class PanelMostrarProducto extends JPanel {
                 panelImagen.add(lblImagen, BorderLayout.CENTER);
             }
         } else {
-            JLabel lblImagen = new JLabel("Imagen no disponible");
+            lblImagen = new JLabel("Imagen no disponible");
             lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
             lblImagen.setVerticalAlignment(SwingConstants.CENTER);
             lblImagen.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -77,13 +100,13 @@ public class PanelMostrarProducto extends JPanel {
         }
         
         // Panel para la información básica (derecha)
-        JPanel panelInfoBasica = new JPanel();
+        panelInfoBasica = new JPanel();
         panelInfoBasica.setLayout(new BoxLayout(panelInfoBasica, BoxLayout.Y_AXIS));
         panelInfoBasica.setBackground(new Color(249, 249, 249));
         panelInfoBasica.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
         
         // Etiqueta de tienda oficial (como en la imagen)
-        JLabel lblTiendaOficial = new JLabel("TIENDA OFICIAL");
+        lblTiendaOficial = new JLabel("TIENDA OFICIAL");
         lblTiendaOficial.setFont(new Font("Arial", Font.BOLD, 11));
         lblTiendaOficial.setForeground(Color.WHITE);
         lblTiendaOficial.setOpaque(true);
@@ -92,21 +115,21 @@ public class PanelMostrarProducto extends JPanel {
         lblTiendaOficial.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Nombre del producto
-        JLabel lblNombre = new JLabel("<html>" + nombre + "</html>");
+        lblNombre = new JLabel("<html>" + nombre + "</html>");
         lblNombre.setFont(new Font("Arial", Font.BOLD, 24));
         lblNombre.setForeground(new Color(51, 51, 51));
         lblNombre.setAlignmentX(Component.LEFT_ALIGNMENT);
         lblNombre.setMaximumSize(new Dimension(400, 80));
         
         // Precio más destacado
-        JLabel lblPrecio = new JLabel("$ " + String.format("%,.0f", precio));
+        lblPrecio = new JLabel("$ " + String.format("%,.0f", precio));
         lblPrecio.setFont(new Font("Arial", Font.BOLD, 36));
         lblPrecio.setForeground(new Color(51, 51, 51));
         lblPrecio.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Estado del stock más visible
         String stockTexto = stock > 0 ? "Stock disponible" : "Agotado";
-        JLabel lblStock = new JLabel(stockTexto);
+        lblStock = new JLabel(stockTexto);
         lblStock.setFont(new Font("Arial", Font.BOLD, 14));
         if (stock <= 0) {
             lblStock.setForeground(Color.RED);
@@ -116,19 +139,19 @@ public class PanelMostrarProducto extends JPanel {
         lblStock.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Cantidad disponible
-        JLabel lblCantidad = new JLabel("Cantidad: " + (stock > 0 ? stock + " unidad" + (stock > 1 ? "es" : "") : "0"));
+        lblCantidad = new JLabel("Cantidad: " + (stock > 0 ? stock + " unidad" + (stock > 1 ? "es" : "") : "0"));
         lblCantidad.setFont(new Font("Arial", Font.PLAIN, 14));
         lblCantidad.setForeground(new Color(102, 102, 102));
         lblCantidad.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Panel para los botones
-        JPanel panelBotones = new JPanel();
+        panelBotones = new JPanel();
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
         panelBotones.setBackground(new Color(249, 249, 249));
         panelBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Botón de comprar - estilo más moderno
-        JButton btnComprar = new JButton("Comprar ahora");
+        btnComprar = new JButton("Comprar ahora");
         btnComprar.setPreferredSize(new Dimension(280, 45));
         btnComprar.setMaximumSize(new Dimension(280, 45));
         btnComprar.setBackground(new Color(74, 144, 226)); // Azul similar al de la imagen
@@ -140,7 +163,7 @@ public class PanelMostrarProducto extends JPanel {
         btnComprar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         // Botón de agregar al carrito
-        JButton btnCarrito = new JButton("Agregar al carrito");
+        btnCarrito = new JButton("Agregar al carrito");
         btnCarrito.setPreferredSize(new Dimension(280, 40));
         btnCarrito.setMaximumSize(new Dimension(280, 40));
         btnCarrito.setBackground(new Color(220, 230, 240));
@@ -195,7 +218,7 @@ public class PanelMostrarProducto extends JPanel {
         panelSuperior.add(panelInfoBasica, BorderLayout.CENTER);
         
         // Sección de características - con diseño más limpio
-        JPanel panelCaracteristicas = new JPanel();
+        panelCaracteristicas = new JPanel();
         panelCaracteristicas.setLayout(new BoxLayout(panelCaracteristicas, BoxLayout.Y_AXIS));
         panelCaracteristicas.setBackground(Color.WHITE);
         panelCaracteristicas.setBorder(BorderFactory.createCompoundBorder(
@@ -205,13 +228,13 @@ public class PanelMostrarProducto extends JPanel {
         panelCaracteristicas.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelCaracteristicas.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         
-        JLabel lblTituloCaracteristicas = new JLabel("características");
+        lblTituloCaracteristicas = new JLabel("características");
         lblTituloCaracteristicas.setFont(new Font("Arial", Font.BOLD, 16));
         lblTituloCaracteristicas.setForeground(new Color(51, 51, 51));
         lblTituloCaracteristicas.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         // Parsear las características y mostrarlas como lista con bullets
-        JPanel panelListaCaracteristicas = new JPanel();
+        panelListaCaracteristicas = new JPanel();
         panelListaCaracteristicas.setLayout(new BoxLayout(panelListaCaracteristicas, BoxLayout.Y_AXIS));
         panelListaCaracteristicas.setBackground(Color.WHITE);
         panelListaCaracteristicas.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -237,7 +260,7 @@ public class PanelMostrarProducto extends JPanel {
         panelCaracteristicas.add(panelListaCaracteristicas);
         
         // Panel para la descripción (si es necesario)
-        JPanel panelDescripcion = new JPanel();
+        panelDescripcion = new JPanel();
         panelDescripcion.setLayout(new BoxLayout(panelDescripcion, BoxLayout.Y_AXIS));
         panelDescripcion.setBackground(Color.WHITE);
         panelDescripcion.setBorder(BorderFactory.createCompoundBorder(
@@ -248,12 +271,12 @@ public class PanelMostrarProducto extends JPanel {
         panelDescripcion.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         
         if (descripcion != null && !descripcion.trim().isEmpty()) {
-            JLabel lblTituloDescripcion = new JLabel("Descripción del producto");
+            lblTituloDescripcion = new JLabel("Descripción del producto");
             lblTituloDescripcion.setFont(new Font("Arial", Font.BOLD, 16));
             lblTituloDescripcion.setForeground(new Color(51, 51, 51));
             lblTituloDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
             
-            JTextArea txtDescripcion = new JTextArea(descripcion);
+            txtDescripcion = new JTextArea(descripcion);
             txtDescripcion.setFont(new Font("Arial", Font.PLAIN, 14));
             txtDescripcion.setForeground(new Color(102, 102, 102));
             txtDescripcion.setLineWrap(true);
@@ -269,7 +292,7 @@ public class PanelMostrarProducto extends JPanel {
         }
         
         // Crear un panel contenedor para las secciones inferiores, alineadas a la izquierda
-        JPanel panelInferior = new JPanel();
+        panelInferior = new JPanel();
         panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.Y_AXIS));
         panelInferior.setBackground(new Color(249, 249, 249));
         panelInferior.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -290,7 +313,7 @@ public class PanelMostrarProducto extends JPanel {
         panelContenido.add(panelInferior);
         
         // Agregar el panel de contenido a un JScrollPane
-        JScrollPane scrollPane = new JScrollPane(panelContenido);
+        scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
@@ -300,4 +323,175 @@ public class PanelMostrarProducto extends JPanel {
         // Agregar el JScrollPane al panel principal
         add(scrollPane, BorderLayout.CENTER);
     }
+
+	public JPanel getPanelContenido() {
+		return panelContenido;
+	}
+
+	public void setPanelContenido(JPanel panelContenido) {
+		this.panelContenido = panelContenido;
+	}
+
+	public JPanel getPanelSuperior() {
+		return panelSuperior;
+	}
+
+	public void setPanelSuperior(JPanel panelSuperior) {
+		this.panelSuperior = panelSuperior;
+	}
+
+	public JPanel getPanelImagen() {
+		return panelImagen;
+	}
+
+	public void setPanelImagen(JPanel panelImagen) {
+		this.panelImagen = panelImagen;
+	}
+
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public JPanel getPanelInfoBasica() {
+		return panelInfoBasica;
+	}
+
+	public void setPanelInfoBasica(JPanel panelInfoBasica) {
+		this.panelInfoBasica = panelInfoBasica;
+	}
+
+	public JLabel getLblTiendaOficial() {
+		return lblTiendaOficial;
+	}
+
+	public void setLblTiendaOficial(JLabel lblTiendaOficial) {
+		this.lblTiendaOficial = lblTiendaOficial;
+	}
+
+	public JLabel getLblNombre() {
+		return lblNombre;
+	}
+
+	public void setLblNombre(JLabel lblNombre) {
+		this.lblNombre = lblNombre;
+	}
+
+	public JLabel getLblPrecio() {
+		return lblPrecio;
+	}
+
+	public void setLblPrecio(JLabel lblPrecio) {
+		this.lblPrecio = lblPrecio;
+	}
+
+	public JLabel getLblStock() {
+		return lblStock;
+	}
+
+	public void setLblStock(JLabel lblStock) {
+		this.lblStock = lblStock;
+	}
+
+	public JLabel getLblCantidad() {
+		return lblCantidad;
+	}
+
+	public void setLblCantidad(JLabel lblCantidad) {
+		this.lblCantidad = lblCantidad;
+	}
+
+	public JPanel getPanelBotones() {
+		return panelBotones;
+	}
+
+	public void setPanelBotones(JPanel panelBotones) {
+		this.panelBotones = panelBotones;
+	}
+
+	public JButton getBtnComprar() {
+		return btnComprar;
+	}
+
+	public void setBtnComprar(JButton btnComprar) {
+		this.btnComprar = btnComprar;
+	}
+
+	public JButton getBtnCarrito() {
+		return btnCarrito;
+	}
+
+	public void setBtnCarrito(JButton btnCarrito) {
+		this.btnCarrito = btnCarrito;
+	}
+
+	public JPanel getPanelCaracteristicas() {
+		return panelCaracteristicas;
+	}
+
+	public void setPanelCaracteristicas(JPanel panelCaracteristicas) {
+		this.panelCaracteristicas = panelCaracteristicas;
+	}
+
+	public JLabel getLblTituloCaracteristicas() {
+		return lblTituloCaracteristicas;
+	}
+
+	public void setLblTituloCaracteristicas(JLabel lblTituloCaracteristicas) {
+		this.lblTituloCaracteristicas = lblTituloCaracteristicas;
+	}
+
+	public JPanel getPanelListaCaracteristicas() {
+		return panelListaCaracteristicas;
+	}
+
+	public void setPanelListaCaracteristicas(JPanel panelListaCaracteristicas) {
+		this.panelListaCaracteristicas = panelListaCaracteristicas;
+	}
+
+	public JPanel getPanelDescripcion() {
+		return panelDescripcion;
+	}
+
+	public void setPanelDescripcion(JPanel panelDescripcion) {
+		this.panelDescripcion = panelDescripcion;
+	}
+
+	public JLabel getLblTituloDescripcion() {
+		return lblTituloDescripcion;
+	}
+
+	public void setLblTituloDescripcion(JLabel lblTituloDescripcion) {
+		this.lblTituloDescripcion = lblTituloDescripcion;
+	}
+
+	public JTextArea getTxtDescripcion() {
+		return txtDescripcion;
+	}
+
+	public void setTxtDescripcion(JTextArea txtDescripcion) {
+		this.txtDescripcion = txtDescripcion;
+	}
+
+	public JPanel getPanelInferior() {
+		return panelInferior;
+	}
+
+	public void setPanelInferior(JPanel panelInferior) {
+		this.panelInferior = panelInferior;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public void setScrollPane(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
+	}
+    
+    
+    
 }
