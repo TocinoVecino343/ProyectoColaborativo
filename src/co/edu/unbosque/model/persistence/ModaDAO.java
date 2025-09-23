@@ -96,5 +96,15 @@ public class ModaDAO implements DAO<Moda> {
 	public void setListaModa(ArrayList<Moda> listaModa) {
 		this.listaModa = listaModa;
 	}
+	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Moda> lista = getListaModa();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }

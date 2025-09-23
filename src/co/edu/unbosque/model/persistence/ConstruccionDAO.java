@@ -95,5 +95,15 @@ public class ConstruccionDAO implements DAO<Construccion> {
 	public void setListaConstruccion(ArrayList<Construccion> listaConstruccion) {
 		this.listaConstruccion = listaConstruccion;
 	}
+	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Construccion> lista = getListaConstruccion();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }

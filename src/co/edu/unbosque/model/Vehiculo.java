@@ -19,16 +19,16 @@ public class Vehiculo extends Producto {
     }
 
     public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, boolean esFinanciable, int kilometraje, int anio, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+            String caracteristicas, int stock,int id, int idAsociado, boolean esFinanciable, int kilometraje, int anio, String fotoProducto) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id,  idAsociado, fotoProducto);
         this.esFinanciable = esFinanciable;
         this.kilometraje = kilometraje;
         this.anio = anio;
     }
 
     public Vehiculo(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock, int id,int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public boolean isEsFinanciable() {

@@ -25,9 +25,9 @@ public class Construccion extends Producto {
     }
 
     public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String modelo, String material, String color,
+            String caracteristicas, int stock,int id, int idAsociado, String modelo, String material, String color,
             float largo, float ancho, float altura, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, fotoProducto);
         this.modelo = modelo;
         this.material = material;
         this.color = color;
@@ -37,8 +37,8 @@ public class Construccion extends Producto {
     }
 
     public Construccion(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock,int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getModelo() {

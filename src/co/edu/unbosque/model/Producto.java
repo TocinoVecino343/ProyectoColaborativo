@@ -13,6 +13,7 @@ public abstract class Producto implements Serializable {
     private String vendedor;
     private String caracteristicas;
     private int stock;
+    private int id;
     private int idAsociado;
     private String fotoProducto;
 
@@ -21,7 +22,7 @@ public abstract class Producto implements Serializable {
     }
 
     public Producto(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String fotoProducto) {
+            String caracteristicas, int stock,int id, int idAsociado, String fotoProducto) {
         super();
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -33,6 +34,7 @@ public abstract class Producto implements Serializable {
         this.stock = stock;
         this.idAsociado = idAsociado;
         this.fotoProducto = fotoProducto;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -115,18 +117,22 @@ public abstract class Producto implements Serializable {
         this.fotoProducto = fotoProducto;
     }
 
-    @Override
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public String toString() {
         return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo + ", precio=" + precio
                 + ", marca=" + marca + ", vendedor=" + vendedor + ", caracteristicas=" + caracteristicas + ", stock="
-                + stock + ", idAsociado=" + idAsociado + ", fotoProducto=" + fotoProducto + "]";
-    }
-
-    public String comprar(String metodoPago) {
-        return null;
-    }
-
-    public String valorar(String comentario) {
-        return null;
+                + stock + ", id= "+ id +", idAsociado=" + idAsociado + ", fotoProducto=" + fotoProducto + "]";
     }
 }

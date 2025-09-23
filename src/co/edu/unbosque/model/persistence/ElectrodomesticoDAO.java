@@ -96,5 +96,15 @@ public class ElectrodomesticoDAO implements DAO<Electrodomestico> {
 	public void setListaElectrodomesticos(ArrayList<Electrodomestico> listaElectrodomesticos) {
 		this.listaElectrodomesticos = listaElectrodomesticos;
 	}
+	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Electrodomestico> lista = getListaElectrodomesticos();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }

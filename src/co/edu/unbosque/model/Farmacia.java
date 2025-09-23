@@ -19,17 +19,17 @@ public class Farmacia extends Producto {
     }
 
     public Farmacia(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String laboratorio, String formatoMedicamento,
+            String caracteristicas, int stock, int id, int idAsociado, String laboratorio, String formatoMedicamento,
             String formatoDeVenta, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, fotoProducto);
         this.laboratorio = laboratorio;
         this.formatoMedicamento = formatoMedicamento;
         this.formatoDeVenta = formatoDeVenta;
     }
 
     public Farmacia(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock,int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getLaboratorio() {

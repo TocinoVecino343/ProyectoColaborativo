@@ -32,10 +32,10 @@ public class Celular extends Producto {
     }
 
     public Celular(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String color, int memoriaInterna, int memoriaRam,
+            String caracteristicas, int stock,int id, int idAsociado, String color, int memoriaInterna, int memoriaRam,
             float largoPantalla, float anchoPantalla, float altoPantalla, int camaraFrontal, int camaraTrasera,
             boolean poseeNfc, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock,id, idAsociado, fotoProducto);
         this.color = color;
         this.memoriaInterna = memoriaInterna;
         this.memoriaRam = memoriaRam;
@@ -48,8 +48,8 @@ public class Celular extends Producto {
     }
 
     public Celular(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock, int id,  int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getColor() {

@@ -30,17 +30,18 @@ public class PanelCrearAlimentoYBebida extends JPanel {
             txtStock, txtUnidadEnvase;
     private JComboBox<String> cmbEsLiquido, cmbTipoEnvase;
     private JFormattedTextField txtCantidadProducto;
-    private JButton btnCrearAlimentoYBebida, btnSeleccionarImagen;
+    private JButton btnCrearAlimentoYBebida, btnSeleccionarImagen, btnBorrarAlimentoYBebida, btnActualizarAlimentoYBebida;
     private JLabel lblImagenPreview;
     private File imagenSeleccionada;
     
-    // Colores estilo MercadoLibre
+ // Colores estilo MercadoLibre
     private final Color COLOR_FONDO = new Color(235, 235, 235);
     private final Color COLOR_PANEL_BLANCO = Color.WHITE;
     private final Color COLOR_TEXTO_PRINCIPAL = new Color(51, 51, 51);
     private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
     private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
     private final Color COLOR_BOTON = new Color(52, 131, 250);
+    private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69); 
 
     public PanelCrearAlimentoYBebida() {
         this.setVisible(true);
@@ -220,22 +221,62 @@ public class PanelCrearAlimentoYBebida extends JPanel {
         ));
         aplicarEfectoFocusFormatted(txtCantidadProducto);
 
-        // Botón principal
+        // Botones
         btnCrearAlimentoYBebida = crearBotonPrincipal("Crear Alimento y Bebida");
         btnCrearAlimentoYBebida.setActionCommand("Crear AlimentoYBebida");
+        
+        btnActualizarAlimentoYBebida = crearBotonPrincipal("Actualizar");
+        btnActualizarAlimentoYBebida.setVisible(false);
+        btnActualizarAlimentoYBebida.setActionCommand("Actualizar AlimentoYBebida");
+        
+        btnBorrarAlimentoYBebida = crearBotonEliminar("Eliminar Producto");
+        btnBorrarAlimentoYBebida.setVisible(false);
+        btnBorrarAlimentoYBebida.setActionCommand("Borrar AlimentoYBebida");
+    }
+    
+    private void seleccionarImagen() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar imagen del producto");
+        
+        // Filtro para imágenes
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Archivos de imagen (*.jpg, *.jpeg, *.png, *.gif)", 
+            "jpg", "jpeg", "png", "gif"
+        );
+        fileChooser.setFileFilter(filter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        
+        int resultado = fileChooser.showOpenDialog(this);
+        
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            imagenSeleccionada = fileChooser.getSelectedFile();
+            
+            try {
+                // Cargar y redimensionar imagen
+                ImageIcon originalIcon = new ImageIcon(imagenSeleccionada.getAbsolutePath());
+                Image img = originalIcon.getImage();
+                Image scaledImg = img.getScaledInstance(380, 380, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImg);
+                
+                lblImagenPreview.setText("");
+                lblImagenPreview.setIcon(scaledIcon);
+                
+            } catch (Exception e) {
+                lblImagenPreview.setText("<html><div style='text-align: center; color: red;'>" +
+                                        "Error al cargar imagen</div></html>");
+            }
+        }
     }
     
     private void posicionarComponentesFormulario(JPanel panel) {
         int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
         
-        // Título de sección
         JLabel titulo = new JLabel("Información del producto");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
         titulo.setBounds(x, 0, 400, 25);
         panel.add(titulo);
         
-        // Información básica
         lblNombre.setBounds(x, yLabel, 200, 20);
         txtNombre.setBounds(x, yField, fieldWidth, fieldHeight);
         
@@ -283,10 +324,17 @@ public class PanelCrearAlimentoYBebida extends JPanel {
         lblUnidadEnvase.setBounds(x, yLabel, 200, 20);
         txtUnidadEnvase.setBounds(x, yField, fieldWidth, fieldHeight);
         
-        // Botón
-        btnCrearAlimentoYBebida.setBounds((panel.getPreferredSize().width - 200) / 2, yField + 80, 200, 45);
+        // Panel para botones
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        panelBotones.setBackground(COLOR_PANEL_BLANCO);
+        panelBotones.setBounds(x, yField + 40, fieldWidth, 50);
         
-        // Agregar todos los componentes
+        // Agregar botones al panel
+        panelBotones.add(btnCrearAlimentoYBebida);
+        panelBotones.add(btnActualizarAlimentoYBebida);
+        panelBotones.add(btnBorrarAlimentoYBebida);
+        
+        // Agregar todos los componentes al panel principal
         panel.add(lblNombre); panel.add(txtNombre);
         panel.add(lblMarca); panel.add(txtMarca);
         panel.add(lblDescripcion); panel.add(txtDescripcion);
@@ -299,41 +347,7 @@ public class PanelCrearAlimentoYBebida extends JPanel {
         panel.add(lblCantidadProducto); panel.add(txtCantidadProducto);
         panel.add(lblTipoEnvase); panel.add(cmbTipoEnvase);
         panel.add(lblUnidadEnvase); panel.add(txtUnidadEnvase);
-        panel.add(btnCrearAlimentoYBebida);
-    }
-    
-    private void seleccionarImagen() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Seleccionar imagen del producto");
-        
-        // Filtro para imágenes
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Archivos de imagen (*.jpg, *.jpeg, *.png, *.gif)", 
-            "jpg", "jpeg", "png", "gif"
-        );
-        fileChooser.setFileFilter(filter);
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        
-        int resultado = fileChooser.showOpenDialog(this);
-        
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            imagenSeleccionada = fileChooser.getSelectedFile();
-            
-            try {
-                // Cargar y redimensionar imagen
-                ImageIcon originalIcon = new ImageIcon(imagenSeleccionada.getAbsolutePath());
-                Image img = originalIcon.getImage();
-                Image scaledImg = img.getScaledInstance(380, 380, Image.SCALE_SMOOTH);
-                ImageIcon scaledIcon = new ImageIcon(scaledImg);
-                
-                lblImagenPreview.setText("");
-                lblImagenPreview.setIcon(scaledIcon);
-                
-            } catch (Exception e) {
-                lblImagenPreview.setText("<html><div style='text-align: center; color: red;'>" +
-                                        "Error al cargar imagen</div></html>");
-            }
-        }
+        panel.add(panelBotones);
     }
     
     // Métodos para crear componentes con estilo
@@ -389,6 +403,28 @@ public class PanelCrearAlimentoYBebida extends JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 boton.setBackground(COLOR_BOTON);
+            }
+        });
+        
+        return boton;
+    }
+    
+    private JButton crearBotonEliminar(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setBackground(COLOR_BOTON_ELIMINAR);
+        boton.setForeground(Color.WHITE);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        boton.setFocusPainted(false);
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        // Efecto hover
+        boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(190, 30, 45)); // Rojo más oscuro al pasar el mouse
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                boton.setBackground(COLOR_BOTON_ELIMINAR); // Volver al color original
             }
         });
         
@@ -693,5 +729,13 @@ public class PanelCrearAlimentoYBebida extends JPanel {
 
     public void setImagenSeleccionada(File imagenSeleccionada) {
         this.imagenSeleccionada = imagenSeleccionada;
+    }
+    
+    public JButton getBtnActualizarAlimentoYBebida() {
+        return btnActualizarAlimentoYBebida;
+    }
+
+    public JButton getBtnBorrarAlimentoYBebida() {
+        return btnBorrarAlimentoYBebida;
     }
 }

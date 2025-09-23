@@ -19,16 +19,16 @@ public class Moda extends Producto {
     }
 
     public Moda(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String color, String talla, String material, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+            String caracteristicas, int stock, int id, int idAsociado, String color, String talla, String material, String fotoProducto) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, fotoProducto);
         this.color = color;
         this.talla = talla;
         this.material = material;
     }
 
     public Moda(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock, int id,  int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getColor() {

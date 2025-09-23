@@ -21,9 +21,9 @@ public class Mascota extends Producto {
     }
 
     public Mascota(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String tipoAnimal, String raza, String color,
+            String caracteristicas, int stock,int id, int idAsociado, String tipoAnimal, String raza, String color,
             String formatoDeVenta, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id,  idAsociado, fotoProducto);
         this.tipoAnimal = tipoAnimal;
         this.raza = raza;
         this.color = color;
@@ -31,8 +31,8 @@ public class Mascota extends Producto {
     }
 
     public Mascota(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock,int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
     
     public String getTipoAnimal() {

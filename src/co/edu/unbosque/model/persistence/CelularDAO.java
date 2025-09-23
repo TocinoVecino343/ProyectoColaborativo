@@ -95,5 +95,15 @@ public class CelularDAO implements DAO<Celular> {
 		this.listaCelulares = listaCelulares;
 	}
 	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Celular> lista = getListaCelulares();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+	
 
 }

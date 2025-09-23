@@ -97,5 +97,15 @@ public class MascotaDAO implements DAO<Mascota> {
 		this.listaMascotas = listaMascotas;
 	}
 	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Mascota> lista = getListaMascotas();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+	
 
 }

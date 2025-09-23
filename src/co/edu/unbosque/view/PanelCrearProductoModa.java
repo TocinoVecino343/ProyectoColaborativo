@@ -29,6 +29,8 @@ public class PanelCrearProductoModa extends JPanel {
     private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtStock, txtColor;
     private JComboBox<String> cmbTipo, cmbMarca, cmbTalla, cmbMaterial;
     private JButton btnCrearProductoModa, btnSeleccionarImagen;
+    private JButton btnActualizarProductoModa;
+    private JButton btnBorrarProductoModa;
     private JLabel lblImagenPreview;
     private File imagenSeleccionada;
     
@@ -39,6 +41,7 @@ public class PanelCrearProductoModa extends JPanel {
     private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
     private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
     private final Color COLOR_BOTON = new Color(52, 131, 250);
+    private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69);
 
     public PanelCrearProductoModa() {
         this.setVisible(true);
@@ -168,10 +171,10 @@ public class PanelCrearProductoModa extends JPanel {
         return formPanel;
     }
     
-    private void inicializarCamposFormulario() {
+    private void inicializarCamposFormulario(){
         // Labels
         lblNombre = crearLabel("Nombre");
-        lblDescripcion = crearLabel("Descripción"); 
+        lblDescripcion = crearLabel("Descripción");
         lblTipo = crearLabel("Tipo");
         lblPrecio = crearLabel("Precio");
         lblMarca = crearLabel("Marca");
@@ -263,73 +266,104 @@ public class PanelCrearProductoModa extends JPanel {
         // Botón principal
         btnCrearProductoModa = crearBotonPrincipal("Crear Producto de Moda");
         btnCrearProductoModa.setActionCommand("Crear Moda");
+
+        btnActualizarProductoModa = crearBotonPrincipal("Actualizar");
+        btnActualizarProductoModa.setActionCommand("Actualizar Moda");
+        btnActualizarProductoModa.setVisible(false);
+
+        btnBorrarProductoModa = crearBotonEliminar("Eliminar Producto");
+        btnBorrarProductoModa.setActionCommand("Borrar Moda");
+        btnBorrarProductoModa.setVisible(false);
     }
     
-    private void posicionarComponentesFormulario(JPanel panel) {
+    private void posicionarComponentesFormulario(JPanel panel){
         int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
-        
+
         // Título de sección
         JLabel titulo = new JLabel("Información del producto de moda");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
         titulo.setBounds(x, 0, 400, 25);
         panel.add(titulo);
-        
+
         // Información básica
         lblNombre.setBounds(x, yLabel, 200, 20);
         txtNombre.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblDescripcion.setBounds(x, yLabel, 200, 20);
         txtDescripcion.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblTipo.setBounds(x, yLabel, 200, 20);
         cmbTipo.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblPrecio.setBounds(x, yLabel, 200, 20);
         txtPrecio.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblMarca.setBounds(x, yLabel, 200, 20);
         cmbMarca.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblCaracteristicas.setBounds(x, yLabel, 200, 20);
         txtCaracteristicas.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblStock.setBounds(x, yLabel, 200, 20);
         txtStock.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblColor.setBounds(x, yLabel, 200, 20);
         txtColor.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblTalla.setBounds(x, yLabel, 200, 20);
         cmbTalla.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblMaterial.setBounds(x, yLabel, 200, 20);
         cmbMaterial.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        // Botón
-        btnCrearProductoModa.setBounds((panel.getPreferredSize().width - 200) / 2, yField + 80, 200, 45);
-        
+
+        // Posicionar botones con coordenadas absolutas
+        btnCrearProductoModa.setBounds((panel.getPreferredSize().width - 180) / 2, yField + 80, 180, 45);
+        btnActualizarProductoModa.setBounds((panel.getPreferredSize().width - 380) / 2, yField + 80, 180, 45);
+        btnBorrarProductoModa.setBounds((panel.getPreferredSize().width + 100) / 2, yField + 80, 180, 45);
+
         // Agregar todos los componentes
-        panel.add(lblNombre); panel.add(txtNombre);
-        panel.add(lblDescripcion); panel.add(txtDescripcion);
-        panel.add(lblTipo); panel.add(cmbTipo);
-        panel.add(lblPrecio); panel.add(txtPrecio);
-        panel.add(lblMarca); panel.add(cmbMarca);
-        panel.add(lblCaracteristicas); panel.add(txtCaracteristicas);
-        panel.add(lblStock); panel.add(txtStock);
-        panel.add(lblColor); panel.add(txtColor);
-        panel.add(lblTalla); panel.add(cmbTalla);
-        panel.add(lblMaterial); panel.add(cmbMaterial);
+        panel.add(lblNombre);
+        panel.add(txtNombre);
+        panel.add(lblDescripcion);
+        panel.add(txtDescripcion);
+        panel.add(lblTipo);
+        panel.add(cmbTipo);
+        panel.add(lblPrecio);
+        panel.add(txtPrecio);
+        panel.add(lblMarca);
+        panel.add(cmbMarca);
+        panel.add(lblCaracteristicas);
+        panel.add(txtCaracteristicas);
+        panel.add(lblStock);
+        panel.add(txtStock);
+        panel.add(lblColor);
+        panel.add(txtColor);
+        panel.add(lblTalla);
+        panel.add(cmbTalla);
+        panel.add(lblMaterial);
+        panel.add(cmbMaterial);
         panel.add(btnCrearProductoModa);
+        panel.add(btnActualizarProductoModa);
+        panel.add(btnBorrarProductoModa);
     }
     
     private void seleccionarImagen() {
@@ -422,6 +456,27 @@ public class PanelCrearProductoModa extends JPanel {
             }
         });
         
+        return boton;
+    }
+    
+    private JButton crearBotonEliminar(String texto){
+        JButton boton= new JButton(texto);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setBackground(COLOR_BOTON_ELIMINAR);
+        boton.setForeground(Color.WHITE);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        boton.setFocusPainted(false);
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        boton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                boton.setBackground(new Color(190, 30, 45));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt){
+                boton.setBackground(COLOR_BOTON_ELIMINAR);
+            }
+        });
+
         return boton;
     }
     
@@ -686,5 +741,12 @@ public class PanelCrearProductoModa extends JPanel {
 
     public void setImagenSeleccionada(File imagenSeleccionada) {
         this.imagenSeleccionada = imagenSeleccionada;
+    }
+    public JButton getBtnActualizarProductoModa() {
+        return btnActualizarProductoModa;
+    }
+
+    public JButton getBtnBorrarProductoModa() {
+        return btnBorrarProductoModa;
     }
 }

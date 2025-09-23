@@ -96,5 +96,14 @@ public class JugueteDAO implements DAO<Juguete> {
 	public void setListaJuguetes(ArrayList<Juguete> listaJuguetes) {
 		this.listaJuguetes = listaJuguetes;
 	}
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Juguete> lista = getListaJuguetes();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }

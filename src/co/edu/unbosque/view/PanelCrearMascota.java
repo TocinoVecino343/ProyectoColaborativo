@@ -30,6 +30,8 @@ public class PanelCrearMascota extends JPanel {
             txtColor;
     private JComboBox<String> cmbTipoAnimal, cmbFormatoDeVenta;
     private JButton btnCrearMascota, btnSeleccionarImagen;
+    private JButton btnActualizarMascota;
+    private JButton btnBorrarMascota;
     private JLabel lblImagenPreview;
     private File imagenSeleccionada;
     
@@ -40,6 +42,7 @@ public class PanelCrearMascota extends JPanel {
     private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
     private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
     private final Color COLOR_BOTON = new Color(52, 131, 250);
+    private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69);
 
     public PanelCrearMascota() {
         this.setVisible(true);
@@ -169,10 +172,10 @@ public class PanelCrearMascota extends JPanel {
         return formPanel;
     }
     
-    private void inicializarCamposFormulario() {
+    private void inicializarCamposFormulario(){
         // Labels
         lblNombre = crearLabel("Nombre");
-        lblDescripcion = crearLabel("Descripción"); 
+        lblDescripcion = crearLabel("Descripción");
         lblTipo = crearLabel("Tipo");
         lblPrecio = crearLabel("Precio");
         lblMarca = crearLabel("Marca");
@@ -219,78 +222,111 @@ public class PanelCrearMascota extends JPanel {
         // Botón principal
         btnCrearMascota = crearBotonPrincipal("Crear Mascota");
         btnCrearMascota.setActionCommand("Crear Mascota");
+
+        btnActualizarMascota = crearBotonPrincipal("Actualizar");
+        btnActualizarMascota.setActionCommand("Actualizar Mascota");
+        btnActualizarMascota.setVisible(false);
+
+        btnBorrarMascota = crearBotonEliminar("Eliminar Producto");
+        btnBorrarMascota.setActionCommand("Borrar Mascota");
+        btnBorrarMascota.setVisible(false);
     }
     
-    private void posicionarComponentesFormulario(JPanel panel) {
+    private void posicionarComponentesFormulario(JPanel panel){
         int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
-        
+
         // Título de sección
         JLabel titulo = new JLabel("Información del producto para mascotas");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
         titulo.setBounds(x, 0, 400, 25);
         panel.add(titulo);
-        
+
         // Información básica
         lblNombre.setBounds(x, yLabel, 200, 20);
         txtNombre.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblMarca.setBounds(x, yLabel, 200, 20);
         txtMarca.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblDescripcion.setBounds(x, yLabel, 200, 20);
         txtDescripcion.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblTipo.setBounds(x, yLabel, 200, 20);
         txtTipo.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblPrecio.setBounds(x, yLabel, 200, 20);
         txtPrecio.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblCaracteristicas.setBounds(x, yLabel, 200, 20);
         txtCaracteristicas.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblStock.setBounds(x, yLabel, 200, 20);
         txtStock.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblTipoAnimal.setBounds(x, yLabel, 200, 20);
         cmbTipoAnimal.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblRaza.setBounds(x, yLabel, 200, 20);
         txtRaza.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblColor.setBounds(x, yLabel, 200, 20);
         txtColor.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblFormatoDeVenta.setBounds(x, yLabel, 200, 20);
         cmbFormatoDeVenta.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        // Botón
-        btnCrearMascota.setBounds((panel.getPreferredSize().width - 200) / 2, yField + 80, 200, 45);
-        
+
+        // Posicionar botones con coordenadas absolutas
+        btnCrearMascota.setBounds((panel.getPreferredSize().width - 180) / 2, yField + 80, 180, 45);
+        btnActualizarMascota.setBounds((panel.getPreferredSize().width - 380) / 2, yField + 80, 180, 45);
+        btnBorrarMascota.setBounds((panel.getPreferredSize().width + 100) / 2, yField + 80, 180, 45);
+
         // Agregar todos los componentes
-        panel.add(lblNombre); panel.add(txtNombre);
-        panel.add(lblMarca); panel.add(txtMarca);
-        panel.add(lblDescripcion); panel.add(txtDescripcion);
-        panel.add(lblTipo); panel.add(txtTipo);
-        panel.add(lblPrecio); panel.add(txtPrecio);
-        panel.add(lblCaracteristicas); panel.add(txtCaracteristicas);
-        panel.add(lblStock); panel.add(txtStock);
-        panel.add(lblTipoAnimal); panel.add(cmbTipoAnimal);
-        panel.add(lblRaza); panel.add(txtRaza);
-        panel.add(lblColor); panel.add(txtColor);
-        panel.add(lblFormatoDeVenta); panel.add(cmbFormatoDeVenta);
+        panel.add(lblNombre);
+        panel.add(txtNombre);
+        panel.add(lblMarca);
+        panel.add(txtMarca);
+        panel.add(lblDescripcion);
+        panel.add(txtDescripcion);
+        panel.add(lblTipo);
+        panel.add(txtTipo);
+        panel.add(lblPrecio);
+        panel.add(txtPrecio);
+        panel.add(lblCaracteristicas);
+        panel.add(txtCaracteristicas);
+        panel.add(lblStock);
+        panel.add(txtStock);
+        panel.add(lblTipoAnimal);
+        panel.add(cmbTipoAnimal);
+        panel.add(lblRaza);
+        panel.add(txtRaza);
+        panel.add(lblColor);
+        panel.add(txtColor);
+        panel.add(lblFormatoDeVenta);
+        panel.add(cmbFormatoDeVenta);
         panel.add(btnCrearMascota);
+        panel.add(btnActualizarMascota);
+        panel.add(btnBorrarMascota);
     }
     
     private void seleccionarImagen() {
@@ -383,6 +419,27 @@ public class PanelCrearMascota extends JPanel {
             }
         });
         
+        return boton;
+    }
+    
+    private JButton crearBotonEliminar(String texto){
+        JButton boton= new JButton(texto);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setBackground(COLOR_BOTON_ELIMINAR);
+        boton.setForeground(Color.WHITE);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        boton.setFocusPainted(false);
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        boton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                boton.setBackground(new Color(190, 30, 45));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt){
+                boton.setBackground(COLOR_BOTON_ELIMINAR);
+            }
+        });
+
         return boton;
     }
     
@@ -647,5 +704,12 @@ public class PanelCrearMascota extends JPanel {
 
     public void setImagenSeleccionada(File imagenSeleccionada) {
         this.imagenSeleccionada = imagenSeleccionada;
+    }
+    public JButton getBtnActualizarMascota() {
+        return btnActualizarMascota;
+    }
+
+    public JButton getBtnBorrarMascota() {
+        return btnBorrarMascota;
     }
 }

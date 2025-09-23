@@ -19,16 +19,16 @@ public class Electrodomestico extends Producto {
     }
 
     public Electrodomestico(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String modelo, int voltaje, String color, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+            String caracteristicas, int stock,int id, int idAsociado, String modelo, int voltaje, String color, String fotoProducto) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, fotoProducto);
         this.modelo = modelo;
         this.voltaje = voltaje;
         this.color = color;
     }
 
     public Electrodomestico(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock,int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getModelo() {

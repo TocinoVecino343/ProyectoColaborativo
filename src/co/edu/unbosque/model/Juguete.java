@@ -19,16 +19,16 @@ public class Juguete extends Producto {
     }
 
     public Juguete(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, String color, String material, String rangoDeEdad, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+            String caracteristicas, int stock,int id, int idAsociado, String color, String material, String rangoDeEdad, String fotoProducto) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id,  idAsociado, fotoProducto);
         this.color = color;
         this.material = material;
         this.rangoDeEdad = rangoDeEdad;
     }
 
     public Juguete(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock,int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public String getColor() {

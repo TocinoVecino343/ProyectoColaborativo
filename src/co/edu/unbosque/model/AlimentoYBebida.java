@@ -21,9 +21,9 @@ public class AlimentoYBebida extends Producto {
     }
 
     public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado, boolean esLiquido, int cantidadProducto,
+            String caracteristicas, int stock, int id, int idAsociado, boolean esLiquido, int cantidadProducto,
             String tipoEnvase, int unidadEnvase, String fotoProducto) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, fotoProducto);
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, fotoProducto);
         this.esLiquido = esLiquido;
         this.cantidadProducto = cantidadProducto;
         this.tipoEnvase = tipoEnvase;
@@ -31,8 +31,8 @@ public class AlimentoYBebida extends Producto {
     }
 
     public AlimentoYBebida(String nombre, String descripcion, String tipo, float precio, String marca, String vendedor,
-            String caracteristicas, int stock, int idAsociado) {
-        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, idAsociado, null);
+            String caracteristicas, int stock, int id, int idAsociado) {
+        super(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, id, idAsociado, null);
     }
 
     public boolean isEsLiquido() {

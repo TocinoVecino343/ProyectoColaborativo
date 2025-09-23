@@ -97,5 +97,15 @@ public class VehiculoDAO implements DAO<Vehiculo> {
 		this.listaVehiculos = listaVehiculos;
 	}
 	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Vehiculo> lista = getListaVehiculos();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+	
 
 }

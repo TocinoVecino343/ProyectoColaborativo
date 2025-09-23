@@ -34,9 +34,12 @@ public class PanelCrearCelular extends JPanel {
 			txtCamaraTrasera;
 	private JComboBox<String> cmbPoseeNfc;
 	private JButton btnCrearCelular, btnSeleccionarImagen;
+	private JButton btnActualizarCelular;
+	private JButton btnBorrarCelular;
 	private JLabel lblImagenPreview;
 	private File imagenSeleccionada;
 
+	// Colores estilo MercadoLibre
 	// Colores estilo MercadoLibre
 	private final Color COLOR_FONDO = new Color(235, 235, 235);
 	private final Color COLOR_PANEL_BLANCO = Color.WHITE;
@@ -44,6 +47,7 @@ public class PanelCrearCelular extends JPanel {
 	private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
 	private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
 	private final Color COLOR_BOTON = new Color(52, 131, 250);
+	private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69);
 
 	public PanelCrearCelular() {
 		this.setVisible(true);
@@ -236,8 +240,17 @@ public class PanelCrearCelular extends JPanel {
 		cmbPoseeNfc.addItem("No");
 
 		// Botón principal
-		btnCrearCelular = crearBotonPrincipal("Crear Celular");
+		btnCrearCelular= crearBotonPrincipal("Crear Celular");
 		btnCrearCelular.setActionCommand("Crear Celular");
+		btnCrearCelular.setVisible(true);
+
+		btnActualizarCelular= crearBotonPrincipal("Actualizar");
+		btnActualizarCelular.setActionCommand("Actualizar Celular");
+		btnActualizarCelular.setVisible(false);
+
+		btnBorrarCelular= crearBotonEliminar("Eliminar Producto");
+		btnBorrarCelular.setActionCommand("Borrar Celular"); 
+		btnBorrarCelular.setVisible(false); 
 	}
 
 	private void posicionarComponentesFormulario(JPanel panel) {
@@ -331,11 +344,10 @@ public class PanelCrearCelular extends JPanel {
 		yField += gap;
 		lblPoseeNfc.setBounds(x, yLabel, 200, 20);
 		cmbPoseeNfc.setBounds(x, yField, fieldWidth, fieldHeight);
+		btnCrearCelular.setBounds((panel.getPreferredSize().width - 180) / 2, yField + 80, 180, 45);
+		btnActualizarCelular.setBounds((panel.getPreferredSize().width - 380) / 2, yField + 80, 180, 45);
+		btnBorrarCelular.setBounds((panel.getPreferredSize().width + 100) / 2, yField + 80, 180, 45);
 
-		// Botón
-		btnCrearCelular.setBounds((panel.getPreferredSize().width - 200) / 2, yField + 80, 200, 45);
-
-		// Agregar todos los componentes
 		panel.add(lblNombre);
 		panel.add(txtNombre);
 		panel.add(lblMarca);
@@ -369,6 +381,9 @@ public class PanelCrearCelular extends JPanel {
 		panel.add(lblPoseeNfc);
 		panel.add(cmbPoseeNfc);
 		panel.add(btnCrearCelular);
+		panel.add(btnCrearCelular);
+		panel.add(btnActualizarCelular);
+		panel.add(btnBorrarCelular);
 	}
 
 	private void seleccionarImagen() {
@@ -467,6 +482,27 @@ public class PanelCrearCelular extends JPanel {
 		});
 
 		return boton;
+	}
+	
+	private JButton crearBotonEliminar(String texto){
+	    JButton boton= new JButton(texto);
+	    boton.setFont(new Font("Arial", Font.BOLD, 16));
+	    boton.setBackground(COLOR_BOTON_ELIMINAR);
+	    boton.setForeground(Color.WHITE);
+	    boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+	    boton.setFocusPainted(false);
+	    boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+	    boton.addMouseListener(new java.awt.event.MouseAdapter(){
+	        public void mouseEntered(java.awt.event.MouseEvent evt){
+	            boton.setBackground(new Color(190, 30, 45));
+	        }
+	        public void mouseExited(java.awt.event.MouseEvent evt){
+	            boton.setBackground(COLOR_BOTON_ELIMINAR);
+	        }
+	    });
+
+	    return boton;
 	}
 
 	private void aplicarEfectoFocus(JTextArea textArea) {
@@ -794,6 +830,13 @@ public class PanelCrearCelular extends JPanel {
 
 	public void setImagenSeleccionada(File imagenSeleccionada) {
 		this.imagenSeleccionada = imagenSeleccionada;
+	}
+	public JButton getBtnActualizarCelular() {
+	    return btnActualizarCelular;
+	}
+
+	public JButton getBtnBorrarCelular() {
+	    return btnBorrarCelular;
 	}
 	
 }

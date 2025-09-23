@@ -32,6 +32,8 @@ public class PanelCrearConstruccion extends JPanel {
     private JComboBox<String> cmbMaterial;
     private JFormattedTextField txtLargo, txtAncho, txtAltura;
     private JButton btnCrearConstruccion, btnSeleccionarImagen;
+    private JButton btnActualizarConstruccion;
+    private JButton btnBorrarConstruccion;
     private JLabel lblImagenPreview;
     private File imagenSeleccionada;
     
@@ -42,6 +44,7 @@ public class PanelCrearConstruccion extends JPanel {
     private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
     private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
     private final Color COLOR_BOTON = new Color(52, 131, 250);
+    private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69);
 
     public PanelCrearConstruccion() {
         this.setVisible(true);
@@ -229,90 +232,132 @@ public class PanelCrearConstruccion extends JPanel {
         // Botón principal
         btnCrearConstruccion = crearBotonPrincipal("Crear Construcción");
         btnCrearConstruccion.setActionCommand("Crear Construccion");
+        btnActualizarConstruccion = new JButton("Actualizar");
+        btnActualizarConstruccion.setVisible(false); // Inicialmente oculto
+        btnBorrarConstruccion = new JButton("Borrar");
+        btnBorrarConstruccion.setVisible(false); // Inicialmente oculto
+
+        btnCrearConstruccion= crearBotonPrincipal("Crear Construcción");
+        btnCrearConstruccion.setActionCommand("Crear Construccion");
+
+        btnActualizarConstruccion= crearBotonPrincipal("Actualizar");
+        btnActualizarConstruccion.setActionCommand("Actualizar Construccion");
+        btnActualizarConstruccion.setVisible(false);
+
+        btnBorrarConstruccion= crearBotonEliminar("Eliminar Producto");
+        btnBorrarConstruccion.setActionCommand("Borrar Construccion");
+        btnBorrarConstruccion.setVisible(false);
     }
     
-    private void posicionarComponentesFormulario(JPanel panel) {
+    private void posicionarComponentesFormulario(JPanel panel){
         int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
-        
+
         // Título de sección
         JLabel titulo = new JLabel("Información del material de construcción");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setForeground(COLOR_TEXTO_PRINCIPAL);
         titulo.setBounds(x, 0, 450, 25);
         panel.add(titulo);
-        
+
         // Información básica
         lblNombre.setBounds(x, yLabel, 200, 20);
         txtNombre.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblMarca.setBounds(x, yLabel, 200, 20);
         txtMarca.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblModelo.setBounds(x, yLabel, 200, 20);
         txtModelo.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblDescripcion.setBounds(x, yLabel, 200, 20);
         txtDescripcion.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblTipo.setBounds(x, yLabel, 200, 20);
         txtTipo.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblPrecio.setBounds(x, yLabel, 200, 20);
         txtPrecio.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblCaracteristicas.setBounds(x, yLabel, 200, 20);
         txtCaracteristicas.setBounds(x, yField, fieldWidth, 60);
-        
-        yLabel += 85; yField += 85;
+
+        yLabel += 85;
+        yField += 85;
         lblStock.setBounds(x, yLabel, 200, 20);
         txtStock.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblColor.setBounds(x, yLabel, 200, 20);
         txtColor.setBounds(x, yField, fieldWidth, fieldHeight);
-        
+
         // Especificaciones del material
-        yLabel += gap; yField += gap;
+        yLabel += gap;
+        yField += gap;
         lblMaterial.setBounds(x, yLabel, 200, 20);
         cmbMaterial.setBounds(x, yField, fieldWidth, fieldHeight);
-        
+
         // Dimensiones
-        yLabel += gap; yField += gap;
+        yLabel += gap;
+        yField += gap;
         lblLargo.setBounds(x, yLabel, 200, 20);
         txtLargo.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblAncho.setBounds(x, yLabel, 200, 20);
         txtAncho.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        yLabel += gap; yField += gap;
+
+        yLabel += gap;
+        yField += gap;
         lblAltura.setBounds(x, yLabel, 200, 20);
         txtAltura.setBounds(x, yField, fieldWidth, fieldHeight);
-        
-        // Botón
-        btnCrearConstruccion.setBounds((panel.getPreferredSize().width - 220) / 2, yField + 80, 220, 45);
-        
-        // Agregar todos los componentes
-        panel.add(lblNombre); panel.add(txtNombre);
-        panel.add(lblMarca); panel.add(txtMarca);
-        panel.add(lblModelo); panel.add(txtModelo);
-        panel.add(lblDescripcion); panel.add(txtDescripcion);
-        panel.add(lblTipo); panel.add(txtTipo);
-        panel.add(lblPrecio); panel.add(txtPrecio);
-        panel.add(lblCaracteristicas); panel.add(txtCaracteristicas);
-        panel.add(lblStock); panel.add(txtStock);
-        panel.add(lblColor); panel.add(txtColor);
-        panel.add(lblMaterial); panel.add(cmbMaterial);
-        panel.add(lblLargo); panel.add(txtLargo);
-        panel.add(lblAncho); panel.add(txtAncho);
-        panel.add(lblAltura); panel.add(txtAltura);
+
+        btnCrearConstruccion.setBounds((panel.getPreferredSize().width - 180) / 2, yField + 80, 180, 45);
+        btnActualizarConstruccion.setBounds((panel.getPreferredSize().width - 380) / 2, yField + 80, 180, 45);
+        btnBorrarConstruccion.setBounds((panel.getPreferredSize().width + 100) / 2, yField + 80, 180, 45);
+
+        panel.add(lblNombre);
+        panel.add(txtNombre);
+        panel.add(lblMarca);
+        panel.add(txtMarca);
+        panel.add(lblModelo);
+        panel.add(txtModelo);
+        panel.add(lblDescripcion);
+        panel.add(txtDescripcion);
+        panel.add(lblTipo);
+        panel.add(txtTipo);
+        panel.add(lblPrecio);
+        panel.add(txtPrecio);
+        panel.add(lblCaracteristicas);
+        panel.add(txtCaracteristicas);
+        panel.add(lblStock);
+        panel.add(txtStock);
+        panel.add(lblColor);
+        panel.add(txtColor);
+        panel.add(lblMaterial);
+        panel.add(cmbMaterial);
+        panel.add(lblLargo);
+        panel.add(txtLargo);
+        panel.add(lblAncho);
+        panel.add(txtAncho);
+        panel.add(lblAltura);
+        panel.add(txtAltura);
         panel.add(btnCrearConstruccion);
+        panel.add(btnActualizarConstruccion);
+        panel.add(btnBorrarConstruccion);
     }
     
     private void seleccionarImagen() {
@@ -415,6 +460,27 @@ public class PanelCrearConstruccion extends JPanel {
             }
         });
         
+        return boton;
+    }
+    
+    private JButton crearBotonEliminar(String texto){
+        JButton boton= new JButton(texto);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setBackground(COLOR_BOTON_ELIMINAR);
+        boton.setForeground(Color.WHITE);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+        boton.setFocusPainted(false);
+        boton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        boton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                boton.setBackground(new Color(190, 30, 45));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt){
+                boton.setBackground(COLOR_BOTON_ELIMINAR);
+            }
+        });
+
         return boton;
     }
     
@@ -705,6 +771,11 @@ public class PanelCrearConstruccion extends JPanel {
 	public void setImagenSeleccionada(File imagenSeleccionada) {
 		this.imagenSeleccionada = imagenSeleccionada;
 	}
-	
+	public JButton getBtnActualizarConstruccion() {
+	    return btnActualizarConstruccion;
+	}
 
+	public JButton getBtnBorrarConstruccion() {
+	    return btnBorrarConstruccion;	
+}
 }

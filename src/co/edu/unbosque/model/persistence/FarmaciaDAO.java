@@ -95,5 +95,15 @@ public class FarmaciaDAO implements DAO<Farmacia> {
 	public void setListaFarmacia(ArrayList<Farmacia> listaFarmacia) {
 		this.listaFarmacia = listaFarmacia;
 	}
+	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<Farmacia> lista = getListaFarmacia();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }

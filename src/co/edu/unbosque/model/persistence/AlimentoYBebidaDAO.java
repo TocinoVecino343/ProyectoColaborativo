@@ -93,5 +93,15 @@ public class AlimentoYBebidaDAO implements DAO<AlimentoYBebida> {
 		FileHandler.escribirEnArchivoSerializado(SERIAL_FILE_NAME, listaAlimentosYBebidas);
 
 	}
+	
+	public int buscarIndicePorId(int id) {
+	    ArrayList<AlimentoYBebida> lista = getListaAlimentosYBebidas();
+	    for (int i = 0; i < lista.size(); i++) {
+	        if (lista.get(i).getId() == id) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
 
 }
