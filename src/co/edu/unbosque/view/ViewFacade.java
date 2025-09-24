@@ -4,9 +4,10 @@ import co.edu.unbosque.view.PanelMostrarProducto;
 
 public class ViewFacade {
 
+	private Ventana ventana;
+	private VentanaFactura ventanaFactura;
 	private PanelSuperior panelSuperior;
 	private PanelLogin panelLogin;
-	private Ventana ventana;
 	private PanelCrearAlimentoYBebida panelCrearAlimentoYBebida;
 	private PanelCrearCelular panelCrearCelular;
 	private PanelCrearConstruccion panelCrearConstruccion;
@@ -24,11 +25,13 @@ public class ViewFacade {
 	private PanelPrincipal panelPrincipal;
 	private PanelMostrarProducto panelMostrarProducto;
 	private PanelProductoCreado panelProductoCreado;
+	private PanelCarrito panelCarrito;
 
 	public ViewFacade() {
+		ventana = new Ventana();
+		ventanaFactura = new VentanaFactura();
 		panelSuperior = new PanelSuperior();
 		panelLogin = new PanelLogin();
-		ventana = new Ventana();
 		panelCrearAlimentoYBebida = new PanelCrearAlimentoYBebida();
 		panelCrearCelular = new PanelCrearCelular();
 		panelCrearConstruccion = new PanelCrearConstruccion();
@@ -46,6 +49,8 @@ public class ViewFacade {
 		panelPrincipal = new PanelPrincipal(this);
 		panelMostrarProducto = new PanelMostrarProducto();
 		panelProductoCreado = new PanelProductoCreado();
+		panelCarrito = new PanelCarrito();
+
 	}
 
 	public PanelSuperior getPanelSuperior() {
@@ -207,6 +212,21 @@ public class ViewFacade {
 	public void setPanelProductoCreado(PanelProductoCreado panelProductoCreado) {
 		this.panelProductoCreado = panelProductoCreado;
 	}
-	
+
+	public VentanaFactura getVentanaFactura() {
+		return ventanaFactura;
+	}
+
+	public void setVentanaFactura(VentanaFactura ventanaFactura) {
+		this.ventanaFactura = ventanaFactura;
+	}
+
+	public PanelCarrito getPanelCarrito() {
+		return panelCarrito;
+	}
+
+	public void setPanelCarrito(PanelCarrito panelCarrito) {
+		this.panelCarrito = panelCarrito;
+	}
 
 }

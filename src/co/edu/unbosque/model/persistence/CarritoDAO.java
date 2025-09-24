@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.Carrito;
+import co.edu.unbosque.model.Item;
 
 public class CarritoDAO {
 
@@ -34,17 +35,41 @@ public class CarritoDAO {
 		escribirArchivoSerializado();
 		return true;
 	}
-	
+
 	public boolean buscarCarrito(int idAsociado) {
 		boolean resultado = false;
-		for(int i =- 0; i < listaCarritos.size(); i ++) {
-			if(listaCarritos.get(i).getIdAsociado() == idAsociado) {
+		for (int i = -0; i < listaCarritos.size(); i++) {
+			if (listaCarritos.get(i).getIdAsociado() == idAsociado) {
 				resultado = true;
 				break;
 			}
 		}
 		return resultado;
-		
+
+	}
+
+	public int buscarIndiceCarrito(int idUsuario) {
+		int indice = -1;
+		for (int i = 0; i < listaCarritos.size(); i++) {
+			if (listaCarritos.get(i).getIdAsociado() == idUsuario) {
+				indice = i;
+				break;
+			}
+		}
+		if (indice == -1) {
+			ArrayList<Item> listaItems = new ArrayList<Item>();
+			Carrito temp = new Carrito(idUsuario, listaItems);
+			crear(temp);
+		}
+
+		for (int i = 0; i < listaCarritos.size(); i++) {
+			if (listaCarritos.get(i).getIdAsociado() == idUsuario) {
+				indice = i;
+				break;
+			}
+		}
+		return indice;
+
 	}
 
 	public void cargarDesdeArchivoSerializado(String url) {
@@ -59,4 +84,13 @@ public class CarritoDAO {
 	public void escribirArchivoSerializado() {
 		FileHandler.escribirEnArchivoSerializado(SERIAL_FILE_NAME, listaCarritos);
 	}
+
+	public ArrayList<Carrito> getListaCarritos() {
+		return listaCarritos;
+	}
+
+	public void setListaCarritos(ArrayList<Carrito> listaCarritos) {
+		this.listaCarritos = listaCarritos;
+	}
+
 }

@@ -17,11 +17,13 @@ import java.util.List;
 import java.util.Random;
 
 import co.edu.unbosque.model.AlimentoYBebida;
+import co.edu.unbosque.model.Carrito;
 import co.edu.unbosque.model.Celular;
 import co.edu.unbosque.model.Construccion;
 import co.edu.unbosque.model.DeporteYFitness;
 import co.edu.unbosque.model.Electrodomestico;
 import co.edu.unbosque.model.Farmacia;
+import co.edu.unbosque.model.Item;
 import co.edu.unbosque.model.Juguete;
 import co.edu.unbosque.model.Mascota;
 import co.edu.unbosque.model.MetodoDePago;
@@ -55,7 +57,7 @@ public class Controlador implements ActionListener {
 		vf.getVentana().setVisible(true);
 	}
 
-	private void iniciarSesion() {
+	public void iniciarSesion() {
 		String email = vf.getPanelLogin().getTxtEmail().getText().trim();
 		String contrasenia = new String(vf.getPanelLogin().getTxtContrasenia().getPassword());
 
@@ -95,7 +97,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void mostrarFormularioRegistro() {
+	public void mostrarFormularioRegistro() {
 		JDialog dialog = new JDialog(vf.getVentana(), "Crear Cuenta - Registro Completo", true);
 		dialog.setSize(850, 750);
 		dialog.setLocationRelativeTo(vf.getVentana());
@@ -245,14 +247,14 @@ public class Controlador implements ActionListener {
 		dialog.setVisible(true);
 	}
 
-	private JLabel crearLabel(String texto) {
+	public JLabel crearLabel(String texto) {
 		JLabel label = new JLabel(texto);
 		label.setFont(new Font("Arial", Font.BOLD, 13));
 		label.setForeground(new Color(44, 62, 80));
 		return label;
 	}
 
-	private void estilizarCampoTexto(JTextField campo) {
+	public void estilizarCampoTexto(JTextField campo) {
 		campo.setFont(new Font("Arial", Font.PLAIN, 13));
 		campo.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1),
 				BorderFactory.createEmptyBorder(5, 8, 5, 8)));
@@ -275,7 +277,7 @@ public class Controlador implements ActionListener {
 		});
 	}
 
-	private void validarYCrearUsuario(JDialog dialog, JTextField txtNombre, JTextField txtNombreUsuario,
+	public void validarYCrearUsuario(JDialog dialog, JTextField txtNombre, JTextField txtNombreUsuario,
 			JTextField txtDocumento, JTextField txtEmail, JTextField txtTelefono, JPasswordField txtContrasenia,
 			String rutaImagen) {
 		String nombre = txtNombre.getText().trim();
@@ -362,7 +364,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void mostrarErrorValidacion(JDialog dialog, String mensaje, JTextField campo) {
+	public void mostrarErrorValidacion(JDialog dialog, String mensaje, JTextField campo) {
 		JOptionPane.showMessageDialog(dialog, mensaje, "Error de Validación", JOptionPane.WARNING_MESSAGE);
 		if (campo != null) {
 			campo.requestFocus();
@@ -370,14 +372,14 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private boolean validarFortalezaContrasenia(String contrasenia) {
+	public boolean validarFortalezaContrasenia(String contrasenia) {
 		boolean tieneMayuscula = contrasenia.matches(".*[A-Z].*");
 		boolean tieneMinuscula = contrasenia.matches(".*[a-z].*");
 		boolean tieneNumero = contrasenia.matches(".*\\d.*");
 		return tieneMayuscula && tieneMinuscula && tieneNumero;
 	}
 
-	private void cerrarSesion() {
+	public void cerrarSesion() {
 		int opcion = JOptionPane.showConfirmDialog(vf.getVentana(), "¿Estás seguro de que quieres cerrar sesión?",
 				"Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
@@ -400,7 +402,7 @@ public class Controlador implements ActionListener {
 
 	// Métodos para agregar a tu clase Controlador
 
-	private void mostrarPanelPrincipal() {
+	public void mostrarPanelPrincipal() {
 		ocultarTodosLosPaneles();
 
 		// Obtener productos de todas las categorías
@@ -477,10 +479,67 @@ public class Controlador implements ActionListener {
 
 	}
 
-	private void ocultarTodosLosPaneles() {
-	    vf.getPanelProductoCreado().removeActionListener(this);
-	    vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
-	    vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
+	public void comprarProducto() {
+		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
+		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
+
+		// Limpiar etiquetas HTML en el nombre
+		nombre = nombre.replaceAll("<[^>]*>", "").trim();
+
+		// Limpiar y normalizar el precio
+		precioString = precioString.replaceAll("<[^>]*>", "").trim();
+		String limpio = precioString.replaceAll("[^\\d.,]", ""); // dejar solo dígitos, puntos y comas
+
+		if (limpio.contains(",") && limpio.contains(".")) {
+			// Caso estilo europeo "12.345,67"
+			limpio = limpio.replace(".", ""); // quitar separadores de miles
+			limpio = limpio.replace(",", "."); // coma pasa a punto decimal
+		} else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
+			// Si hay más de un punto → dejar solo el último como decimal
+			int last = limpio.lastIndexOf('.');
+			limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
+		} else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
+			// Si hay más de una coma → dejar solo la última como decimal
+			int last = limpio.lastIndexOf(',');
+			limpio = limpio.substring(0, last).replace(",", "") + "." + limpio.substring(last + 1);
+		} else if (limpio.contains(",")) {
+			// Caso simple "123,45" → cambiar a punto
+			limpio = limpio.replace(",", ".");
+		}
+
+		float precio = Float.parseFloat(limpio);
+
+		// Mostrar ventana factura
+		vf.getVentanaFactura().setVisible(true);
+		vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
+		vf.getVentanaFactura().getLblCompra().setText("Compraste: " + nombre);
+		vf.getVentanaFactura().getLblPrecio().setText("Pagaste: " + precio);
+		vf.getVentanaFactura().revalidate();
+		vf.getVentanaFactura().repaint();
+	}
+
+	public void agregarCarrito() {
+		String nombreProducto = vf.getPanelMostrarProducto().getLblNombre().getText();
+		String stockString = vf.getPanelMostrarProducto().getLblStock().getText();
+
+		// Limpiar etiquetas HTML en nombre
+		nombreProducto = nombreProducto.replaceAll("<[^>]*>", "").trim();
+
+		// Extraer solo número de stock (si no hay número → 0)
+		String stockLimpio = stockString.replaceAll("[^0-9]", "");
+		int stock = stockLimpio.isEmpty() ? 0 : Integer.parseInt(stockLimpio);
+
+		// Crear item y agregar al carrito
+		Item temp = new Item(nombreProducto, stock);
+		int indiceCarrito = mf.getCarritoDAO().buscarIndiceCarrito(usuarioLogueado.getId());
+		mf.getCarritoDAO().getListaCarritos().get(indiceCarrito).getListaItems().add(temp);
+
+	}
+
+	public void ocultarTodosLosPaneles() {
+		vf.getPanelProductoCreado().removeActionListener(this);
+		vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
+		vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
 		vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
 		vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
 		vf.getVentana().remove(vf.getPanelCrearCelular());
@@ -497,9 +556,10 @@ public class Controlador implements ActionListener {
 		vf.getVentana().remove(vf.getPanelMetodoDePago());
 		vf.getVentana().remove(vf.getPanelProductoCreado());
 		vf.getVentana().remove(vf.getPanelPrincipal());
+		vf.getVentana().remove(vf.getPanelCarrito());
 	}
 
-	private void guardarAlimentoYBebida() {
+	public void guardarAlimentoYBebida() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearAlimentoYBebida().getTxtNombre().getText().trim();
@@ -519,13 +579,12 @@ public class Controlador implements ActionListener {
 						"Error de validación", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
-          
+
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int unidadEnvase = Integer.parseInt(unidadEnvaseStr);
-            int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int id = random.nextInt(999999 - 100000 + 1) + 999999;
+			int idAsociado = usuarioLogueado.getId();
 			boolean esLiquido = "Sí"
 					.equals(vf.getPanelCrearAlimentoYBebida().getCmbEsLiquido().getSelectedItem().toString());
 			String tipoEnvase = vf.getPanelCrearAlimentoYBebida().getCmbTipoEnvase().getSelectedItem().toString();
@@ -539,8 +598,9 @@ public class Controlador implements ActionListener {
 				rutaImagen = imagen.getAbsolutePath();
 			}
 
-			AlimentoYBebida nuevoProducto = new AlimentoYBebida(nombre, descripcion, tipo, precio, marca, vendedor, caracteristicas, stock, 
-					id, idAsociado, esLiquido, cantidadProducto, tipoEnvase, unidadEnvase, rutaImagen);
+			AlimentoYBebida nuevoProducto = new AlimentoYBebida(nombre, descripcion, tipo, precio, marca, vendedor,
+					caracteristicas, stock, id, idAsociado, esLiquido, cantidadProducto, tipoEnvase, unidadEnvase,
+					rutaImagen);
 
 			mf.getAlimentoYBebidaDAO().crear(nuevoProducto);
 
@@ -561,7 +621,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarCelular() {
+	public void guardarCelular() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearCelular().getTxtNombre().getText().trim();
@@ -602,7 +662,7 @@ public class Controlador implements ActionListener {
 			int camaraTrasera = Integer.parseInt(camaraTraseraStr);
 			boolean poseeNfc = "Sí".equals(vf.getPanelCrearCelular().getCmbPoseeNfc().getSelectedItem().toString());
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearCelular().getImagenSeleccionada();
@@ -618,8 +678,7 @@ public class Controlador implements ActionListener {
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
 					stock, // stock
-					id,
-					idAsociado, // idAsociado (ID del usuario logueado)
+					id, idAsociado, // idAsociado (ID del usuario logueado)
 					color, // color
 					memoriaInterna, // memoriaInterna
 					memoriaRam, // memoriaRam
@@ -651,7 +710,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarConstruccion() {
+	public void guardarConstruccion() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearConstruccion().getTxtNombre().getText().trim();
@@ -684,7 +743,7 @@ public class Controlador implements ActionListener {
 			float ancho = Float.parseFloat(anchoStr);
 			float altura = Float.parseFloat(alturaStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearConstruccion().getImagenSeleccionada();
@@ -699,9 +758,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,
-					idAsociado, // idAsociado (ID del usuario logueado)
+					stock, id, idAsociado, // idAsociado (ID del usuario logueado)
 					modelo, // modelo
 					material, // material
 					color, // color
@@ -730,7 +787,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarDeporteYFitness() {
+	public void guardarDeporteYFitness() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCDeporteYFitness().getTxtNombre().getText().trim();
@@ -755,7 +812,7 @@ public class Controlador implements ActionListener {
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCDeporteYFitness().getImagenSeleccionada();
@@ -770,9 +827,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock, 
-					id,
-					idAsociado, // idAsociado (ID del usuario logueado)
+					stock, id, idAsociado, // idAsociado (ID del usuario logueado)
 					color, // color
 					material, // material
 					rutaImagen // fotoProducto
@@ -797,7 +852,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarElectrodomestico() {
+	public void guardarElectrodomestico() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearElectrodomesticos().getTxtNombre().getText().trim();
@@ -824,7 +879,7 @@ public class Controlador implements ActionListener {
 			int stock = Integer.parseInt(stockStr);
 			int voltaje = Integer.parseInt(voltajeStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearElectrodomesticos().getImagenSeleccionada();
@@ -839,8 +894,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					modelo, // modelo
 					voltaje, // voltaje
@@ -867,7 +921,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarJuguete() {
+	public void guardarJuguete() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearJuguete().getTxtNombre().getText().trim();
@@ -893,7 +947,7 @@ public class Controlador implements ActionListener {
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearJuguete().getImagenSeleccionada();
@@ -908,8 +962,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					color, // color
 					material, // material
@@ -936,7 +989,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarMascota() {
+	public void guardarMascota() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearMascota().getTxtNombre().getText().trim();
@@ -963,7 +1016,7 @@ public class Controlador implements ActionListener {
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearMascota().getImagenSeleccionada();
@@ -978,8 +1031,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock, 
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					tipoAnimal, // tipoAnimal
 					raza, // raza
@@ -1007,7 +1059,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarMedicamento() {
+	public void guardarMedicamento() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearMedicamento().getTxtNombre().getText().trim();
@@ -1034,7 +1086,7 @@ public class Controlador implements ActionListener {
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearMedicamento().getImagenSeleccionada();
@@ -1049,8 +1101,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					laboratorio, // laboratorio
 					formatoMedicamento, // formatoMedicamento
@@ -1077,7 +1128,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarModa() {
+	public void guardarModa() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearProductoModa().getTxtNombre().getText().trim();
@@ -1103,7 +1154,7 @@ public class Controlador implements ActionListener {
 			float precio = Float.parseFloat(precioStr);
 			int stock = Integer.parseInt(stockStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearProductoModa().getImagenSeleccionada();
@@ -1118,8 +1169,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					vendedor, // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					color, // color
 					talla, // talla
@@ -1146,7 +1196,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void guardarVehiculo() {
+	public void guardarVehiculo() {
 		Random random = new Random();
 		try {
 			String nombre = vf.getPanelCrearVehiculo().getTxtNombre().getText().trim();
@@ -1174,7 +1224,7 @@ public class Controlador implements ActionListener {
 			int anio = Integer.parseInt(anioStr);
 			int kilometraje = Integer.parseInt(kilometrajeStr);
 			int id = random.nextInt(999999 - 100000 + 1) + 999999;
-            int idAsociado = usuarioLogueado.getId();
+			int idAsociado = usuarioLogueado.getId();
 
 			String rutaImagen = null;
 			File imagen = vf.getPanelCrearVehiculo().getImagenSeleccionada();
@@ -1189,8 +1239,7 @@ public class Controlador implements ActionListener {
 					marca, // marca
 					"Vendedor", // vendedor
 					caracteristicas, // caracteristicas
-					stock,
-					id,// stock
+					stock, id, // stock
 					idAsociado, // idAsociado (ID del usuario logueado)
 					esFinanciable, // esFinanciable
 					kilometraje, // kilometraje
@@ -1217,7 +1266,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarAlimentoYBebida() {
+	public void actualizarAlimentoYBebida() {
 		try {
 			AlimentoYBebida productoActual = (AlimentoYBebida) vf.getPanelCrearAlimentoYBebida()
 					.getClientProperty("productoActual");
@@ -1294,7 +1343,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarCelular() {
+	public void actualizarCelular() {
 		try {
 			Celular productoActual = (Celular) vf.getPanelCrearCelular().getClientProperty("productoActual");
 
@@ -1385,7 +1434,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarConstruccion() {
+	public void actualizarConstruccion() {
 		try {
 			Construccion productoActual = (Construccion) vf.getPanelCrearConstruccion()
 					.getClientProperty("productoActual");
@@ -1470,7 +1519,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarDeporteYFitness() {
+	public void actualizarDeporteYFitness() {
 		try {
 			DeporteYFitness productoActual = (DeporteYFitness) vf.getPanelCDeporteYFitness()
 					.getClientProperty("productoActual");
@@ -1547,7 +1596,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarElectrodomestico() {
+	public void actualizarElectrodomestico() {
 		try {
 			Electrodomestico productoActual = (Electrodomestico) vf.getPanelCrearElectrodomesticos()
 					.getClientProperty("productoActual");
@@ -1628,7 +1677,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarJuguete() {
+	public void actualizarJuguete() {
 		try {
 			Juguete productoActual = (Juguete) vf.getPanelCrearJuguete().getClientProperty("productoActual");
 
@@ -1708,7 +1757,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarMascota() {
+	public void actualizarMascota() {
 		try {
 			Mascota productoActual = (Mascota) vf.getPanelCrearMascota().getClientProperty("productoActual");
 
@@ -1788,7 +1837,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarMedicamento() {
+	public void actualizarMedicamento() {
 		try {
 			Farmacia productoActual = (Farmacia) vf.getPanelCrearMedicamento().getClientProperty("productoActual");
 
@@ -1869,7 +1918,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarModa() {
+	public void actualizarModa() {
 		try {
 			Moda productoActual = (Moda) vf.getPanelCrearProductoModa().getClientProperty("productoActual");
 
@@ -1947,7 +1996,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarVehiculo() {
+	public void actualizarVehiculo() {
 		try {
 			Vehiculo productoActual = (Vehiculo) vf.getPanelCrearVehiculo().getClientProperty("productoActual");
 
@@ -2026,7 +2075,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarAlimentoYBebida() {
+	public void borrarAlimentoYBebida() {
 		AlimentoYBebida productoActual = (AlimentoYBebida) vf.getPanelCrearAlimentoYBebida()
 				.getClientProperty("productoActual");
 
@@ -2059,7 +2108,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarCelular() {
+	public void borrarCelular() {
 		Celular productoActual = (Celular) vf.getPanelCrearCelular().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2093,7 +2142,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarConstruccion() {
+	public void borrarConstruccion() {
 		Construccion productoActual = (Construccion) vf.getPanelCrearConstruccion().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2127,7 +2176,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarDeporteYFitness() {
+	public void borrarDeporteYFitness() {
 		DeporteYFitness productoActual = (DeporteYFitness) vf.getPanelCDeporteYFitness()
 				.getClientProperty("productoActual");
 
@@ -2162,7 +2211,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarElectrodomestico() {
+	public void borrarElectrodomestico() {
 		Electrodomestico productoActual = (Electrodomestico) vf.getPanelCrearElectrodomesticos()
 				.getClientProperty("productoActual");
 
@@ -2197,7 +2246,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarJuguete() {
+	public void borrarJuguete() {
 		Juguete productoActual = (Juguete) vf.getPanelCrearJuguete().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2231,7 +2280,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarMascota() {
+	public void borrarMascota() {
 		Mascota productoActual = (Mascota) vf.getPanelCrearMascota().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2265,7 +2314,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarMedicamento() {
+	public void borrarMedicamento() {
 		Farmacia productoActual = (Farmacia) vf.getPanelCrearMedicamento().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2299,7 +2348,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarModa() {
+	public void borrarModa() {
 		Moda productoActual = (Moda) vf.getPanelCrearProductoModa().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2333,7 +2382,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void borrarVehiculo() {
+	public void borrarVehiculo() {
 		Vehiculo productoActual = (Vehiculo) vf.getPanelCrearVehiculo().getClientProperty("productoActual");
 
 		if (productoActual == null) {
@@ -2365,7 +2414,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void cargarAlimentoYBebidaEnPanel(AlimentoYBebida producto) {
+	public void cargarAlimentoYBebidaEnPanel(AlimentoYBebida producto) {
 		vf.getPanelCrearAlimentoYBebida().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearAlimentoYBebida().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearAlimentoYBebida().getTxtTipo().setText(producto.getTipo());
@@ -2398,7 +2447,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearAlimentoYBebida().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarCelularEnPanel(Celular producto) {
+	public void cargarCelularEnPanel(Celular producto) {
 		vf.getPanelCrearCelular().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearCelular().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearCelular().getTxtTipo().setText(producto.getTipo());
@@ -2435,7 +2484,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearCelular().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarConstruccionEnPanel(Construccion producto) {
+	public void cargarConstruccionEnPanel(Construccion producto) {
 		vf.getPanelCrearConstruccion().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearConstruccion().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearConstruccion().getTxtTipo().setText(producto.getTipo());
@@ -2469,7 +2518,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearConstruccion().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarDeporteYFitnessEnPanel(DeporteYFitness producto) {
+	public void cargarDeporteYFitnessEnPanel(DeporteYFitness producto) {
 		vf.getPanelCDeporteYFitness().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCDeporteYFitness().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCDeporteYFitness().getTxtTipo().setText(producto.getTipo());
@@ -2497,7 +2546,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCDeporteYFitness().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarElectrodomesticoEnPanel(Electrodomestico producto) {
+	public void cargarElectrodomesticoEnPanel(Electrodomestico producto) {
 		vf.getPanelCrearElectrodomesticos().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearElectrodomesticos().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearElectrodomesticos().getTxtTipo().setText(producto.getTipo());
@@ -2513,7 +2562,7 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearElectrodomesticos().getBtnCrearElectrodomestico().setVisible(false);
 		vf.getPanelCrearElectrodomesticos().getBtnActualizarElectrodomestico().setVisible(true);
 		vf.getPanelCrearElectrodomesticos().getBtnBorrarElectrodomestico().setVisible(true);
-		
+
 		vf.getPanelCrearElectrodomesticos().putClientProperty("productoActual", producto);
 
 		if (producto.getFotoProducto() != null && !producto.getFotoProducto().isEmpty()) {
@@ -2527,7 +2576,7 @@ public class Controlador implements ActionListener {
 
 	}
 
-	private void cargarJugueteEnPanel(Juguete producto) {
+	public void cargarJugueteEnPanel(Juguete producto) {
 		vf.getPanelCrearJuguete().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearJuguete().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearJuguete().getTxtTipo().setText(producto.getTipo());
@@ -2552,11 +2601,10 @@ public class Controlador implements ActionListener {
 			vf.getPanelCrearJuguete().getBtnBorrarJuguete().setVisible(true);
 		}
 
-
 		vf.getPanelCrearJuguete().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarMascotaEnPanel(Mascota producto) {
+	public void cargarMascotaEnPanel(Mascota producto) {
 		vf.getPanelCrearMascota().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearMascota().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearMascota().getTxtTipo().setText(producto.getTipo());
@@ -2581,11 +2629,10 @@ public class Controlador implements ActionListener {
 			}
 		}
 
-		
 		vf.getPanelCrearMascota().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarFarmaciaEnPanel(Farmacia producto) {
+	public void cargarFarmaciaEnPanel(Farmacia producto) {
 		vf.getPanelCrearMedicamento().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearMedicamento().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearMedicamento().getTxtTipo().setText(producto.getTipo());
@@ -2601,7 +2648,6 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearMedicamento().getBtnActualizarMedicamento().setVisible(true);
 		vf.getPanelCrearMedicamento().getBtnBorrarMedicamento().setVisible(true);
 
-
 		if (producto.getFotoProducto() != null && !producto.getFotoProducto().isEmpty()) {
 			try {
 				File imagen = new File(producto.getFotoProducto());
@@ -2611,11 +2657,10 @@ public class Controlador implements ActionListener {
 			}
 		}
 
-
 		vf.getPanelCrearMedicamento().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarModaEnPanel(Moda producto) {
+	public void cargarModaEnPanel(Moda producto) {
 		vf.getPanelCrearProductoModa().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearProductoModa().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearProductoModa().getCmbTipo().setSelectedItem(producto.getTipo());
@@ -2639,11 +2684,10 @@ public class Controlador implements ActionListener {
 			}
 		}
 
-
 		vf.getPanelCrearProductoModa().putClientProperty("productoActual", producto);
 	}
 
-	private void cargarVehiculoEnPanel(Vehiculo producto) {
+	public void cargarVehiculoEnPanel(Vehiculo producto) {
 		vf.getPanelCrearVehiculo().getTxtNombre().setText(producto.getNombre());
 		vf.getPanelCrearVehiculo().getTxtDescripcion().setText(producto.getDescripcion());
 		vf.getPanelCrearVehiculo().getCmbTipo().setSelectedItem(producto.getTipo());
@@ -2687,7 +2731,48 @@ public class Controlador implements ActionListener {
 		vf.getPanelPerfil().cargarImagenPerfil(usuarioLogueado.getRutaImagenDePerfil());
 	}
 
-	private void actualizarUsuario() {
+	public void mostrarPanelCarro() {
+		ocultarTodosLosPaneles();
+		vf.getVentana().add(vf.getPanelCarrito(), BorderLayout.CENTER);
+		vf.getPanelCarrito().setVisible(true);
+
+		int indice = mf.getCarritoDAO().buscarIndiceCarrito(usuarioLogueado.getId());
+		ArrayList<Item> listaItems = mf.getCarritoDAO().getListaCarritos().get(indice).getListaItems();
+
+		vf.getPanelCarrito().cargarCarrito(listaItems, this::eliminarDelCarrito);
+
+		// Refrescar la vista
+		vf.getVentana().revalidate();
+		vf.getVentana().repaint();
+	}
+
+	// Método para manejar la eliminación de items
+	public void eliminarDelCarrito(int indiceItem) {
+		try {
+			int indiceCarrito = mf.getCarritoDAO().buscarIndiceCarrito(usuarioLogueado.getId());
+			ArrayList<Item> listaItems = mf.getCarritoDAO().getListaCarritos().get(indiceCarrito).getListaItems();
+
+			if (indiceItem >= 0 && indiceItem < listaItems.size()) {
+				// Eliminar el item de la lista
+				listaItems.remove(indiceItem);
+
+				// Actualizar en el DAO
+				mf.getCarritoDAO().getListaCarritos().get(indiceCarrito).setListaItems(listaItems);
+
+				// Recargar la vista del carrito
+				mostrarPanelCarro();
+			}
+		} catch (Exception e) {
+			// Manejar error
+			System.err.println("Error al eliminar item del carrito: " + e.getMessage());
+		}
+
+		// Refrescar la vista
+		vf.getVentana().revalidate();
+		vf.getVentana().repaint();
+	}
+
+	public void actualizarUsuario() {
 		try {
 			String nombre = vf.getPanelUsuario().getTxtNombre().getText().trim();
 			String email = vf.getPanelUsuario().getTxtEmail().getText().trim();
@@ -2778,7 +2863,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void eliminarUsuario() {
+	public void eliminarUsuario() {
 		int opcion = JOptionPane.showConfirmDialog(vf.getVentana(),
 				"¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.", "Eliminar Cuenta",
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -2809,7 +2894,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private List<MetodoDePago> obtenerMetodosDePagoPorUsuario(int idUsuario) {
+	public List<MetodoDePago> obtenerMetodosDePagoPorUsuario(int idUsuario) {
 		List<MetodoDePago> metodosDePagoUsuario = new ArrayList<>();
 
 		List<MetodoDePago> todosLosMetodos = mf.getMetodoDePagoDAO().getListaMetodosDePago();
@@ -2823,7 +2908,7 @@ public class Controlador implements ActionListener {
 		return metodosDePagoUsuario;
 	}
 
-	private void mostrarPanelMetodoDePago() {
+	public void mostrarPanelMetodoDePago() {
 		ocultarTodosLosPaneles();
 
 		List<MetodoDePago> metodosDePago = obtenerMetodosDePagoPorUsuario(usuarioLogueado.getId());
@@ -2835,7 +2920,7 @@ public class Controlador implements ActionListener {
 		vf.getVentana().repaint();
 	}
 
-	private void agregarMetodoDePago() {
+	public void agregarMetodoDePago() {
 		try {
 			String titular = vf.getPanelMetodoDePago().getTxtTitular().getText().trim();
 			String numeroTarjetaStr = vf.getPanelMetodoDePago().getTxtNumeroTarjeta().getText().trim();
@@ -2909,7 +2994,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void actualizarMetodoDePago() {
+	public void actualizarMetodoDePago() {
 		try {
 			MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
 			if (metodoSeleccionado == null) {
@@ -3001,7 +3086,7 @@ public class Controlador implements ActionListener {
 		}
 	}
 
-	private void eliminarMetodoDePago() {
+	public void eliminarMetodoDePago() {
 		try {
 			MetodoDePago metodoSeleccionado = vf.getPanelMetodoDePago().getMetodoSeleccionado();
 			if (metodoSeleccionado == null) {
@@ -3064,6 +3149,7 @@ public class Controlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
+		System.out.println(comando);
 
 		switch (comando) {
 		case "Iniciar Sesion": {
@@ -3097,8 +3183,7 @@ public class Controlador implements ActionListener {
 		}
 
 		case "Carrito": {
-			JOptionPane.showMessageDialog(vf.getVentana(), "Funcionalidad del carrito en desarrollo", "Información",
-					JOptionPane.INFORMATION_MESSAGE);
+			mostrarPanelCarro();
 			break;
 		}
 
@@ -3521,10 +3606,18 @@ public class Controlador implements ActionListener {
 			vf.getVentana().repaint();
 			break;
 		}
+		case "Comprar Producto": {
+			comprarProducto();
+			break;
+		}
+		case "Agregar Carrito": {
+			agregarCarrito();
+			break;
+		}
 		}
 	}
 
-	private void inicializarActionListener() {
+	public void inicializarActionListener() {
 		vf.getPanelLogin().getBtnIniciarSesion().addActionListener(this);
 		vf.getPanelLogin().getBtnIniciarSesion().setActionCommand("Iniciar Sesion");
 		vf.getPanelLogin().getBtnCrearCuenta().addActionListener(this);
@@ -3604,7 +3697,8 @@ public class Controlador implements ActionListener {
 		vf.getPanelSuperior().getBtnMercadoLibre().addActionListener(this);
 
 		vf.getPanelCrearAlimentoYBebida().getBtnActualizarAlimentoYBebida().addActionListener(this);
-		vf.getPanelCrearAlimentoYBebida().getBtnActualizarAlimentoYBebida().setActionCommand("Actualizar AlimentoYBebida");
+		vf.getPanelCrearAlimentoYBebida().getBtnActualizarAlimentoYBebida()
+				.setActionCommand("Actualizar AlimentoYBebida");
 		vf.getPanelCrearAlimentoYBebida().getBtnBorrarAlimentoYBebida().addActionListener(this);
 		vf.getPanelCrearAlimentoYBebida().getBtnBorrarAlimentoYBebida().setActionCommand("Borrar AlimentoYBebida");
 
@@ -3662,5 +3756,11 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearVehiculo().getBtnActualizarVehiculo().setActionCommand("Actualizar Vehiculo");
 		vf.getPanelCrearVehiculo().getBtnBorrarVehiculo().addActionListener(this);
 		vf.getPanelCrearVehiculo().getBtnBorrarVehiculo().setActionCommand("Borrar Vehiculo");
+
+		vf.getPanelMostrarProducto().getBtnComprar().addActionListener(this);
+		vf.getPanelMostrarProducto().getBtnComprar().setActionCommand("Comprar Producto");
+
+		vf.getPanelMostrarProducto().getBtnCarrito().addActionListener(this);
+		vf.getPanelMostrarProducto().getBtnCarrito().setActionCommand("Agregar Carrito");
 	}
 }

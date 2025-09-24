@@ -3,41 +3,38 @@ package co.edu.unbosque.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class PanelFactura extends JPanel {
+public class VentanaFactura extends JFrame {
 
-	private JLabel lblFondo, lblInterfaz, lblTitulo, lblCompra, lblPrecio;
+	private JLabel lblFondo, lblTitulo, lblCompra, lblPrecio;
 
-	public PanelFactura() {
-		this.setVisible(true);
+	public VentanaFactura() {
+		this.setVisible(false);
 		this.setBackground(new Color(235, 235, 235));
+		this.setResizable(false);
 		this.setLayout(new BorderLayout());
-		this.setBounds(0, 0, 1280, 800);
+		this.setLocationRelativeTo(null);
+		this.setBounds(0, 0, 400, 400);
 		inicializarComponentes();
 	}
 
 	public void inicializarComponentes() {
 		lblFondo = new JLabel();
-		lblFondo.setBounds(0, 0, 1280, 800);
+		lblFondo.setBounds(0, 34, 400, 115);
 		lblFondo.setBackground(Color.GREEN);
 
-		lblInterfaz = new JLabel();
-		lblInterfaz.setBounds(303, 92, 600, 600);
-		lblInterfaz.setBackground(Color.WHITE);
+		lblTitulo = new JLabel();
+		lblTitulo.setBounds(61, 64, 277, 55);
 
-		lblTitulo = new JLabel("Resumen de tu compra");
-		lblTitulo.setBounds(430, 272, 230, 50);
+		lblCompra = new JLabel();
+		lblCompra.setBounds(61, 195, 179, 42);
 
-		lblCompra = new JLabel("Compraste: ");
-		lblCompra.setBounds(405, 147, 396, 50);
-
-		lblPrecio = new JLabel("Pagaste: ");
-		lblPrecio.setBounds(430, 370, 245, 70);
+		lblPrecio = new JLabel();
+		lblPrecio.setBounds(61, 239, 195, 42);
 
 		this.add(lblFondo);
-		this.add(lblInterfaz);
 		this.add(lblTitulo);
 		this.add(lblCompra);
 		this.add(lblPrecio);
@@ -49,14 +46,6 @@ public class PanelFactura extends JPanel {
 
 	public void setLblFondo(JLabel lblFondo) {
 		this.lblFondo = lblFondo;
-	}
-
-	public JLabel getLblInterfaz() {
-		return lblInterfaz;
-	}
-
-	public void setLblInterfaz(JLabel lblInterfaz) {
-		this.lblInterfaz = lblInterfaz;
 	}
 
 	public JLabel getLblTitulo() {

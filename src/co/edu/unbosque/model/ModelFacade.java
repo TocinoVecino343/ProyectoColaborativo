@@ -1,6 +1,7 @@
 package co.edu.unbosque.model;
 
 import co.edu.unbosque.model.persistence.AlimentoYBebidaDAO;
+import co.edu.unbosque.model.persistence.CarritoDAO;
 import co.edu.unbosque.model.persistence.CelularDAO;
 import co.edu.unbosque.model.persistence.ConstruccionDAO;
 import co.edu.unbosque.model.persistence.DeporteYFitnessDAO;
@@ -26,6 +27,7 @@ public class ModelFacade {
 	private ModaDAO modaDAO;
 	private VehiculoDAO vehiculoDAO;
 	private MetodoDePagoDAO metodoDePagoDAO;
+	private CarritoDAO carritoDAO;
 
 	private UsuarioDAO usuarioDAO;
 
@@ -42,6 +44,7 @@ public class ModelFacade {
 		vehiculoDAO = new VehiculoDAO();
 		usuarioDAO = new UsuarioDAO();
 		metodoDePagoDAO = new MetodoDePagoDAO();
+		carritoDAO = new CarritoDAO();
 	}
 
 	public AlimentoYBebidaDAO getAlimentoYBebidaDAO() {
@@ -138,6 +141,14 @@ public class ModelFacade {
 
 	public void setMetodoDePagoDAO(MetodoDePagoDAO metodoDePagoDAO) {
 		this.metodoDePagoDAO = metodoDePagoDAO;
+	}
+
+	public CarritoDAO getCarritoDAO() {
+		return carritoDAO;
+	}
+
+	public void setCarritoDAO(CarritoDAO carritoDAO) {
+		this.carritoDAO = carritoDAO;
 	}
 
 }

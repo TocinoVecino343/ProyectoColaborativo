@@ -9,27 +9,16 @@ public class Carrito implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3900628835051746652L;
-	private String nombreCarrito;
 	private int idAsociado;
-	private ArrayList<ItemCarrito> listaItems;
+	private ArrayList<Item> listaItems;
 
 	public Carrito() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Carrito(String nombreCarrito, int idAsociado, ArrayList<ItemCarrito> listaItems) {
+	public Carrito(int idAsociado, ArrayList<Item> listaItems) {
 		super();
-		this.nombreCarrito = nombreCarrito;
 		this.idAsociado = idAsociado;
 		this.listaItems = listaItems;
-	}
-
-	public String getNombreCarrito() {
-		return nombreCarrito;
-	}
-
-	public void setNombreCarrito(String nombreCarrito) {
-		this.nombreCarrito = nombreCarrito;
 	}
 
 	public int getIdAsociado() {
@@ -40,22 +29,17 @@ public class Carrito implements Serializable {
 		this.idAsociado = idAsociado;
 	}
 
-	public ArrayList<ItemCarrito> getListaItems() {
+	public ArrayList<Item> getListaItems() {
 		return listaItems;
 	}
 
-	public void setListaItems(ArrayList<ItemCarrito> listaItems) {
+	public void setListaItems(ArrayList<Item> listaItems) {
 		this.listaItems = listaItems;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "Carrito [nombreCarrito=" + nombreCarrito + ", idAsociado=" + idAsociado + ", listaItems=" + listaItems
-				+ "]";
+		return "Carrito [idAsociado=" + idAsociado + ", listaItems=" + listaItems + "]";
 	}
 
 }
