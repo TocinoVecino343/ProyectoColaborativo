@@ -491,11 +491,10 @@ public class Controlador implements ActionListener {
 		String limpio = precioString.replaceAll("[^\\d.,]", ""); // dejar solo dígitos, puntos y comas
 
 		if (limpio.contains(",") && limpio.contains(".")) {
-			// Caso estilo europeo "12.345,67"
 			limpio = limpio.replace(".", ""); // quitar separadores de miles
-			limpio = limpio.replace(",", "."); // coma pasa a punto decimal
+			limpio = limpio.replace(",", "."); // coma pasa se convierte punto decimal
 		} else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
-			// Si hay más de un punto → dejar solo el último como decimal
+			// Si hay más de un punto,se deja solo el ultimo
 			int last = limpio.lastIndexOf('.');
 			limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
 		} else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
@@ -520,20 +519,40 @@ public class Controlador implements ActionListener {
 
 	public void agregarCarrito() {
 		String nombreProducto = vf.getPanelMostrarProducto().getLblNombre().getText();
-		String stockString = vf.getPanelMostrarProducto().getLblStock().getText();
+		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
 
-		// Limpiar etiquetas HTML en nombre
+		// Limpiar etiquetas HTML en nombre y precio
 		nombreProducto = nombreProducto.replaceAll("<[^>]*>", "").trim();
+		precioString = precioString.replaceAll("<[^>]*>", "").trim();
 
-		// Extraer solo número de stock (si no hay número → 0)
-		String stockLimpio = stockString.replaceAll("[^0-9]", "");
-		int stock = stockLimpio.isEmpty() ? 0 : Integer.parseInt(stockLimpio);
+		// Limpiar precio (igual que en comprarProducto)
+		String limpio = precioString.replaceAll("[^\\d.,]", "");
+		if (limpio.contains(",") && limpio.contains(".")) {
+			limpio = limpio.replace(".", "").replace(",", ".");
+		} else if (limpio.contains(",")) {
+			limpio = limpio.replace(",", ".");
+		}
+
+		float precio = limpio.isEmpty() ? 0 : Float.parseFloat(limpio);
 
 		// Crear item y agregar al carrito
-		Item temp = new Item(nombreProducto, stock);
+		Item temp = new Item(nombreProducto, precio);
 		int indiceCarrito = mf.getCarritoDAO().buscarIndiceCarrito(usuarioLogueado.getId());
 		mf.getCarritoDAO().getListaCarritos().get(indiceCarrito).getListaItems().add(temp);
+	}
 
+	public void comprarCarrito() {
+		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
+		float precio = vf.getPanelCarrito().getPrecioTotal();
+
+		// Mostrar ventana factura
+		vf.getVentanaFactura().setVisible(true);
+		vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
+		vf.getVentanaFactura().getLblCompra().setText("Compraste: Tu carrito");
+		vf.getVentanaFactura().getLblPrecio().setText("Pagaste: " + precio);
+		vf.getVentanaFactura().revalidate();
+		vf.getVentanaFactura().repaint();
+		vf.getPanelCarrito().limpiarCarrito();
 	}
 
 	public void ocultarTodosLosPaneles() {
@@ -3614,6 +3633,9 @@ public class Controlador implements ActionListener {
 			agregarCarrito();
 			break;
 		}
+		case "Comprar Carrito": {
+			comprarCarrito();
+		}
 		}
 	}
 
@@ -3757,10 +3779,15 @@ public class Controlador implements ActionListener {
 		vf.getPanelCrearVehiculo().getBtnBorrarVehiculo().addActionListener(this);
 		vf.getPanelCrearVehiculo().getBtnBorrarVehiculo().setActionCommand("Borrar Vehiculo");
 
+		// PanelMostrar
 		vf.getPanelMostrarProducto().getBtnComprar().addActionListener(this);
 		vf.getPanelMostrarProducto().getBtnComprar().setActionCommand("Comprar Producto");
 
 		vf.getPanelMostrarProducto().getBtnCarrito().addActionListener(this);
 		vf.getPanelMostrarProducto().getBtnCarrito().setActionCommand("Agregar Carrito");
+
+		// Factura
+		vf.getPanelCarrito().getBtnComprarCarrito().addActionListener(this);
+		vf.getPanelCarrito().getBtnComprarCarrito().setActionCommand("Comprar Carrito");
 	}
 }

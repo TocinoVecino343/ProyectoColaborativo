@@ -22,6 +22,7 @@ public class PanelCarrito extends JPanel {
 	private JPanel panelItem;
 	private JScrollPane scrollPane;
 	private JButton btnComprarCarrito;
+	private List<Item> items; // lista guardada internamente para calcular el total
 
 	public PanelCarrito() {
 		this.setLayout(new BorderLayout());
@@ -57,12 +58,9 @@ public class PanelCarrito extends JPanel {
 
 	/**
 	 * Método para cargar los items del carrito
-	 * 
-	 * @param items            Lista de ItemCarrito
-	 * @param eliminarListener Listener que recibe el índice del item a eliminar
 	 */
 	public void cargarCarrito(List<Item> items, EliminarListener eliminarListener) {
-		// Limpiar el panel antes de cargar nuevos items
+		this.items = items; // guardamos los items
 		panelItem.removeAll();
 
 		if (items == null || items.isEmpty()) {
@@ -72,7 +70,6 @@ public class PanelCarrito extends JPanel {
 			lblVacio.setForeground(Color.GRAY);
 			panelItem.add(lblVacio);
 		} else {
-			// Generar un panel por cada item en el carrito
 			for (int i = 0; i < items.size(); i++) {
 				Item item = items.get(i);
 				JPanel itemPanel = crearPanelItem(item, i, eliminarListener);
@@ -80,7 +77,6 @@ public class PanelCarrito extends JPanel {
 			}
 		}
 
-		// Refrescar la vista
 		panelItem.revalidate();
 		panelItem.repaint();
 	}
@@ -96,7 +92,6 @@ public class PanelCarrito extends JPanel {
 		itemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
 		itemPanel.setPreferredSize(new Dimension(0, 80));
 
-		// Panel izquierdo con nombre y precio
 		JPanel panelInfo = new JPanel();
 		panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.Y_AXIS));
 		panelInfo.setBackground(Color.WHITE);
@@ -112,45 +107,59 @@ public class PanelCarrito extends JPanel {
 		panelInfo.add(lblNombre);
 		panelInfo.add(lblPrecio);
 
-		// Botón eliminar a la derecha
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBackground(new Color(244, 67, 54));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnEliminar.setPreferredSize(new Dimension(100, 35));
 
-		// Al hacer click, llamar el listener con el índice
 		if (eliminarListener != null) {
 			btnEliminar.addActionListener(e -> eliminarListener.eliminar(index));
 		}
 
-		// Agregar componentes al panel del item
 		itemPanel.add(panelInfo, BorderLayout.CENTER);
 		itemPanel.add(btnEliminar, BorderLayout.EAST);
 
 		return itemPanel;
 	}
 
-	/**
-	 * Interface para el listener de eliminar
-	 */
 	@FunctionalInterface
 	public interface EliminarListener {
 		void eliminar(int indice);
 	}
 
 	/**
-	 * Obtiene el botón de comprar carrito
+	 * Devuelve el precio total de los items actualmente cargados en el carrito
 	 */
-	public JButton getBtnComprarCarrito() {
-		return btnComprarCarrito;
+	public float getPrecioTotal() {
+		float total = 0.0f;
+		if (items != null) {
+			for (Item item : items) {
+				total += item.getPrecioProducto();
+			}
+		}
+		return total;
 	}
 
 	/**
-	 * Actualiza el texto del botón con el total
+	 * Limpia el carrito completamente
 	 */
-	public void actualizarTotal(double total) {
-		btnComprarCarrito.setText("Comprar Todo ($" + String.format("%.2f", total) + ")");
+	public void limpiarCarrito() {
+		items = null; // reseteamos la lista
+		panelItem.removeAll();
+
+		JLabel lblVacio = new JLabel("El carrito está vacío");
+		lblVacio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVacio.setFont(new Font("Arial", Font.ITALIC, 16));
+		lblVacio.setForeground(Color.GRAY);
+		panelItem.add(lblVacio);
+
+		panelItem.revalidate();
+		panelItem.repaint();
+	}
+
+	public JButton getBtnComprarCarrito() {
+		return btnComprarCarrito;
 	}
 
 	public JPanel getPanelItem() {
@@ -172,6 +181,4 @@ public class PanelCarrito extends JPanel {
 	public void setBtnComprarCarrito(JButton btnComprarCarrito) {
 		this.btnComprarCarrito = btnComprarCarrito;
 	}
-
-	
 }
