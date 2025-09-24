@@ -97,6 +97,7 @@ public class ModaDAO implements DAO<Moda> {
 		this.listaModa = listaModa;
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<Moda> lista = getListaModa();
 	    for (int i = 0; i < lista.size(); i++) {

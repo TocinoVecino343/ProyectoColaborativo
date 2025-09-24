@@ -481,37 +481,38 @@ public class Controlador implements ActionListener {
 	}
 
 	public void comprarProducto() {
-	    String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
-	    String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
+		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
+		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
 
-	    // Limpiar etiquetas HTML en el nombre
-	    nombre = nombre.replaceAll("<[^>]*>", "").trim();
+		// Limpiar etiquetas HTML en el nombre
+		nombre = nombre.replaceAll("<[^>]*>", "").trim();
 
-	    // Limpiar y normalizar el precio (tu código - perfecto como está)
-	    precioString = precioString.replaceAll("<[^>]*>", "").trim();
-	    String limpio = precioString.replaceAll("[^\\d.,]", "");
+		// Limpiar y normalizar el precio (tu código - perfecto como está)
+		precioString = precioString.replaceAll("<[^>]*>", "").trim();
+		String limpio = precioString.replaceAll("[^\\d.,]", "");
 
-	    if (limpio.contains(",") && limpio.contains(".")) {
-	        limpio = limpio.replace(".", "");
-	        limpio = limpio.replace(",", ".");
-	    } else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
-	        int last = limpio.lastIndexOf('.');
-	        limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
-	    } else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
-	        int last = limpio.lastIndexOf(',');
-	        limpio = limpio.substring(0, last).replace(",", "") + "." + limpio.substring(last + 1);
-	    } else if (limpio.contains(",")) {
-	        limpio = limpio.replace(",", ".");
-	    }
+		if (limpio.contains(",") && limpio.contains(".")) {
+			limpio = limpio.replace(".", "");
+			limpio = limpio.replace(",", ".");
+		} else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
+			int last = limpio.lastIndexOf('.');
+			limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
+		} else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
+			int last = limpio.lastIndexOf(',');
+			limpio = limpio.substring(0, last).replace(",", "") + "." + limpio.substring(last + 1);
+		} else if (limpio.contains(",")) {
+			limpio = limpio.replace(",", ".");
+		}
 
-	    // Mostrar ventana factura
-	    vf.getVentanaFactura().setVisible(true);
-	    vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
-	    vf.getVentanaFactura().getLblCompra().setText("Compraste: " + nombre);
-	    vf.getVentanaFactura().setPrecioDesdeString(limpio);
-	    vf.getVentanaFactura().revalidate();
-	    vf.getVentanaFactura().repaint();
+		// Mostrar ventana factura
+		vf.getVentanaFactura().setVisible(true);
+		vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
+		vf.getVentanaFactura().getLblCompra().setText("Compraste: " + nombre);
+		vf.getVentanaFactura().setPrecioDesdeString(limpio);
+		vf.getVentanaFactura().revalidate();
+		vf.getVentanaFactura().repaint();
 	}
+
 	public void agregarCarrito() {
 		String nombreProducto = vf.getPanelMostrarProducto().getLblNombre().getText();
 		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
@@ -538,8 +539,12 @@ public class Controlador implements ActionListener {
 
 	public void comprarCarrito() {
 
-		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
 		float precio = vf.getPanelCarrito().getPrecioTotal();
+		mf.getCarritoDAO().escribirReporte(precio, usuarioLogueado.getId(), usuarioLogueado.getNombre());
+
+		vf.getPanelCarrito().limpiarCarrito();
+		vf.getPanelCarrito().revalidate();
+		vf.getPanelCarrito().repaint();
 
 		// Mostrar ventana factura
 		vf.getVentanaFactura().setVisible(true);
@@ -548,16 +553,16 @@ public class Controlador implements ActionListener {
 		vf.getVentanaFactura().setPrecioFormateado(precio);
 		vf.getVentanaFactura().revalidate();
 		vf.getVentanaFactura().repaint();
-		vf.getPanelCarrito().limpiarCarrito();
+
 	}
 
 	public void ocultarTodosLosPaneles() {
-	    vf.getPanelProductoCreado().removeActionListener(this);
-	    
-	    Container contentPane = vf.getVentana().getContentPane();
-	    contentPane.removeAll();
-	    
-	    contentPane.add(vf.getPanelSuperior(), BorderLayout.NORTH);
+		vf.getPanelProductoCreado().removeActionListener(this);
+
+		Container contentPane = vf.getVentana().getContentPane();
+		contentPane.removeAll();
+
+		contentPane.add(vf.getPanelSuperior(), BorderLayout.NORTH);
 	}
 
 	public void guardarAlimentoYBebida() {
@@ -2742,7 +2747,6 @@ public class Controlador implements ActionListener {
 
 		vf.getPanelCarrito().cargarCarrito(listaItems, this::eliminarDelCarrito);
 
-		// Refrescar la vista
 		vf.getVentana().revalidate();
 		vf.getVentana().repaint();
 	}
@@ -3146,45 +3150,34 @@ public class Controlador implements ActionListener {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void panelPrincipalFiltrado() {
 		ocultarTodosLosPaneles();
 		String textoBusqueda = vf.getPanelSuperior().getTxtFieldBuscador().getText();
-	    if (!textoBusqueda.equals("Buscar productos, marcas y más...") && !textoBusqueda.isEmpty()) {
-	        ArrayList<AlimentoYBebida> alimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
-	        ArrayList<Celular> celulares = mf.getCelularDAO().getListaCelulares();
-	        ArrayList<Construccion> construcciones = mf.getConstruccionDAO().getListaConstruccion();
-	        ArrayList<DeporteYFitness> deportes = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
-	        ArrayList<Electrodomestico> electrodomesticos = mf.getElectrodomesticoDAO().getListaElectrodomesticos();
-	        ArrayList<Juguete> juguetes = mf.getJugueteDAO().getListaJuguetes();
-	        ArrayList<Mascota> mascotas = mf.getMascotaDAO().getListaMascotas();
-	        ArrayList<Farmacia> farmacias = mf.getFarmaciaDAO().getListaFarmacia();
-	        ArrayList<Moda> modas = mf.getModaDAO().getListaModa();
-	        ArrayList<Vehiculo> vehiculos = mf.getVehiculoDAO().getListaVehiculos();
-	        
-	        // Crear el panel filtrado
-	        PanelPrincipalFiltrado panelFiltrado = new PanelPrincipalFiltrado(vf);
-	        panelFiltrado.mostrarProductosFiltrados(
-	            textoBusqueda, 
-	            alimentos, 
-	            celulares, 
-	            construcciones, 
-	            deportes, 
-	            electrodomesticos, 
-	            juguetes, 
-	            mascotas, 
-	            farmacias, 
-	            modas, 
-	            vehiculos
-	        );
-	        
-	        ocultarTodosLosPaneles();
-	        vf.getVentana().add(panelFiltrado, BorderLayout.CENTER);
-	        vf.getVentana().revalidate();
-	        vf.getVentana().repaint();
-	    } else {
-	        mostrarPanelPrincipal();
-	    }
+		if (!textoBusqueda.equals("Buscar productos, marcas y más...") && !textoBusqueda.isEmpty()) {
+			ArrayList<AlimentoYBebida> alimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
+			ArrayList<Celular> celulares = mf.getCelularDAO().getListaCelulares();
+			ArrayList<Construccion> construcciones = mf.getConstruccionDAO().getListaConstruccion();
+			ArrayList<DeporteYFitness> deportes = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
+			ArrayList<Electrodomestico> electrodomesticos = mf.getElectrodomesticoDAO().getListaElectrodomesticos();
+			ArrayList<Juguete> juguetes = mf.getJugueteDAO().getListaJuguetes();
+			ArrayList<Mascota> mascotas = mf.getMascotaDAO().getListaMascotas();
+			ArrayList<Farmacia> farmacias = mf.getFarmaciaDAO().getListaFarmacia();
+			ArrayList<Moda> modas = mf.getModaDAO().getListaModa();
+			ArrayList<Vehiculo> vehiculos = mf.getVehiculoDAO().getListaVehiculos();
+
+			// Crear el panel filtrado
+			PanelPrincipalFiltrado panelFiltrado = new PanelPrincipalFiltrado(vf);
+			panelFiltrado.mostrarProductosFiltrados(textoBusqueda, alimentos, celulares, construcciones, deportes,
+					electrodomesticos, juguetes, mascotas, farmacias, modas, vehiculos);
+
+			ocultarTodosLosPaneles();
+			vf.getVentana().add(panelFiltrado, BorderLayout.CENTER);
+			vf.getVentana().revalidate();
+			vf.getVentana().repaint();
+		} else {
+			mostrarPanelPrincipal();
+		}
 	}
 
 	@Override
@@ -3638,7 +3631,7 @@ public class Controlador implements ActionListener {
 		}
 
 		case "Volver MetodoPago": {
-            mostrarPanelPrincipal();
+			mostrarPanelPrincipal();
 			break;
 		}
 		case "Comprar Producto": {
@@ -3653,8 +3646,8 @@ public class Controlador implements ActionListener {
 			comprarCarrito();
 		}
 		case "Buscar": {
-		    panelPrincipalFiltrado();
-		    break;
+			panelPrincipalFiltrado();
+			break;
 		}
 		}
 	}
@@ -3809,12 +3802,12 @@ public class Controlador implements ActionListener {
 		// Factura
 		vf.getPanelCarrito().getBtnComprarCarrito().addActionListener(this);
 		vf.getPanelCarrito().getBtnComprarCarrito().setActionCommand("Comprar Carrito");
-		
+
 		vf.getPanelSuperior().getBtnBuscar().addActionListener(this);
 		vf.getPanelSuperior().getBtnBuscar().setActionCommand("Buscar");
-	    
-	    // ActionListener para el campo de búsqueda (cuando se presiona Enter)
-	    vf.getPanelSuperior().getTxtFieldBuscador().addActionListener(this);
-	    vf.getPanelSuperior().getTxtFieldBuscador().setActionCommand("Buscar");
+
+		// ActionListener para el campo de búsqueda (cuando se presiona Enter)
+		vf.getPanelSuperior().getTxtFieldBuscador().addActionListener(this);
+		vf.getPanelSuperior().getTxtFieldBuscador().setActionCommand("Buscar");
 	}
 }

@@ -97,6 +97,7 @@ public class MascotaDAO implements DAO<Mascota> {
 		this.listaMascotas = listaMascotas;
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<Mascota> lista = getListaMascotas();
 	    for (int i = 0; i < lista.size(); i++) {

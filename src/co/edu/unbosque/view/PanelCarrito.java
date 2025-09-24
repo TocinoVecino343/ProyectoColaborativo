@@ -141,11 +141,8 @@ public class PanelCarrito extends JPanel {
 		return total;
 	}
 
-	/**
-	 * Limpia el carrito completamente
-	 */
 	public void limpiarCarrito() {
-		items = null; // reseteamos la lista
+		items = null; //
 		panelItem.removeAll();
 
 		JLabel lblVacio = new JLabel("El carrito está vacío");

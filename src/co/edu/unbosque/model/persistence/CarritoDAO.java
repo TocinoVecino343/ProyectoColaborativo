@@ -85,6 +85,16 @@ public class CarritoDAO {
 		FileHandler.escribirEnArchivoSerializado(SERIAL_FILE_NAME, listaCarritos);
 	}
 
+	public void escribirReporte(float precio, int idUsuario, String nombreUsuario) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(nombreUsuario + ";");
+		sb.append(idUsuario + ";");
+		sb.append(precio + "\n");
+
+		FileHandler.escribirEnArchivoDeTexto("ReportesCompras.csv", sb.toString());
+	}
+
 	public ArrayList<Carrito> getListaCarritos() {
 		return listaCarritos;
 	}

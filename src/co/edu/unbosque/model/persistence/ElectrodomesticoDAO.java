@@ -97,6 +97,7 @@ public class ElectrodomesticoDAO implements DAO<Electrodomestico> {
 		this.listaElectrodomesticos = listaElectrodomesticos;
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<Electrodomestico> lista = getListaElectrodomesticos();
 	    for (int i = 0; i < lista.size(); i++) {

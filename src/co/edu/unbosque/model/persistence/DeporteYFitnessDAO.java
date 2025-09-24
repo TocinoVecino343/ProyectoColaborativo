@@ -100,6 +100,7 @@ public class DeporteYFitnessDAO implements DAO<DeporteYFitness> {
 		this.listaDeportesYFitness = listaDeportesYFitness;
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<DeporteYFitness> lista = getListaDeportesYFitness();
 	    for (int i = 0; i < lista.size(); i++) {

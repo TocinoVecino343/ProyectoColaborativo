@@ -94,6 +94,7 @@ public class AlimentoYBebidaDAO implements DAO<AlimentoYBebida> {
 
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<AlimentoYBebida> lista = getListaAlimentosYBebidas();
 	    for (int i = 0; i < lista.size(); i++) {

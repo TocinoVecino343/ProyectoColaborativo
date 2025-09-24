@@ -96,6 +96,7 @@ public class FarmaciaDAO implements DAO<Farmacia> {
 		this.listaFarmacia = listaFarmacia;
 	}
 	
+	@Override
 	public int buscarIndicePorId(int id) {
 	    ArrayList<Farmacia> lista = getListaFarmacia();
 	    for (int i = 0; i < lista.size(); i++) {

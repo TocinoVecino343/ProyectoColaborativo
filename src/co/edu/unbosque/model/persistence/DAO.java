@@ -21,4 +21,6 @@ public interface DAO<E> {
 	public void cargarDesdeArchivoSerializado(String url);
 
 	public void escribirArchivoSerializado();
+	
+	public int buscarIndicePorId(int id);
 }

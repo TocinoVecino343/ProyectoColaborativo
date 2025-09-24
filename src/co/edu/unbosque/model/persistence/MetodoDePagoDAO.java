@@ -67,7 +67,7 @@ public class MetodoDePagoDAO {
 	    }
 	    return -1; 
 	}
-
+	
 	public boolean eliminar(int indice) {
 	    if (indice >= 0 && indice < listaMetodosDePago.size()) {
 	        listaMetodosDePago.remove(indice);
