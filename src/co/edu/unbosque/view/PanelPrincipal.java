@@ -74,7 +74,6 @@ public class PanelPrincipal extends JPanel {
             ArrayList<Moda> productosModa,
             ArrayList<Vehiculo> productosVehiculos) {
 
-        // Guardar los arrays
         this.productosAlimentos = productosAlimentos;
         this.productosCelulares = productosCelulares;
         this.productosConstruccion = productosConstruccion;
@@ -88,7 +87,6 @@ public class PanelPrincipal extends JPanel {
 
         panelProductos.removeAll();
 
-        // Sección de Alimentos y Bebidas
         if (!productosAlimentos.isEmpty()) {
             JPanel categoriaPanel = crearPanelCategoria("Alimentos y Bebidas");
             JPanel productosPanel = new JPanel(new GridLayout(0, 4, 15, 15));

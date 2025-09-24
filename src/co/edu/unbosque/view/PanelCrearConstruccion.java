@@ -24,28 +24,140 @@ import javax.swing.ImageIcon;
 import javax.swing.Box;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Panel para crear y editar productos de construcción.
+ * Permite ingresar información detallada del material de construcción incluyendo imagen,
+ * datos básicos, especificaciones técnicas y dimensiones.
+ * 
+ * @author TuNombre
+ * @version 1.0
+ * @since 1.0
+ */
 public class PanelCrearConstruccion extends JPanel {
-    private JLabel lblNombre, lblDescripcion, lblTipo, lblPrecio, lblMarca, lblCaracteristicas, lblStock, lblModelo,
-            lblMaterial, lblColor, lblLargo, lblAncho, lblAltura;
-    private JTextArea txtNombre, txtDescripcion, txtTipo, txtPrecio, txtMarca, txtCaracteristicas, txtMaterial,
-            txtStock, txtColor, txtModelo;
+    /** Etiqueta para el campo nombre del material */
+    private JLabel lblNombre;
+    
+    /** Etiqueta para el campo descripción del material */
+    private JLabel lblDescripcion;
+    
+    /** Etiqueta para el campo tipo del material */
+    private JLabel lblTipo;
+    
+    /** Etiqueta para el campo precio del material */
+    private JLabel lblPrecio;
+    
+    /** Etiqueta para el campo marca del material */
+    private JLabel lblMarca;
+    
+    /** Etiqueta para el campo características del material */
+    private JLabel lblCaracteristicas;
+    
+    /** Etiqueta para el campo stock del material */
+    private JLabel lblStock;
+    
+    /** Etiqueta para el campo modelo del material */
+    private JLabel lblModelo;
+    
+    /** Etiqueta para el campo material del material */
+    private JLabel lblMaterial;
+    
+    /** Etiqueta para el campo color del material */
+    private JLabel lblColor;
+    
+    /** Etiqueta para el campo largo del material */
+    private JLabel lblLargo;
+    
+    /** Etiqueta para el campo ancho del material */
+    private JLabel lblAncho;
+    
+    /** Etiqueta para el campo altura del material */
+    private JLabel lblAltura;
+    
+    /** Campo de texto para el nombre del material */
+    private JTextArea txtNombre;
+    
+    /** Campo de texto para la descripción del material */
+    private JTextArea txtDescripcion;
+    
+    /** Campo de texto para el tipo del material */
+    private JTextArea txtTipo;
+    
+    /** Campo de texto para el precio del material */
+    private JTextArea txtPrecio;
+    
+    /** Campo de texto para la marca del material */
+    private JTextArea txtMarca;
+    
+    /** Campo de texto para las características del material */
+    private JTextArea txtCaracteristicas;
+    
+    /** Campo de texto para el material del material */
+    private JTextArea txtMaterial;
+    
+    /** Campo de texto para el stock del material */
+    private JTextArea txtStock;
+    
+    /** Campo de texto para el color del material */
+    private JTextArea txtColor;
+    
+    /** Campo de texto para el modelo del material */
+    private JTextArea txtModelo;
+    
+    /** ComboBox para seleccionar el tipo de material */
     private JComboBox<String> cmbMaterial;
-    private JFormattedTextField txtLargo, txtAncho, txtAltura;
-    private JButton btnCrearConstruccion, btnSeleccionarImagen;
+    
+    /** Campo formateado para el largo del material */
+    private JFormattedTextField txtLargo;
+    
+    /** Campo formateado para el ancho del material */
+    private JFormattedTextField txtAncho;
+    
+    /** Campo formateado para la altura del material */
+    private JFormattedTextField txtAltura;
+    
+    /** Botón para crear un nuevo material */
+    private JButton btnCrearConstruccion;
+    
+    /** Botón para seleccionar la imagen del material */
+    private JButton btnSeleccionarImagen;
+    
+    /** Botón para actualizar un material existente */
     private JButton btnActualizarConstruccion;
+    
+    /** Botón para borrar un material existente */
     private JButton btnBorrarConstruccion;
+    
+    /** Etiqueta para mostrar la vista previa de la imagen del material */
     private JLabel lblImagenPreview;
+    
+    /** Archivo de imagen seleccionado para el material */
     private File imagenSeleccionada;
     
-    // Colores estilo MercadoLibre
+    /** Color de fondo del panel */
     private final Color COLOR_FONDO = new Color(235, 235, 235);
+    
+    /** Color para paneles blancos */
     private final Color COLOR_PANEL_BLANCO = Color.WHITE;
+    
+    /** Color para texto principal */
     private final Color COLOR_TEXTO_PRINCIPAL = new Color(51, 51, 51);
+    
+    /** Color para texto secundario */
     private final Color COLOR_TEXTO_SECUNDARIO = new Color(102, 102, 102);
+    
+    /** Color para bordes de campos */
     private final Color COLOR_BORDE_CAMPO = new Color(220, 220, 220);
+    
+    /** Color para botones principales */
     private final Color COLOR_BOTON = new Color(52, 131, 250);
+    
+    /** Color para botones de eliminación */
     private final Color COLOR_BOTON_ELIMINAR = new Color(220, 53, 69);
 
+    /**
+     * Constructor por defecto que inicializa el panel.
+     * Configura el tamaño, color de fondo y layout del panel.
+     */
     public PanelCrearConstruccion() {
         this.setVisible(true);
         this.setBackground(COLOR_FONDO);
@@ -54,6 +166,11 @@ public class PanelCrearConstruccion extends JPanel {
         inicializarComponentes();
     }
 
+    /**
+     * Inicializa todos los componentes del panel.
+     * Crea el panel principal con scroll y añade los paneles izquierdo (imagen) 
+     * y derecho (formulario).
+     */
     public void inicializarComponentes() {
         // Panel principal con scroll
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -85,6 +202,12 @@ public class PanelCrearConstruccion extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
     
+    /**
+     * Crea el panel izquierdo para mostrar la imagen del material.
+     * Incluye un contenedor para la imagen y un botón para seleccionar imagen.
+     * 
+     * @return JPanel configurado para mostrar la imagen del material
+     */
     private JPanel crearPanelImagen() {
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.setBackground(COLOR_PANEL_BLANCO);
@@ -157,6 +280,12 @@ public class PanelCrearConstruccion extends JPanel {
         return imagePanel;
     }
     
+    /**
+     * Crea el panel derecho con el formulario para ingresar datos del material.
+     * Inicializa y posiciona todos los campos del formulario.
+     * 
+     * @return JPanel configurado con el formulario del material
+     */
     private JPanel crearPanelFormulario() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
@@ -174,6 +303,10 @@ public class PanelCrearConstruccion extends JPanel {
         return formPanel;
     }
     
+    /**
+     * Inicializa todos los campos del formulario (etiquetas, campos de texto, combobox y botones).
+     * Configura las propiedades visuales y comportamientos de cada componente.
+     */
     private void inicializarCamposFormulario() {
         // Labels
         lblNombre = crearLabel("Nombre");
@@ -249,6 +382,12 @@ public class PanelCrearConstruccion extends JPanel {
         btnBorrarConstruccion.setVisible(false);
     }
     
+    /**
+     * Posiciona todos los componentes del formulario en el panel.
+     * Establece las coordenadas y dimensiones de cada elemento.
+     * 
+     * @param panel JPanel donde se posicionarán los componentes
+     */
     private void posicionarComponentesFormulario(JPanel panel){
         int x = 20, yLabel = 20, yField = 45, gap = 65, fieldWidth = 480, fieldHeight = 35;
 
@@ -360,6 +499,10 @@ public class PanelCrearConstruccion extends JPanel {
         panel.add(btnBorrarConstruccion);
     }
     
+    /**
+     * Abre un selector de archivos para elegir una imagen para el material.
+     * Filtra solo archivos de imagen y muestra una vista previa en el panel.
+     */
     private void seleccionarImagen() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar imagen del material de construcción");
@@ -394,7 +537,12 @@ public class PanelCrearConstruccion extends JPanel {
         }
     }
     
-    // Métodos para crear componentes con estilo
+    /**
+     * Crea una etiqueta con el estilo estándar del formulario.
+     * 
+     * @param texto Texto que mostrará la etiqueta
+     * @return JLabel configurada con el estilo estándar
+     */
     private JLabel crearLabel(String texto) {
         JLabel label = new JLabel(texto);
         label.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -402,6 +550,11 @@ public class PanelCrearConstruccion extends JPanel {
         return label;
     }
     
+    /**
+     * Crea un campo de texto con el estilo estándar del formulario.
+     * 
+     * @return JTextArea configurada con el estilo estándar
+     */
     private JTextArea crearTextArea() {
         JTextArea textArea = new JTextArea();
         textArea.setLineWrap(true);
@@ -417,11 +570,21 @@ public class PanelCrearConstruccion extends JPanel {
         return textArea;
     }
     
+    /**
+     * Crea un campo de texto grande con el estilo estándar del formulario.
+     * 
+     * @return JTextArea configurada para mayor tamaño
+     */
     private JTextArea crearTextAreaGrande() {
         JTextArea textArea = crearTextArea();
         return textArea;
     }
     
+    /**
+     * Crea un ComboBox con el estilo estándar del formulario.
+     * 
+     * @return JComboBox configurado con el estilo estándar
+     */
     private JComboBox<String> crearComboBox() {
         JComboBox<String> combo = new JComboBox<>();
         combo.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -431,6 +594,11 @@ public class PanelCrearConstruccion extends JPanel {
         return combo;
     }
     
+    /**
+     * Aplica estilo estándar a un campo de texto formateado.
+     * 
+     * @param textField JFormattedTextField al que se le aplicará el estilo
+     */
     private void aplicarEstiloTextField(JFormattedTextField textField) {
         textField.setFont(new Font("Arial", Font.PLAIN, 14));
         textField.setBackground(COLOR_PANEL_BLANCO);
@@ -442,6 +610,12 @@ public class PanelCrearConstruccion extends JPanel {
         aplicarEfectoFocusTextField(textField);
     }
     
+    /**
+     * Crea un botón principal con el estilo estándar del formulario.
+     * 
+     * @param texto Texto que mostrará el botón
+     * @return JButton configurado con el estilo principal
+     */
     private JButton crearBotonPrincipal(String texto) {
         JButton boton = new JButton(texto);
         boton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -463,6 +637,12 @@ public class PanelCrearConstruccion extends JPanel {
         return boton;
     }
     
+    /**
+     * Crea un botón de eliminación con el estilo estándar del formulario.
+     * 
+     * @param texto Texto que mostrará el botón
+     * @return JButton configurado con el estilo de eliminación
+     */
     private JButton crearBotonEliminar(String texto){
         JButton boton= new JButton(texto);
         boton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -484,6 +664,11 @@ public class PanelCrearConstruccion extends JPanel {
         return boton;
     }
     
+    /**
+     * Aplica un efecto visual cuando un JTextArea recibe o pierde el foco.
+     * 
+     * @param textArea JTextArea al que se le aplicará el efecto
+     */
     private void aplicarEfectoFocus(JTextArea textArea) {
         textArea.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -501,6 +686,11 @@ public class PanelCrearConstruccion extends JPanel {
         });
     }
     
+    /**
+     * Aplica un efecto visual cuando un JFormattedTextField recibe o pierde el foco.
+     * 
+     * @param textField JFormattedTextField al que se le aplicará el efecto
+     */
     private void aplicarEfectoFocusTextField(JFormattedTextField textField) {
         textField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -517,6 +707,11 @@ public class PanelCrearConstruccion extends JPanel {
             }
         });
     }
+    
+    /**
+     * Limpia todos los campos del formulario y restaura los valores por defecto.
+     * Restablece la vista previa de la imagen a su estado inicial.
+     */
     public void limpiarFormulario() {
         getTxtNombre().setText("");
         getTxtDescripcion().setText("");
@@ -540,242 +735,545 @@ public class PanelCrearConstruccion extends JPanel {
         imagenSeleccionada = null;
     }
 
-	public JLabel getLblNombre() {
-		return lblNombre;
-	}
+    // Getters y Setters con Javadoc
+    
+    /**
+     * Obtiene la etiqueta del campo nombre.
+     * 
+     * @return JLabel del campo nombre
+     */
+    public JLabel getLblNombre() {
+        return lblNombre;
+    }
 
-	public void setLblNombre(JLabel lblNombre) {
-		this.lblNombre = lblNombre;
-	}
+    /**
+     * Establece la etiqueta del campo nombre.
+     * 
+     * @param lblNombre JLabel del campo nombre
+     */
+    public void setLblNombre(JLabel lblNombre) {
+        this.lblNombre = lblNombre;
+    }
 
-	public JLabel getLblDescripcion() {
-		return lblDescripcion;
-	}
+    /**
+     * Obtiene la etiqueta del campo descripción.
+     * 
+     * @return JLabel del campo descripción
+     */
+    public JLabel getLblDescripcion() {
+        return lblDescripcion;
+    }
 
-	public void setLblDescripcion(JLabel lblDescripcion) {
-		this.lblDescripcion = lblDescripcion;
-	}
+    /**
+     * Establece la etiqueta del campo descripción.
+     * 
+     * @param lblDescripcion JLabel del campo descripción
+     */
+    public void setLblDescripcion(JLabel lblDescripcion) {
+        this.lblDescripcion = lblDescripcion;
+    }
 
-	public JLabel getLblTipo() {
-		return lblTipo;
-	}
+    /**
+     * Obtiene la etiqueta del campo tipo.
+     * 
+     * @return JLabel del campo tipo
+     */
+    public JLabel getLblTipo() {
+        return lblTipo;
+    }
 
-	public void setLblTipo(JLabel lblTipo) {
-		this.lblTipo = lblTipo;
-	}
+    /**
+     * Establece la etiqueta del campo tipo.
+     * 
+     * @param lblTipo JLabel del campo tipo
+     */
+    public void setLblTipo(JLabel lblTipo) {
+        this.lblTipo = lblTipo;
+    }
 
-	public JLabel getLblPrecio() {
-		return lblPrecio;
-	}
+    /**
+     * Obtiene la etiqueta del campo precio.
+     * 
+     * @return JLabel del campo precio
+     */
+    public JLabel getLblPrecio() {
+        return lblPrecio;
+    }
 
-	public void setLblPrecio(JLabel lblPrecio) {
-		this.lblPrecio = lblPrecio;
-	}
+    /**
+     * Establece la etiqueta del campo precio.
+     * 
+     * @param lblPrecio JLabel del campo precio
+     */
+    public void setLblPrecio(JLabel lblPrecio) {
+        this.lblPrecio = lblPrecio;
+    }
 
-	public JLabel getLblMarca() {
-		return lblMarca;
-	}
+    /**
+     * Obtiene la etiqueta del campo marca.
+     * 
+     * @return JLabel del campo marca
+     */
+    public JLabel getLblMarca() {
+        return lblMarca;
+    }
 
-	public void setLblMarca(JLabel lblMarca) {
-		this.lblMarca = lblMarca;
-	}
+    /**
+     * Establece la etiqueta del campo marca.
+     * 
+     * @param lblMarca JLabel del campo marca
+     */
+    public void setLblMarca(JLabel lblMarca) {
+        this.lblMarca = lblMarca;
+    }
 
-	public JLabel getLblCaracteristicas() {
-		return lblCaracteristicas;
-	}
+    /**
+     * Obtiene la etiqueta del campo características.
+     * 
+     * @return JLabel del campo características
+     */
+    public JLabel getLblCaracteristicas() {
+        return lblCaracteristicas;
+    }
 
-	public void setLblCaracteristicas(JLabel lblCaracteristicas) {
-		this.lblCaracteristicas = lblCaracteristicas;
-	}
+    /**
+     * Establece la etiqueta del campo características.
+     * 
+     * @param lblCaracteristicas JLabel del campo características
+     */
+    public void setLblCaracteristicas(JLabel lblCaracteristicas) {
+        this.lblCaracteristicas = lblCaracteristicas;
+    }
 
-	public JLabel getLblStock() {
-		return lblStock;
-	}
+    /**
+     * Obtiene la etiqueta del campo stock.
+     * 
+     * @return JLabel del campo stock
+     */
+    public JLabel getLblStock() {
+        return lblStock;
+    }
 
-	public void setLblStock(JLabel lblStock) {
-		this.lblStock = lblStock;
-	}
+    /**
+     * Establece la etiqueta del campo stock.
+     * 
+     * @param lblStock JLabel del campo stock
+     */
+    public void setLblStock(JLabel lblStock) {
+        this.lblStock = lblStock;
+    }
 
-	public JLabel getLblModelo() {
-		return lblModelo;
-	}
+    /**
+     * Obtiene la etiqueta del campo modelo.
+     * 
+     * @return JLabel del campo modelo
+     */
+    public JLabel getLblModelo() {
+        return lblModelo;
+    }
 
-	public void setLblModelo(JLabel lblModelo) {
-		this.lblModelo = lblModelo;
-	}
+    /**
+     * Establece la etiqueta del campo modelo.
+     * 
+     * @param lblModelo JLabel del campo modelo
+     */
+    public void setLblModelo(JLabel lblModelo) {
+        this.lblModelo = lblModelo;
+    }
 
-	public JLabel getLblMaterial() {
-		return lblMaterial;
-	}
+    /**
+     * Obtiene la etiqueta del campo material.
+     * 
+     * @return JLabel del campo material
+     */
+    public JLabel getLblMaterial() {
+        return lblMaterial;
+    }
 
-	public void setLblMaterial(JLabel lblMaterial) {
-		this.lblMaterial = lblMaterial;
-	}
+    /**
+     * Establece la etiqueta del campo material.
+     * 
+     * @param lblMaterial JLabel del campo material
+     */
+    public void setLblMaterial(JLabel lblMaterial) {
+        this.lblMaterial = lblMaterial;
+    }
 
-	public JLabel getLblColor() {
-		return lblColor;
-	}
+    /**
+     * Obtiene la etiqueta del campo color.
+     * 
+     * @return JLabel del campo color
+     */
+    public JLabel getLblColor() {
+        return lblColor;
+    }
 
-	public void setLblColor(JLabel lblColor) {
-		this.lblColor = lblColor;
-	}
+    /**
+     * Establece la etiqueta del campo color.
+     * 
+     * @param lblColor JLabel del campo color
+     */
+    public void setLblColor(JLabel lblColor) {
+        this.lblColor = lblColor;
+    }
 
-	public JLabel getLblLargo() {
-		return lblLargo;
-	}
+    /**
+     * Obtiene la etiqueta del campo largo.
+     * 
+     * @return JLabel del campo largo
+     */
+    public JLabel getLblLargo() {
+        return lblLargo;
+    }
 
-	public void setLblLargo(JLabel lblLargo) {
-		this.lblLargo = lblLargo;
-	}
+    /**
+     * Establece la etiqueta del campo largo.
+     * 
+     * @param lblLargo JLabel del campo largo
+     */
+    public void setLblLargo(JLabel lblLargo) {
+        this.lblLargo = lblLargo;
+    }
 
-	public JLabel getLblAncho() {
-		return lblAncho;
-	}
+    /**
+     * Obtiene la etiqueta del campo ancho.
+     * 
+     * @return JLabel del campo ancho
+     */
+    public JLabel getLblAncho() {
+        return lblAncho;
+    }
 
-	public void setLblAncho(JLabel lblAncho) {
-		this.lblAncho = lblAncho;
-	}
+    /**
+     * Establece la etiqueta del campo ancho.
+     * 
+     * @param lblAncho JLabel del campo ancho
+     */
+    public void setLblAncho(JLabel lblAncho) {
+        this.lblAncho = lblAncho;
+    }
 
-	public JLabel getLblAltura() {
-		return lblAltura;
-	}
+    /**
+     * Obtiene la etiqueta del campo altura.
+     * 
+     * @return JLabel del campo altura
+     */
+    public JLabel getLblAltura() {
+        return lblAltura;
+    }
 
-	public void setLblAltura(JLabel lblAltura) {
-		this.lblAltura = lblAltura;
-	}
+    /**
+     * Establece la etiqueta del campo altura.
+     * 
+     * @param lblAltura JLabel del campo altura
+     */
+    public void setLblAltura(JLabel lblAltura) {
+        this.lblAltura = lblAltura;
+    }
 
-	public JTextArea getTxtNombre() {
-		return txtNombre;
-	}
+    /**
+     * Obtiene el campo de texto del nombre.
+     * 
+     * @return JTextArea del campo nombre
+     */
+    public JTextArea getTxtNombre() {
+        return txtNombre;
+    }
 
-	public void setTxtNombre(JTextArea txtNombre) {
-		this.txtNombre = txtNombre;
-	}
+    /**
+     * Establece el campo de texto del nombre.
+     * 
+     * @param txtNombre JTextArea del campo nombre
+     */
+    public void setTxtNombre(JTextArea txtNombre) {
+        this.txtNombre = txtNombre;
+    }
 
-	public JTextArea getTxtDescripcion() {
-		return txtDescripcion;
-	}
+    /**
+     * Obtiene el campo de texto de la descripción.
+     * 
+     * @return JTextArea del campo descripción
+     */
+    public JTextArea getTxtDescripcion() {
+        return txtDescripcion;
+    }
 
-	public void setTxtDescripcion(JTextArea txtDescripcion) {
-		this.txtDescripcion = txtDescripcion;
-	}
+    /**
+     * Establece el campo de texto de la descripción.
+     * 
+     * @param txtDescripcion JTextArea del campo descripción
+     */
+    public void setTxtDescripcion(JTextArea txtDescripcion) {
+        this.txtDescripcion = txtDescripcion;
+    }
 
-	public JTextArea getTxtTipo() {
-		return txtTipo;
-	}
+    /**
+     * Obtiene el campo de texto del tipo.
+     * 
+     * @return JTextArea del campo tipo
+     */
+    public JTextArea getTxtTipo() {
+        return txtTipo;
+    }
 
-	public void setTxtTipo(JTextArea txtTipo) {
-		this.txtTipo = txtTipo;
-	}
+    /**
+     * Establece el campo de texto del tipo.
+     * 
+     * @param txtTipo JTextArea del campo tipo
+     */
+    public void setTxtTipo(JTextArea txtTipo) {
+        this.txtTipo = txtTipo;
+    }
 
-	public JTextArea getTxtPrecio() {
-		return txtPrecio;
-	}
+    /**
+     * Obtiene el campo de texto del precio.
+     * 
+     * @return JTextArea del campo precio
+     */
+    public JTextArea getTxtPrecio() {
+        return txtPrecio;
+    }
 
-	public void setTxtPrecio(JTextArea txtPrecio) {
-		this.txtPrecio = txtPrecio;
-	}
+    /**
+     * Establece el campo de texto del precio.
+     * 
+     * @param txtPrecio JTextArea del campo precio
+     */
+    public void setTxtPrecio(JTextArea txtPrecio) {
+        this.txtPrecio = txtPrecio;
+    }
 
-	public JTextArea getTxtMarca() {
-		return txtMarca;
-	}
+    /**
+     * Obtiene el campo de texto de la marca.
+     * 
+     * @return JTextArea del campo marca
+     */
+    public JTextArea getTxtMarca() {
+        return txtMarca;
+    }
 
-	public void setTxtMarca(JTextArea txtMarca) {
-		this.txtMarca = txtMarca;
-	}
+    /**
+     * Establece el campo de texto de la marca.
+     * 
+     * @param txtMarca JTextArea del campo marca
+     */
+    public void setTxtMarca(JTextArea txtMarca) {
+        this.txtMarca = txtMarca;
+    }
 
-	public JTextArea getTxtCaracteristicas() {
-		return txtCaracteristicas;
-	}
+    /**
+     * Obtiene el campo de texto de las características.
+     * 
+     * @return JTextArea del campo características
+     */
+    public JTextArea getTxtCaracteristicas() {
+        return txtCaracteristicas;
+    }
 
-	public void setTxtCaracteristicas(JTextArea txtCaracteristicas) {
-		this.txtCaracteristicas = txtCaracteristicas;
-	}
+    /**
+     * Establece el campo de texto de las características.
+     * 
+     * @param txtCaracteristicas JTextArea del campo características
+     */
+    public void setTxtCaracteristicas(JTextArea txtCaracteristicas) {
+        this.txtCaracteristicas = txtCaracteristicas;
+    }
 
-	public JTextArea getTxtMaterial() {
-		return txtMaterial;
-	}
+    /**
+     * Obtiene el campo de texto del material.
+     * 
+     * @return JTextArea del campo material
+     */
+    public JTextArea getTxtMaterial() {
+        return txtMaterial;
+    }
 
-	public void setTxtMaterial(JTextArea txtMaterial) {
-		this.txtMaterial = txtMaterial;
-	}
+    /**
+     * Establece el campo de texto del material.
+     * 
+     * @param txtMaterial JTextArea del campo material
+     */
+    public void setTxtMaterial(JTextArea txtMaterial) {
+        this.txtMaterial = txtMaterial;
+    }
 
-	public JTextArea getTxtStock() {
-		return txtStock;
-	}
+    /**
+     * Obtiene el campo de texto del stock.
+     * 
+     * @return JTextArea del campo stock
+     */
+    public JTextArea getTxtStock() {
+        return txtStock;
+    }
 
-	public void setTxtStock(JTextArea txtStock) {
-		this.txtStock = txtStock;
-	}
+    /**
+     * Establece el campo de texto del stock.
+     * 
+     * @param txtStock JTextArea del campo stock
+     */
+    public void setTxtStock(JTextArea txtStock) {
+        this.txtStock = txtStock;
+    }
 
-	public JTextArea getTxtColor() {
-		return txtColor;
-	}
+    /**
+     * Obtiene el campo de texto del color.
+     * 
+     * @return JTextArea del campo color
+     */
+    public JTextArea getTxtColor() {
+        return txtColor;
+    }
 
-	public void setTxtColor(JTextArea txtColor) {
-		this.txtColor = txtColor;
-	}
+    /**
+     * Establece el campo de texto del color.
+     * 
+     * @param txtColor JTextArea del campo color
+     */
+    public void setTxtColor(JTextArea txtColor) {
+        this.txtColor = txtColor;
+    }
 
-	public JTextArea getTxtModelo() {
-		return txtModelo;
-	}
+    /**
+     * Obtiene el campo de texto del modelo.
+     * 
+     * @return JTextArea del campo modelo
+     */
+    public JTextArea getTxtModelo() {
+        return txtModelo;
+    }
 
-	public void setTxtModelo(JTextArea txtModelo) {
-		this.txtModelo = txtModelo;
-	}
+    /**
+     * Establece el campo de texto del modelo.
+     * 
+     * @param txtModelo JTextArea del campo modelo
+     */
+    public void setTxtModelo(JTextArea txtModelo) {
+        this.txtModelo = txtModelo;
+    }
 
-	public JComboBox getCmbMaterial() {
-		return cmbMaterial;
-	}
+    /**
+     * Obtiene el ComboBox de material.
+     * 
+     * @return JComboBox de material
+     */
+    public JComboBox getCmbMaterial() {
+        return cmbMaterial;
+    }
 
-	public void setCmbMaterial(JComboBox cmbMaterial) {
-		this.cmbMaterial = cmbMaterial;
-	}
+    /**
+     * Establece el ComboBox de material.
+     * 
+     * @param cmbMaterial JComboBox de material
+     */
+    public void setCmbMaterial(JComboBox cmbMaterial) {
+        this.cmbMaterial = cmbMaterial;
+    }
 
-	public JFormattedTextField getTxtLargo() {
-		return txtLargo;
-	}
+    /**
+     * Obtiene el campo formateado del largo.
+     * 
+     * @return JFormattedTextField del largo
+     */
+    public JFormattedTextField getTxtLargo() {
+        return txtLargo;
+    }
 
-	public void setTxtLargo(JFormattedTextField txtLargo) {
-		this.txtLargo = txtLargo;
-	}
+    /**
+     * Establece el campo formateado del largo.
+     * 
+     * @param txtLargo JFormattedTextField del largo
+     */
+    public void setTxtLargo(JFormattedTextField txtLargo) {
+        this.txtLargo = txtLargo;
+    }
 
-	public JFormattedTextField getTxtAncho() {
-		return txtAncho;
-	}
+    /**
+     * Obtiene el campo formateado del ancho.
+     * 
+     * @return JFormattedTextField del ancho
+     */
+    public JFormattedTextField getTxtAncho() {
+        return txtAncho;
+    }
 
-	public void setTxtAncho(JFormattedTextField txtAncho) {
-		this.txtAncho = txtAncho;
-	}
+    /**
+     * Establece el campo formateado del ancho.
+     * 
+     * @param txtAncho JFormattedTextField del ancho
+     */
+    public void setTxtAncho(JFormattedTextField txtAncho) {
+        this.txtAncho = txtAncho;
+    }
 
-	public JFormattedTextField getTxtAltura() {
-		return txtAltura;
-	}
+    /**
+     * Obtiene el campo formateado de la altura.
+     * 
+     * @return JFormattedTextField de la altura
+     */
+    public JFormattedTextField getTxtAltura() {
+        return txtAltura;
+    }
 
-	public void setTxtAltura(JFormattedTextField txtAltura) {
-		this.txtAltura = txtAltura;
-	}
+    /**
+     * Establece el campo formateado de la altura.
+     * 
+     * @param txtAltura JFormattedTextField de la altura
+     */
+    public void setTxtAltura(JFormattedTextField txtAltura) {
+        this.txtAltura = txtAltura;
+    }
 
-	public JButton getBtnCrearConstruccion() {
-		return btnCrearConstruccion;
-	}
+    /**
+     * Obtiene el botón de crear construcción.
+     * 
+     * @return JButton de crear construcción
+     */
+    public JButton getBtnCrearConstruccion() {
+        return btnCrearConstruccion;
+    }
 
-	public void setBtnCrearConstruccion(JButton btnCrearConstruccion) {
-		this.btnCrearConstruccion = btnCrearConstruccion;
-	}
+    /**
+     * Establece el botón de crear construcción.
+     * 
+     * @param btnCrearConstruccion JButton de crear construcción
+     */
+    public void setBtnCrearConstruccion(JButton btnCrearConstruccion) {
+        this.btnCrearConstruccion = btnCrearConstruccion;
+    }
 
-	public File getImagenSeleccionada() {
-		return imagenSeleccionada;
-	}
+    /**
+     * Obtiene el archivo de imagen seleccionado.
+     * 
+     * @return File de imagen seleccionado
+     */
+    public File getImagenSeleccionada() {
+        return imagenSeleccionada;
+    }
 
-	public void setImagenSeleccionada(File imagenSeleccionada) {
-		this.imagenSeleccionada = imagenSeleccionada;
-	}
-	public JButton getBtnActualizarConstruccion() {
-	    return btnActualizarConstruccion;
-	}
+    /**
+     * Establece el archivo de imagen seleccionado.
+     * 
+     * @param imagenSeleccionada File de imagen seleccionado
+     */
+    public void setImagenSeleccionada(File imagenSeleccionada) {
+        this.imagenSeleccionada = imagenSeleccionada;
+    }
+    
+    /**
+     * Obtiene el botón de actualizar construcción.
+     * 
+     * @return JButton de actualizar construcción
+     */
+    public JButton getBtnActualizarConstruccion() {
+        return btnActualizarConstruccion;
+    }
 
-	public JButton getBtnBorrarConstruccion() {
-	    return btnBorrarConstruccion;	
-}
+    /**
+     * Obtiene el botón de borrar construcción.
+     * 
+     * @return JButton de borrar construcción
+     */
+    public JButton getBtnBorrarConstruccion() {
+        return btnBorrarConstruccion;	
+    }
 }

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -36,6 +37,7 @@ import co.edu.unbosque.util.exception.EmailInvalidoException;
 import co.edu.unbosque.util.exception.EmailYaRegistradoException;
 import co.edu.unbosque.util.exception.LanzadorExcepciones;
 import co.edu.unbosque.view.ViewFacade;
+import co.edu.unbosque.view.PanelPrincipalFiltrado;
 import co.edu.unbosque.view.Ventana;
 
 public class Controlador implements ActionListener {
@@ -418,7 +420,6 @@ public class Controlador implements ActionListener {
 		ArrayList<Moda> productosModa = mf.getModaDAO().getListaModa();
 		ArrayList<Vehiculo> productosVehiculos = mf.getVehiculoDAO().getListaVehiculos();
 
-		// Mostrar todos los productos en el panel principal
 		vf.getPanelPrincipal().mostrarTodosLosProductos(productosAlimentos, productosCelulares, productosConstruccion,
 				productosDeporteYFitness, productosElectrodomesticos, productosJuguetes, productosMascotas,
 				productosFarmacia, productosModa, productosVehiculos);
@@ -480,43 +481,37 @@ public class Controlador implements ActionListener {
 	}
 
 	public void comprarProducto() {
-		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
-		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
+	    String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
+	    String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
 
-		// Limpiar etiquetas HTML en el nombre
-		nombre = nombre.replaceAll("<[^>]*>", "").trim();
+	    // Limpiar etiquetas HTML en el nombre
+	    nombre = nombre.replaceAll("<[^>]*>", "").trim();
 
-		// Limpiar y normalizar el precio
-		precioString = precioString.replaceAll("<[^>]*>", "").trim();
-		String limpio = precioString.replaceAll("[^\\d.,]", ""); // dejar solo dígitos, puntos y comas
+	    // Limpiar y normalizar el precio (tu código - perfecto como está)
+	    precioString = precioString.replaceAll("<[^>]*>", "").trim();
+	    String limpio = precioString.replaceAll("[^\\d.,]", "");
 
-		if (limpio.contains(",") && limpio.contains(".")) {
-			limpio = limpio.replace(".", ""); // quitar separadores de miles
-			limpio = limpio.replace(",", "."); // coma pasa se convierte punto decimal
-		} else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
-			// Si hay más de un punto,se deja solo el ultimo
-			int last = limpio.lastIndexOf('.');
-			limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
-		} else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
-			// Si hay más de una coma → dejar solo la última como decimal
-			int last = limpio.lastIndexOf(',');
-			limpio = limpio.substring(0, last).replace(",", "") + "." + limpio.substring(last + 1);
-		} else if (limpio.contains(",")) {
-			// Caso simple "123,45" → cambiar a punto
-			limpio = limpio.replace(",", ".");
-		}
+	    if (limpio.contains(",") && limpio.contains(".")) {
+	        limpio = limpio.replace(".", "");
+	        limpio = limpio.replace(",", ".");
+	    } else if (limpio.indexOf('.') != limpio.lastIndexOf('.')) {
+	        int last = limpio.lastIndexOf('.');
+	        limpio = limpio.substring(0, last).replace(".", "") + "." + limpio.substring(last + 1);
+	    } else if (limpio.indexOf(',') != limpio.lastIndexOf(',')) {
+	        int last = limpio.lastIndexOf(',');
+	        limpio = limpio.substring(0, last).replace(",", "") + "." + limpio.substring(last + 1);
+	    } else if (limpio.contains(",")) {
+	        limpio = limpio.replace(",", ".");
+	    }
 
-		float precio = Float.parseFloat(limpio);
-
-		// Mostrar ventana factura
-		vf.getVentanaFactura().setVisible(true);
-		vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
-		vf.getVentanaFactura().getLblCompra().setText("Compraste: " + nombre);
-		vf.getVentanaFactura().getLblPrecio().setText("Pagaste: " + precio);
-		vf.getVentanaFactura().revalidate();
-		vf.getVentanaFactura().repaint();
+	    // Mostrar ventana factura
+	    vf.getVentanaFactura().setVisible(true);
+	    vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
+	    vf.getVentanaFactura().getLblCompra().setText("Compraste: " + nombre);
+	    vf.getVentanaFactura().setPrecioDesdeString(limpio);
+	    vf.getVentanaFactura().revalidate();
+	    vf.getVentanaFactura().repaint();
 	}
-
 	public void agregarCarrito() {
 		String nombreProducto = vf.getPanelMostrarProducto().getLblNombre().getText();
 		String precioString = vf.getPanelMostrarProducto().getLblPrecio().getText();
@@ -542,6 +537,7 @@ public class Controlador implements ActionListener {
 	}
 
 	public void comprarCarrito() {
+
 		String nombre = vf.getPanelMostrarProducto().getLblNombre().getText();
 		float precio = vf.getPanelCarrito().getPrecioTotal();
 
@@ -549,33 +545,19 @@ public class Controlador implements ActionListener {
 		vf.getVentanaFactura().setVisible(true);
 		vf.getVentanaFactura().getLblTitulo().setText("Resumen de tu compra");
 		vf.getVentanaFactura().getLblCompra().setText("Compraste: Tu carrito");
-		vf.getVentanaFactura().getLblPrecio().setText("Pagaste: " + precio);
+		vf.getVentanaFactura().setPrecioFormateado(precio);
 		vf.getVentanaFactura().revalidate();
 		vf.getVentanaFactura().repaint();
 		vf.getPanelCarrito().limpiarCarrito();
 	}
 
 	public void ocultarTodosLosPaneles() {
-		vf.getPanelProductoCreado().removeActionListener(this);
-		vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
-		vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
-		vf.getVentana().remove(vf.getPanelSeleccionarCategoria());
-		vf.getVentana().remove(vf.getPanelCrearAlimentoYBebida());
-		vf.getVentana().remove(vf.getPanelCrearCelular());
-		vf.getVentana().remove(vf.getPanelCrearConstruccion());
-		vf.getVentana().remove(vf.getPanelCDeporteYFitness());
-		vf.getVentana().remove(vf.getPanelCrearElectrodomesticos());
-		vf.getVentana().remove(vf.getPanelCrearJuguete());
-		vf.getVentana().remove(vf.getPanelCrearMascota());
-		vf.getVentana().remove(vf.getPanelCrearMedicamento());
-		vf.getVentana().remove(vf.getPanelCrearProductoModa());
-		vf.getVentana().remove(vf.getPanelCrearVehiculo());
-		vf.getVentana().remove(vf.getPanelUsuario());
-		vf.getVentana().remove(vf.getPanelPerfil());
-		vf.getVentana().remove(vf.getPanelMetodoDePago());
-		vf.getVentana().remove(vf.getPanelProductoCreado());
-		vf.getVentana().remove(vf.getPanelPrincipal());
-		vf.getVentana().remove(vf.getPanelCarrito());
+	    vf.getPanelProductoCreado().removeActionListener(this);
+	    
+	    Container contentPane = vf.getVentana().getContentPane();
+	    contentPane.removeAll();
+	    
+	    contentPane.add(vf.getPanelSuperior(), BorderLayout.NORTH);
 	}
 
 	public void guardarAlimentoYBebida() {
@@ -3164,6 +3146,46 @@ public class Controlador implements ActionListener {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public void panelPrincipalFiltrado() {
+		ocultarTodosLosPaneles();
+		String textoBusqueda = vf.getPanelSuperior().getTxtFieldBuscador().getText();
+	    if (!textoBusqueda.equals("Buscar productos, marcas y más...") && !textoBusqueda.isEmpty()) {
+	        ArrayList<AlimentoYBebida> alimentos = mf.getAlimentoYBebidaDAO().getListaAlimentosYBebidas();
+	        ArrayList<Celular> celulares = mf.getCelularDAO().getListaCelulares();
+	        ArrayList<Construccion> construcciones = mf.getConstruccionDAO().getListaConstruccion();
+	        ArrayList<DeporteYFitness> deportes = mf.getDeporteYFitnessDAO().getListaDeportesYFitness();
+	        ArrayList<Electrodomestico> electrodomesticos = mf.getElectrodomesticoDAO().getListaElectrodomesticos();
+	        ArrayList<Juguete> juguetes = mf.getJugueteDAO().getListaJuguetes();
+	        ArrayList<Mascota> mascotas = mf.getMascotaDAO().getListaMascotas();
+	        ArrayList<Farmacia> farmacias = mf.getFarmaciaDAO().getListaFarmacia();
+	        ArrayList<Moda> modas = mf.getModaDAO().getListaModa();
+	        ArrayList<Vehiculo> vehiculos = mf.getVehiculoDAO().getListaVehiculos();
+	        
+	        // Crear el panel filtrado
+	        PanelPrincipalFiltrado panelFiltrado = new PanelPrincipalFiltrado(vf);
+	        panelFiltrado.mostrarProductosFiltrados(
+	            textoBusqueda, 
+	            alimentos, 
+	            celulares, 
+	            construcciones, 
+	            deportes, 
+	            electrodomesticos, 
+	            juguetes, 
+	            mascotas, 
+	            farmacias, 
+	            modas, 
+	            vehiculos
+	        );
+	        
+	        ocultarTodosLosPaneles();
+	        vf.getVentana().add(panelFiltrado, BorderLayout.CENTER);
+	        vf.getVentana().revalidate();
+	        vf.getVentana().repaint();
+	    } else {
+	        mostrarPanelPrincipal();
+	    }
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -3181,8 +3203,8 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		case "Principal": // NUEVO CASO para el botón MercadoLibre
-			if (usuarioLogueado != null) { // Solo si hay usuario logueado
+		case "Principal":
+			if (usuarioLogueado != null) {
 				mostrarPanelPrincipal();
 			}
 			break;
@@ -3401,10 +3423,8 @@ public class Controlador implements ActionListener {
 			Object producto = boton.getClientProperty("producto");
 			String tipoProducto = (String) boton.getClientProperty("tipoProducto");
 
-			// Ocultar panel actual
 			ocultarTodosLosPaneles();
 
-			// Mostrar panel correspondiente según el tipo de producto
 			switch (tipoProducto) {
 			case "AlimentoYBebida":
 				vf.getVentana().add(vf.getPanelCrearAlimentoYBebida(), BorderLayout.CENTER);
@@ -3538,7 +3558,6 @@ public class Controlador implements ActionListener {
 			break;
 		}
 
-		// Borrar Productos
 		case "Borrar AlimentoYBebida": {
 			borrarAlimentoYBebida();
 			break;
@@ -3619,10 +3638,7 @@ public class Controlador implements ActionListener {
 		}
 
 		case "Volver MetodoPago": {
-			ocultarTodosLosPaneles();
-			vf.getVentana().add(vf.getPanelPerfil(), BorderLayout.CENTER);
-			vf.getVentana().revalidate();
-			vf.getVentana().repaint();
+            mostrarPanelPrincipal();
 			break;
 		}
 		case "Comprar Producto": {
@@ -3635,6 +3651,10 @@ public class Controlador implements ActionListener {
 		}
 		case "Comprar Carrito": {
 			comprarCarrito();
+		}
+		case "Buscar": {
+		    panelPrincipalFiltrado();
+		    break;
 		}
 		}
 	}
@@ -3789,5 +3809,12 @@ public class Controlador implements ActionListener {
 		// Factura
 		vf.getPanelCarrito().getBtnComprarCarrito().addActionListener(this);
 		vf.getPanelCarrito().getBtnComprarCarrito().setActionCommand("Comprar Carrito");
+		
+		vf.getPanelSuperior().getBtnBuscar().addActionListener(this);
+		vf.getPanelSuperior().getBtnBuscar().setActionCommand("Buscar");
+	    
+	    // ActionListener para el campo de búsqueda (cuando se presiona Enter)
+	    vf.getPanelSuperior().getTxtFieldBuscador().addActionListener(this);
+	    vf.getPanelSuperior().getTxtFieldBuscador().setActionCommand("Buscar");
 	}
 }

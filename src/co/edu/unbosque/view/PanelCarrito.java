@@ -22,7 +22,7 @@ public class PanelCarrito extends JPanel {
 	private JPanel panelItem;
 	private JScrollPane scrollPane;
 	private JButton btnComprarCarrito;
-	private List<Item> items; // lista guardada internamente para calcular el total
+	private List<Item> items;
 
 	public PanelCarrito() {
 		this.setLayout(new BorderLayout());
@@ -84,7 +84,7 @@ public class PanelCarrito extends JPanel {
 	/**
 	 * Crea un panel individual para cada item del carrito
 	 */
-	private JPanel crearPanelItem(Item item, int index, EliminarListener eliminarListener) {
+	public JPanel crearPanelItem(Item item, int index, EliminarListener eliminarListener) {
 		JPanel itemPanel = new JPanel(new BorderLayout());
 		itemPanel.setBackground(Color.WHITE);
 		itemPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),

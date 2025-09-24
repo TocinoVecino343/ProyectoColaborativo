@@ -26,6 +26,7 @@ public class ViewFacade {
 	private PanelMostrarProducto panelMostrarProducto;
 	private PanelProductoCreado panelProductoCreado;
 	private PanelCarrito panelCarrito;
+	private PanelPrincipalFiltrado panelPrincipalFiltrado;
 
 	public ViewFacade() {
 		ventana = new Ventana();
@@ -50,6 +51,7 @@ public class ViewFacade {
 		panelMostrarProducto = new PanelMostrarProducto();
 		panelProductoCreado = new PanelProductoCreado();
 		panelCarrito = new PanelCarrito();
+		panelPrincipalFiltrado = new PanelPrincipalFiltrado(this);
 
 	}
 
@@ -228,5 +230,15 @@ public class ViewFacade {
 	public void setPanelCarrito(PanelCarrito panelCarrito) {
 		this.panelCarrito = panelCarrito;
 	}
+
+	public PanelPrincipalFiltrado getPanelPrincipalFiltrado() {
+		return panelPrincipalFiltrado;
+	}
+
+	public void setPanelPrincipalFiltrado(PanelPrincipalFiltrado panelPrincipalFiltrado) {
+		this.panelPrincipalFiltrado = panelPrincipalFiltrado;
+	}
+	
+	
 
 }

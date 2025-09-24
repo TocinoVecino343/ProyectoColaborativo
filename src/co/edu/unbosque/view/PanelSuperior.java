@@ -9,11 +9,12 @@ import javax.swing.*;
 public class PanelSuperior extends JPanel {
 
 	private JButton btnCategoria;
-	private JButton btnVender;
-	private JButton btnCarro;
-	private JButton btnPerfil;
-	private JButton btnMercadoLibre;
-	private JTextField txtFieldBuscador;
+    private JButton btnVender;
+    private JButton btnCarro;
+    private JButton btnPerfil;
+    private JButton btnMercadoLibre;
+    private JTextField txtFieldBuscador;
+    private JButton btnBuscar;
 
 	public PanelSuperior() {
 		this.setVisible(true);
@@ -47,6 +48,12 @@ public class PanelSuperior extends JPanel {
 				btnMercadoLibre.setBackground(Color.decode("#ffe600")); 
 			}
 		});
+		
+		btnBuscar = new JButton("🔍"); // Asignar a la variable de instancia
+	    btnBuscar.setBounds(850, 25, 50, 40);
+	    btnBuscar.setBackground(Color.WHITE);
+	    btnBuscar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    btnBuscar.setFocusPainted(false);
 
 		// Buscador - SIN CAMBIOS
 		txtFieldBuscador = new JTextField("Buscar productos, marcas y más...");
@@ -132,6 +139,9 @@ public class PanelSuperior extends JPanel {
 			}
 		});
 	}
+	
+	// En la clase PanelSuperior, añade este método después de inicializarComponentes()
+
 
 	// Getters y setters - CAMBIO: getter para btnMercadoLibre
 	public JButton getBtnCategoria() {
@@ -182,4 +192,13 @@ public class PanelSuperior extends JPanel {
 	public void setBtnPerfil(JButton btnPerfil) {
 		this.btnPerfil = btnPerfil;
 	}
+
+	public JButton getBtnBuscar() {
+		return btnBuscar;
+	}
+
+	public void setBtnBuscar(JButton btnBuscar) {
+		this.btnBuscar = btnBuscar;
+	}
+	
 }
